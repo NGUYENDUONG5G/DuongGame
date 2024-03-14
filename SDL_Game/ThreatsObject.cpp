@@ -98,7 +98,7 @@ void ThreatsObject::DoPlayer(Map& gMap)
 		{
 			x_val_ += THREAT_SPEED;
 		}
-
+		
 		CheckToMap(gMap);
 	}
 	else if (come_back_time_ > 0)

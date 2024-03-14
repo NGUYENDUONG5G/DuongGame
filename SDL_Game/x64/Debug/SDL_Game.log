@@ -28,19 +28,19 @@ D:\Demo_Duong\SDL_Game\MainObject.cpp(249,66): warning C4244: 'argument': conver
 D:\Demo_Duong\SDL_Game\MainObject.cpp(253,65): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
 D:\Demo_Duong\SDL_Game\MainObject.cpp(351,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\Demo_Duong\SDL_Game\MainObject.cpp(376,16): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Demo_Duong\SDL_Game\MainObject.cpp(445,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 D:\Demo_Duong\SDL_Game\MainObject.cpp(455,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(477,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(478,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(480,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(481,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(493,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(510,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(529,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(530,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(532,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(533,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(545,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(570,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Demo_Duong\SDL_Game\MainObject.cpp(587,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(465,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(487,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(488,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(490,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(491,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(503,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(520,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(539,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(540,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(542,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(543,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(555,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(580,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Demo_Duong\SDL_Game\MainObject.cpp(597,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   SDL_Game.vcxproj -> D:\Demo_Duong\x64\Debug\SDL_Game.exe

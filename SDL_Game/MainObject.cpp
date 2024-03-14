@@ -398,8 +398,18 @@ void MainObject::Doplayer(Map& map_data)
 		}
 		if (input_type_.war1 == 1)
 		{
-			if (check == 0) x_val_ -= PLAYER_SPEED;
-			else x_val_ += PLAYER_SPEED;
+			if (on_ground_ ==  true) {
+				if (check == 0) x_val_ -= PLAYER_SPEED;
+				else x_val_ += PLAYER_SPEED;
+			}
+			else {
+				
+			
+				x_pos_ = swx;
+				y_pos_ = swy;
+
+
+			}
 
 		}
 

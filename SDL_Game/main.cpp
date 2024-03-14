@@ -11,6 +11,8 @@
 #undef main
 BaseObject g_background;
 
+
+
 bool InitData() {
 
 	bool success = true;
@@ -67,8 +69,10 @@ int main(int arc, char* argv[])
 	ImpTimer fps_timer;
 	float vtrix;
 	float vtriy;
+	int xem_xet;
 
-
+	float vitribotx;
+	float vitriboty;
 
 	if (InitData() == false) return -1;
 	if (LoadBackground() == false) return -1;
@@ -122,6 +126,11 @@ int main(int arc, char* argv[])
 
 		vtrix = p_player.vitri_x();
 		vtriy = p_player.vitri_y();
+		
+
+		vitribotx = p_threat.get_x_pos();
+		vitriboty = p_threat.get_y_pos();
+		p_player.Swap(vitribotx,vitriboty );
 		p_player.HandleBullet(g_screen);
 
 		p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
@@ -138,12 +147,13 @@ int main(int arc, char* argv[])
 
 		p_threat.SetMapXY(map_data.start_x_, map_data.start_y_);
 		p_threat.ktraN(vtrix, vtriy);
+		
 		p_threat.ImpMoveType(g_screen);
 		p_threat.DoPlayer(map_data);
 		p_threat.MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT);
 		p_threat.Show(g_screen);
 
-
+		xem_xet = 0;
 
 
 

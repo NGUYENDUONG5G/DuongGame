@@ -47,6 +47,7 @@ public:
 	float get_y_pos() const {
 		return y_pos_;
 	}
+
 	void SetMapXY(const int& mp_x, const int& mp_y) {
 		map_x_ = mp_x; map_y_ = mp_y;
 	}
@@ -87,8 +88,9 @@ public:
 	{
 		vt_x = x;
 		vt_y = y;
+		
 	}
-
+	
 private:
 
 	
@@ -109,7 +111,7 @@ private:
 
 	int type_move_;
 
-
+	
 	Input input_type_;
 
 	std::vector<BulletObject*>bullet_list_;

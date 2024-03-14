@@ -66,12 +66,20 @@ public:
 	
 	int  vitri_x() { return x_pos_; }
 	int vitri_y() { return y_pos_; }
-
+	
+	void Swap(const float& x, const float& y)
+	{
+		swx = x;
+		swy = y;
+	}
+	
 private:
 	
 
 	std::vector<BulletObject*> p_bullet_list_;
 	
+	float swx;
+	float swy;
 	float x_val_;
 	float y_val_;
 	float x_pos_;
@@ -95,6 +103,7 @@ private:
 
 	int come_back_time_;
 	int check;
+	
 };
 
 
