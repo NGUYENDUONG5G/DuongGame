@@ -18,6 +18,7 @@ static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
 
+
 // Screen
 
 const int  FRAME_PER_SECOND = 25;
@@ -48,6 +49,8 @@ const int RENDER_DRAW_COLOR = 0xff;
 #define MAX_MAP_Y 10
 
 
+#define MAX_VOLUME 128
+#define BULLET_SPEED 5
 
 typedef struct Input
 {
@@ -83,9 +86,11 @@ typedef struct Map
 
 };
 
+namespace Impact
+{
+	bool Impact_(const int& x, const int& y, SDL_Rect rect);
 
-
-
+}
 
 
 #endif 

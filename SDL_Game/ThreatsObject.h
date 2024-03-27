@@ -7,11 +7,11 @@
 #include "BulletObject.h"
 
 
-#define THREAT_FRAME_NUM 4
+#define THREAT_FRAME_NUM 8
 #define THREAT_GRAVITY_SPEED 0.8
 #define THREAT_MAX_FALL_SPEED 10
 #define THREAT_SPEED 3
-
+#define THREAT_JUMP 18
 
 
 class ThreatsObject :public BaseObject
@@ -20,10 +20,16 @@ public:
 	ThreatsObject();
 	~ThreatsObject();
 
-	enum TypeMove
+	enum WalkType
 	{
-		STATIC_THREAT = 0,
-		MOVE_IN_SPACE_THREAT = 1,
+		WALK_NONE = 0,
+		WALK_RIGHT = 1,
+		WALK_LEFT = 2,
+		WALK_UP = 3,
+		WALK_DOWN = 4,
+		WAR1 = 5,
+		WAR2 = 6,
+	
 	};
 
 	void set_x_val(const float& xVal) {
@@ -41,6 +47,10 @@ public:
 		y_pos_ = yp;
 	}
 
+	void set_vt(const float& x, const float& y) {
+		x_pos_ = x;
+		y_pos_ = y;
+	}
 	float get_x_pos() const {
 		return x_pos_;
 	}
@@ -61,11 +71,13 @@ public:
 		return height_frame_;
 	}
 	// Hành động cho bot
+	
 	void DoPlayer(Map& gMap);
+	
 	void CheckToMap(Map& gMap);
 
 
-	void InitThreats();
+	
 
 	void set_type_move(const int& typeMove) { type_move_ = typeMove; }
 
@@ -77,23 +89,30 @@ public:
 
 	// bot tấn công
 
-	std::vector <BulletObject*> get_bullet_list() const { return bullet_list_; }
-	void set_bullet_list(const std::vector<BulletObject*>& bl_list) { bullet_list_ = bl_list; }
+	
 
-	void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
-	void MakeBullet(SDL_Renderer* screen, const int& x_limit, const int& y_limit);
+	
+	int sent_fight();
+	
+	
 
-	void RemoveBullet(const int& idx);
-	void ktraN(const float& x, const float& y)
+
+	void ktraN(const float& x, const float& y,const int& z)
 	{
 		vt_x = x;
 		vt_y = y;
-		
+		tt = z;
 	}
+	
+
+
+	SDL_Rect GetRectFrame();
+
+	
 	
 private:
 
-	
+	int tt;
 	float vt_x;
 	float vt_y;
 	int map_x_;
@@ -103,7 +122,8 @@ private:
 	float x_pos_;
 	float y_pos_;
 	bool on_ground_;
-	int come_back_time_;
+	int status_;
+	
 	SDL_Rect frame_clip_[THREAT_FRAME_NUM];
 	int width_frame_;
 	int height_frame_;
@@ -111,10 +131,11 @@ private:
 
 	int type_move_;
 
-	
+	int dem;
+	int fight;
 	Input input_type_;
 
-	std::vector<BulletObject*>bullet_list_;
+	
 };
 
 

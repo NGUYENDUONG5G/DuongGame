@@ -1,8 +1,7 @@
-
-#pragma once
+﻿#pragma once
 #pragma once
 #ifndef BULLET_OBJECT_H_
-#define NULLET_OBJECT_
+#define BULLET_OBJECT_
 
 #include "BaseObject.h"
 #include "CommonFunc.h"
@@ -16,67 +15,62 @@ public:
 	BulletObject();
 	~BulletObject();
 
-	enum BulletDir
-	{
-		DIR_RIGHT = 20,
-		DIR_LEFT = 21,
-		DIR_UP = 22,
-		DIR_UP_LEFT = 23,
-		DIR_UP_RIGHT = 24,
-		DIR_DOWN_LEFT = 25,
-		DIR_DOWN_RIGHT = 26,
-		DIR_DOWN = 27,
-	};
+	
 
-	enum  BulletType
-	{
-		SPHERE_BULLET = 50,
+	
 
-	};
-
-
-	void set_x_val(const int& xVal) {
-		x_val_ = xVal;
+	void set_x_pos(const int& xVal, const int& yVal) {
+		x_pos_ = xVal;
+		y_pos_ = yVal;
 	}
-	void set_y_val(const int& yVal)
+	
+	int get_x_bb() const { return x_pos_; }
+	int get_y_bb() const { return y_pos_; }
+
+	void set_XY(const int& x, const int& y)
 	{
-		y_val_ = yVal;
+
+		x_pos_ = x;
+		y_pos_ = y;
 	}
-	int get_x_val() const { return x_val_; }
-	int get_y_val() const { return y_val_; }
-
-	void set_is_move(const bool& isMove) { is_move_ = isMove; }
-	bool get_is_move() const { return is_move_; }
-
-	void set_bullet_dir(const unsigned int& bulletDir) { bullet_dir_ = bulletDir; }
-	int  get_bullet_dir() const { return bullet_dir_; }
-
-	void set_bullet_type(const unsigned int& bulletType) { bullet_type_ = bulletType; }
-
-
-	unsigned int get_bullet_type() const {
-		return bullet_type_;
+	
+	SDL_Rect GetRectFrame() ;
+	
+	void set_clips();
+	bool LoadImg(std::string path, SDL_Renderer* screen);
+	void Show(SDL_Renderer* des);
+	int get_width_frame() const {
+		return width_frame_;
 	}
+	int get_height_frame() const {
+		return height_frame_;
+	}
+	// Hành động cho bot
 
-	void HandleMove(const int& x_border, const int& y_border);
+	void DoPlayer(Map& gMap);
 
-	bool LoadImgBullet(SDL_Renderer* des);
+	void CheckToMap(Map& gMap);
 
-
-
-
+	void GPS(const int& x_) { mt_x = x_; }
+	void SetMapXY(const int map_x, const int map_y)
+	{
+		map_x_ = map_x;
+		map_y_ = map_y;
+	}
 private:
-	int x_val_;
-	int y_val_;
-	bool is_move_;
-	unsigned int bullet_dir_;
-	unsigned int bullet_type_;
-
-
-
-
-
-
+	float x_pos_;
+	float y_pos_;
+	float x_val_;
+	float y_val_;
+	int map_x_;
+	int map_y_;
+	int width_frame_;
+	int height_frame_;
+	int frame_;
+	bool on_ground_;
+	SDL_Rect frame_clip_[4];
+	int mt_x;
+	
 };
 
 

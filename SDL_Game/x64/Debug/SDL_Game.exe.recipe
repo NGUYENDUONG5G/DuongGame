@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\Demo_Duong\x64\Debug\SDL_Game.exe</FullPath>
+      <FullPath>D:\DuongGame\x64\Debug\SDL_Game.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

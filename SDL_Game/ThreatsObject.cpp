@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 
 #include "ThreatsObject.h"
-
+#include <cmath>
 
 ThreatsObject::ThreatsObject()
 {
@@ -12,12 +12,14 @@ ThreatsObject::ThreatsObject()
 	x_pos_ = SCREEN_WIDTH;
 	y_pos_ = 0;
 	on_ground_ = 0;
-	come_back_time_ = 0;
-	frame_ = 0;
 	
+	frame_ = 0;
+	status_=WALK_NONE,
 
 	input_type_.left_ = 0;
-	type_move_ = STATIC_THREAT;
+	
+	dem = 0;
+	fight = 0;
 
 }
 
@@ -62,8 +64,7 @@ void ThreatsObject::set_clips()
 
 void ThreatsObject::Show(SDL_Renderer* des)
 {
-	if (come_back_time_ == 0)
-	{
+
 		rect_.x = x_pos_ - map_x_;
 		rect_.y = y_pos_ - map_y_;
 		frame_++;
@@ -76,13 +77,12 @@ void ThreatsObject::Show(SDL_Renderer* des)
 		SDL_Rect rendQuad = { rect_.x,rect_.y,width_frame_,height_frame_ };
 		SDL_RenderCopy(des, p_object_, currentClip, &rendQuad);
 
-	}
+	
 }
 
 void ThreatsObject::DoPlayer(Map& gMap)
 {
-	if (come_back_time_ == 0)
-	{
+	
 		x_val_ = 0;
 		y_val_ += THREAT_GRAVITY_SPEED;
 		if (y_val_ >= THREAT_MAX_FALL_SPEED)
@@ -99,41 +99,16 @@ void ThreatsObject::DoPlayer(Map& gMap)
 			x_val_ += THREAT_SPEED;
 		}
 		
+		
+		
 		CheckToMap(gMap);
-	}
-	else if (come_back_time_ > 0)
-	{
 
-		come_back_time_--;
-		if (come_back_time_ == 0)
-		{
-			InitThreats();
-		}
-	}
-
-
-}
-
-void ThreatsObject::InitThreats()
-{
-
-	x_pos_ = 0;
-	y_val_ = 0;
-	if (x_pos_ > 256)
-	{
-		x_pos_ -= 256;
 	
-	}
-	else
-	{
-		x_pos_ = 0;
-	}
 
-	y_pos_ = 0;
-	come_back_time_ = 0;
-	input_type_.left_ = 1;
 
 }
+
+
 
 
 
@@ -261,10 +236,7 @@ void ThreatsObject::CheckToMap(Map& map_data)
 		x_pos_ = map_data.max_x_ - width_frame_ - 1;
 	}
 
-	if (y_pos_ > map_data.max_y_)
-	{
-		come_back_time_ = 60;
-	}
+	
 
 }
 
@@ -273,88 +245,65 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 {
 	
 			//đảo chiều
-			if (x_pos_ > vt_x)
-			{
+
+		if (x_pos_ > vt_x)
+		{
 				input_type_.left_ = 1;
 				input_type_.right_ = 0;
-				LoadImg("img//threat_left.png", screen);
-			}
-			else if (x_pos_ < vt_x)
-			{
-				input_type_.left_ = 0;
-				input_type_.right_ = 1;
-				LoadImg("img//threat_right.png", screen);
-
-
-			}
-	
-
-	
-
-}
-
-
-void ThreatsObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
-{
-	if (p_bullet != NULL)
-	{
-		p_bullet->set_bullet_type(BulletObject::SPHERE_BULLET);
-		bool ret = p_bullet->LoadImgBullet(screen);
-
-		if (ret)
-		{
-			p_bullet->set_is_move(true);
-			p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
-			p_bullet->SetRect(rect_.x + 10, rect_.y + 10);
-			p_bullet->set_x_val(15);
-			bullet_list_.push_back(p_bullet);
-		}
-
-
-
-
-
-
-	}
-
-}
-
-void ThreatsObject::MakeBullet(SDL_Renderer* screen, const int& x_limit, const int& y_limit)
-{
-	for (int i = 0; i < bullet_list_.size(); i++)
-	{
-		BulletObject* p_bullet = bullet_list_.at(i);
-		if (p_bullet != NULL)
-		{
-			if (p_bullet->get_is_move())
-			{
-
-				// giới hạn đạn bay
-				int bullet_distance = rect_.x + width_frame_ - p_bullet->GetRect().x;
-				if (bullet_distance <=64 && bullet_distance>0)
+				
+				if (x_pos_ - x_val_ > 64*3 )
 				{
-					p_bullet->HandleMove(x_limit, y_limit);
-					p_bullet->Render(screen);
+					LoadImg("img//bot_left.png", screen);
 				}
-
 				else
 				{
-					p_bullet->set_is_move(false);
+					LoadImg("img//bot_left.png", screen);
 				}
-
-			}
-			else
-			{
-				p_bullet->set_is_move(true);
-				p_bullet->SetRect(rect_.x + 10, rect_.y + 10);
-
-
-			}
+			
 
 
 		}
+		else if (x_pos_ < vt_x)
+		{
+			
+				
+				input_type_.left_ = 0;
+				input_type_.right_ = 1;
+				if (x_val_ - x_pos_ > 64*3)
+				{
+					LoadImg("img//bot_right.png", screen);
+				}
+				else
+				{
+					LoadImg("img//bot_right.png", screen);
+
+				}
+		}
+	
+
+}
 
 
-	}
+
+
+
+
+
+
+SDL_Rect ThreatsObject::GetRectFrame()
+{
+	SDL_Rect rect;
+	rect.x = rect_.x;
+	rect.y = rect_.y;
+	rect.w = width_frame_;
+	rect.h = height_frame_;
+	return rect;
+}
+int ThreatsObject:: sent_fight()
+{
+	if (dem % 3 == 0) fight = 1;
+	else fight = 0;
+	dem++;
+	return fight;
 
 }
