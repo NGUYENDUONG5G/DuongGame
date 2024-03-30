@@ -2,13 +2,13 @@
 
 void Music::LoadMusic(const char path[])
 {
-	sound = Mix_LoadWAV(path);
+	sound = Mix_LoadMUS(path);
 
 }
 
-void Music::DisplayMusic(int x)
+void Music::DisplayMusic()
 {
-	Mix_PlayChannel(-1, sound, x);
+	if (Mix_PlayingMusic() == 0) Mix_PlayMusic(sound, -1);
 
 }
 
@@ -20,12 +20,12 @@ void Music::Volume(int volum)
 }
 void Music::Free()
 {
-	Mix_FreeChunk(sound);
+	Mix_FreeMusic(sound);
 
 
 }
 void Music::stopMusic()
 {
-	Mix_HaltChannel(-1);
+	Mix_HaltMusic();
 	
 }

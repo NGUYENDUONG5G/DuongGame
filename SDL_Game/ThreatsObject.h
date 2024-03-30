@@ -79,7 +79,7 @@ public:
 
 	
 
-	void set_type_move(const int& typeMove) { type_move_ = typeMove; }
+	
 
 	
 
@@ -129,7 +129,7 @@ private:
 	int height_frame_;
 	int frame_;
 
-	int type_move_;
+
 
 	int dem;
 	int fight;

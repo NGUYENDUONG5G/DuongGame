@@ -26,6 +26,7 @@ MainObject::MainObject() {
 	dem=0;
 	check = 1;
 	lighting = 0;
+	unti = 0;
 }
 MainObject::~MainObject() {
 
@@ -52,13 +53,14 @@ SDL_Rect MainObject::GetRectFrame()
 	SDL_Rect rect;
 	rect.x = rect_.x;
 	rect.y = rect_.y;
-	rect.w =width_frame_;
+	rect.w = width_frame_;
 	rect.h = height_frame_;
 	return rect;
 }
 
 void MainObject::set_clips()
 {
+	
 	if (width_frame_ > 0 && height_frame_ > 0) {
 		
 		for (int i = 0; i < 4; i++)
@@ -157,8 +159,8 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			if (on_ground_ == true)
 			{
 
-				max_y = y_pos_ + 64*2;
-				min_y = y_pos_;
+				max_y = y_pos_ ;
+				min_y = y_pos_-64*2;
 
 
 				
@@ -202,8 +204,8 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			if (on_ground_ == true)
 			{
 
-				max_y = y_pos_ + 64*2;
-				min_y = y_pos_;
+				max_y = y_pos_ ;
+				min_y = y_pos_- 64 * 2;
 
 
 
@@ -257,8 +259,8 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			if (on_ground_ == true)
 			{
 
-				max_y = y_pos_ + 64*2;
-				min_y = y_pos_;
+				max_y = y_pos_ ;
+				min_y = y_pos_- 64 * 2;
 
 
 
@@ -325,24 +327,31 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			input_type_.war1 = 0;
 			heiy= 0;
 			lighting = 0;
+			fight = 0;
 		}
 		break;
 		case SDLK_w:
 		{
 			fight = 0;
 			input_type_.war2 = 0;
+			max_y =0;
+			min_y = 0;
 		}
 		break;
 		case SDLK_d:
 		{
 			fight = 0;
 			input_type_.war3l = 0;
+			max_y = 0;
+			min_y = 0;
 		}
 		break;
 		case SDLK_f:
 		{
 			fight = 0;
 			input_type_.war3r = 0;
+			max_y = 0;
+			min_y = 0;
 		}
 		break;
 
@@ -382,6 +391,15 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 		{
 			x_val_ -= PLAYER_SPEED;
 		}
+		else if (input_type_.war2 == 1)
+		{
+			if (on_ground_ == true) input_type_.jump_ = 1;
+			else
+			{
+				if(check==1) x_val_ += PLAYER_SPEED;
+				else x_val_ -= PLAYER_SPEED;
+			}
+		}
 		else if (input_type_.war3r == 1) {
 
 			x_val_ += PLAYER_SPEED;
@@ -389,10 +407,13 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 		else 	if (input_type_.war1 == 1)
 		{
 
-
-			//x_pos_ = SCREEN_WIDTH / 2;
-			//y_pos_ = 0;
-			;
+			if (unti == 0)
+			{
+				x_pos_ = SCREEN_WIDTH / 2;
+				y_pos_ = 0;
+				unti++;
+			}
+			
 			
 		}
 		else if (input_type_.war2 == 1)
@@ -582,14 +603,7 @@ void MainObject::UpdateImagePlayer(SDL_Renderer* des)
 			LoadImg("img//player1_right.png", des);
 		}
 		
-		else if (status_ == WAR2)
-		{
-
-			
-		
-			if (check == 1) LoadImg("img//war2_right.png", des);
-			else LoadImg("img//war2_left.png", des);
-		}
+	
 		else if (status_ == WAR3) {
 
 			

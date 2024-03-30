@@ -4,7 +4,7 @@
 void GameMap::LoadMap(char* name)
 {
 	FILE* fp = NULL;
-	fopen_s(&fp, name, "rb");
+	fopen_s(&fp, name, "rb");  // rb là ??c d??i d?ng nh? phân
 	if (fp == NULL)
 	{
 		return;

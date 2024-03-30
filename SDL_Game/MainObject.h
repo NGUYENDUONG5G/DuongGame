@@ -84,7 +84,7 @@ void set_xval_(const int& xval)   {  x_val_= xval; }
 private:
 	
 
-	std::vector<BulletObject*> p_bullet_list_;
+	
 	int heiy;
 	float swx;
 	float swy;
@@ -113,7 +113,7 @@ private:
 	
 	int check;
 	int fight;
-	
+	int unti;
 	int lighting;
 };
 

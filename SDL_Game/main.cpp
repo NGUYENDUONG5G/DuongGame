@@ -9,7 +9,8 @@
 #include "Music.h"
 #include <string.h>
 #include <vector>
-
+#include "Sound.h"
+#include<iostream>
 
 #undef main
 BaseObject g_background;
@@ -18,16 +19,16 @@ BaseObject star_game;
 
 TTF_Font* font;
 Music music_;
-
+Sound music1_;
 
 
 
 bool InitData() {
 
 	bool success = true;
-	int ret = SDL_Init(SDL_INIT_VIDEO);
+	int ret = SDL_Init(SDL_INIT_VIDEO|| SDL_INIT_AUDIO);  // Khởi tạo thư viện SDL2
 	if (ret < 0)  return false;
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"); //cài đặt các tính năng của thư viện
 	g_window = SDL_CreateWindow("Ninja fight", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 	
@@ -58,10 +59,7 @@ bool InitData() {
 			success = false;
 		}
 
-		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
-		{
-			return false;
-		}
+		
 		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 		{
 			return false;
@@ -88,7 +86,7 @@ void close() {
 
 	
 	music_.Free();
-
+	music1_.Free();
 	SDL_DestroyRenderer(g_screen);
 	g_screen = NULL;
 	SDL_DestroyWindow(g_window);
@@ -168,6 +166,12 @@ int main(int arc, char* argv[])
 	TextObject p_bothp;
 	p_bothp.set_xy(SCREEN_WIDTH -300, 10);
 
+	TextObject begin;
+	TextObject endgame[2];
+	TextObject choose[2];
+
+	
+
 	int photo = 0;
 	int lighting = 0;
 
@@ -176,6 +180,8 @@ int main(int arc, char* argv[])
 		p_bullet.LoadImg("img//war3_right1.png", g_screen);
 		p_bullet.set_clips();
 	
+		music_.LoadMusic("music//start_game.mp3");
+		music1_.LoadMusic("music//war3.mp3");
 	
 	bool is_quit = false;
 
@@ -196,6 +202,7 @@ int main(int arc, char* argv[])
 				if (g_event.key.keysym.sym == SDLK_SPACE)
 				{
 					pause = 1;
+				
 				}
 			}
 			
@@ -246,26 +253,29 @@ int main(int arc, char* argv[])
 			else
 			{
 
+				music_.DisplayMusic();
+				music_.Volume(MAX_VOLUME/2);
+
 				
-				music_.LoadMusic("music//start_game.mp3");
-				music_.DisplayMusic(0);
-				music_.Volume(MAX_VOLUME / 2);
 				g_background2.LoadImg("img//tachi.jpg", g_screen);
 				g_background2.Render(g_screen, NULL);
 
-				TextObject begin;
+				
 				begin.set_xy(SCREEN_WIDTH / 2 - 64 * 2, SCREEN_HEIGHT / 2 + 64 * 2);
 				begin.RenderText("START GAME", font, g_screen, 0);
 
+				
 				if (Impact::Impact_(x_, y_, begin.get_Rect())) start = true;
+				
 				x_ = 0; y_ = 0;
 			}
 		}
 		else if (start)
 		{
 			music_.stopMusic();
-
-
+			
+			music1_.DisplayMusic(-1);
+			music1_.Volume(MAX_VOLUME / 2);
 		
 			if (pause == 2)
 			{
@@ -282,7 +292,7 @@ int main(int arc, char* argv[])
 					g_background2.SetRect(0, 0);
 					g_background2.Render(g_screen, NULL);
 				}
-				TextObject endgame[2];
+			
 				endgame[0].set_xy(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 64 +32);
 				endgame[0].RenderText("CONTINUTE PLAY", font, g_screen, 0);
 
@@ -325,7 +335,7 @@ int main(int arc, char* argv[])
 				g_background2.SetRect(272, 113);
 				g_background2.Render(g_screen, NULL);
 
-				TextObject choose[2];
+			
 				choose[0].set_xy(SCREEN_WIDTH / 2 - 64, SCREEN_HEIGHT / 2 - 64);
 				choose[0].RenderText("Resume", font, g_screen, 1);
 
@@ -421,15 +431,16 @@ int main(int arc, char* argv[])
 						p_bullet.GPS(vitribotx);
 						p_bullet.Show(g_screen);
 						
-					
+						if (Impact::Impact_(vitribotx, vitriboty, rect_bullet)) botkilled -= 5;
 				
 				}
 
-				if (Impact::Impact_(vitribotx, vitriboty, rect_bullet)) botkilled -= 5;
+				
 				
 				bool bCol1 = false;
 				bool bCol2 = false;
 				bool bCol3 = false;
+
 
 
 
@@ -448,7 +459,7 @@ int main(int arc, char* argv[])
 				else if (botfight == 1 && myfight == 0)
 				{
 
-					if (vtrix >= vitribotx - 64 * 2 && vtrix <= vitribotx + 64 * 2 && vtrix >= vitriboty - 64 * 2 && vtriy <= vitriboty + 64 * 2) bCol2 = true;
+					if (vtrix >= vitribotx - 64 * 2 && vtrix <= vitribotx + 64 * 2 && vtriy >= vitriboty - 64 * 2 && vtriy <= vitriboty + 64 * 2) bCol2 = true;
 
 
 				}
@@ -456,7 +467,8 @@ int main(int arc, char* argv[])
 				else
 				{
 					if (vitribotx <= vtrix + 64 && vitribotx >= vtrix - 64 && vitriboty <= max_y && vitriboty >= min_y) bCol3 = true;
-					if (vtrix >= vitribotx - 64 && vtrix <= vitribotx + 64 && vtrix >= vitriboty - 64 && vtriy <= vitriboty + 64) bCol3 = true;
+					
+					else 	if (vtrix >= vitribotx - 64 && vtrix <= vitribotx + 64 && vtriy >= vitriboty - 64 && vtriy <= vitriboty + 64) bCol3 = true;
 
 
 				}
@@ -488,9 +500,6 @@ int main(int arc, char* argv[])
 					
 					botkilled -= 10;
 					
-
-
-
 				}
 				
 				else if (bCol2)
@@ -534,11 +543,15 @@ int main(int arc, char* argv[])
 		
    }
 
-
+   begin.free();
 p_myhp.free();
 p_bothp.free();
 p_player.Free();
-
+for (int i = 0; i < 2; i++)
+{
+	endgame[i].free();
+	choose[i].free();
+}
 	close();
 	return 0;
 }

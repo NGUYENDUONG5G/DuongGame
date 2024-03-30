@@ -8,13 +8,13 @@ class Music
 {
 public:
 	void LoadMusic(const char path[]);
-	void DisplayMusic(int x);
+	void DisplayMusic();
 	void Volume(int volum);
 	void stopMusic();
 	void Free();
 private:
 
-	Mix_Chunk* sound;
+	Mix_Music* sound;
 };
 
 
