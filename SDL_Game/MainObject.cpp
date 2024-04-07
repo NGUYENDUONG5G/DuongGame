@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "MainObject.h"
 #include"BaseObject.h"
+#include"BulletObject.h"
 #include <iostream>
 #include<cmath>
 
@@ -21,12 +22,15 @@ MainObject::MainObject() {
 	on_ground_ = false;
 	map_x_ = 0;
 	map_y_ = 0;
-	
+	angle = 0;
 	fight = 0;
 	dem=0;
 	check = 1;
-	lighting = 0;
-	unti = 0;
+	is_basic = 0;
+	
+	cb_basic = 0;
+	unti = 2;
+	time_unti = 0;
 }
 MainObject::~MainObject() {
 
@@ -77,15 +81,7 @@ void MainObject::set_clips()
 void MainObject::Show(SDL_Renderer* des) {
 	UpdateImagePlayer(des);
 
-	if (input_type_.left_ == 1 || input_type_.right_ == 1||input_type_.war1==1|| input_type_.war2 == 1 || input_type_.war3r == 1||input_type_.war3l==1)
-	{
-		
-
-		frame_++;
-	}
-	else {
-		frame_ = 0;
-	}
+	frame_++;
 
 	if (frame_ >= 4) frame_ = 0;
 
@@ -104,7 +100,8 @@ void MainObject::Show(SDL_Renderer* des) {
 }
 void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 	
-	if (events.type == SDL_KEYDOWN) {
+	if (events.type == SDL_KEYDOWN)
+	{
 
 		switch (events.key.keysym.sym)
 		{
@@ -136,16 +133,22 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 		break;
 
 
+		case SDLK_1:
+		{
 
+		}
+		break;
 
 		case SDLK_a:
 		{
 			status_ = WAR1;
 			input_type_.war1 = 1;
 			UpdateImagePlayer(screen);
-			if (on_ground_ == false) heiy = 1;
-			lighting = 1;
-			
+			is_basic = 1;
+			fight = 1;
+			cb_basic = 1;
+			max_y = y_pos_;
+			min_y = y_pos_ - 64 * 2;
 
 
 		}
@@ -155,15 +158,16 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			status_ = WAR2;
 			input_type_.war2 = 1;
 			UpdateImagePlayer(screen);
+			is_basic = 0;
 			fight = 1;
 			if (on_ground_ == true)
 			{
 
-				max_y = y_pos_ ;
-				min_y = y_pos_-64*2;
+				max_y = y_pos_;
+				min_y = y_pos_ - 64 * 2;
 
 
-				
+
 
 			}
 
@@ -179,8 +183,8 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 
 
-				max_y = y_pos_ + 64*2;
-				min_y = y_pos_ - 64*2;
+				max_y = y_pos_ + 64 * 2;
+				min_y = y_pos_ - 64 * 2;
 
 
 
@@ -190,22 +194,22 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 			}
 		}
-			break;
+		break;
 		case SDLK_d:
 		{
 			status_ = WAR3;
-			input_type_.war3l = 1;
+			input_type_.war3 = 1;
 			UpdateImagePlayer(screen);
 
 			fight = 1;
-
+			is_basic = 0;
 
 
 			if (on_ground_ == true)
 			{
 
-				max_y = y_pos_ ;
-				min_y = y_pos_- 64 * 2;
+				max_y = y_pos_;
+				min_y = y_pos_ - 64 * 2;
 
 
 
@@ -224,8 +228,8 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 
 
-				max_y = y_pos_ + 64*2;
-				min_y = y_pos_ - 64*2;
+				max_y = y_pos_ + 64 * 2;
+				min_y = y_pos_ - 64 * 2;
 
 
 
@@ -245,22 +249,22 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 
 		break;
-		case SDLK_f:
+
+		case SDLK_s:
 		{
-			status_ = WAR3;
-			input_type_.war3r = 1;
+			status_ = WAR4;
+			input_type_.war4 = 1;
 			UpdateImagePlayer(screen);
 
 			fight = 1;
-
-
-
+			is_basic = 0;
+			unti = 1;
 
 			if (on_ground_ == true)
 			{
 
-				max_y = y_pos_ ;
-				min_y = y_pos_- 64 * 2;
+				max_y = y_pos_;
+				min_y = y_pos_ - 64 * 3;
 
 
 
@@ -279,8 +283,8 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 
 
-				max_y = y_pos_ + 64*2;
-				min_y = y_pos_ - 64*2;
+				max_y = y_pos_ + 64 * 3;
+				min_y = y_pos_ - 64 * 3;
 
 
 
@@ -290,18 +294,19 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 			}
 
-		}
 
 
 
 
-		break;
 
 		}
 
 
 
-	
+
+
+
+		}
 	}
 	else if (events.type == SDL_KEYUP)
 	{
@@ -309,51 +314,67 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 		case SDLK_RIGHT:
 		{
-
+			status_ = WALK_NONE;
 			input_type_.right_ = 0;
-
+			UpdateImagePlayer(screen);
 		}
 		break;
 		case SDLK_LEFT:
 		{
-
+			status_ = WALK_NONE;
 			input_type_.left_ = 0;
-			
+			UpdateImagePlayer(screen);
 		}
 		break;
 		case SDLK_a:
 		{
-			
+			status_ = WALK_NONE;
 			input_type_.war1 = 0;
 			heiy= 0;
-			lighting = 0;
 			fight = 0;
+			cb_basic = 0;
+			min_y = 0;
+			max_y = 0;
+			UpdateImagePlayer(screen);
+			
 		}
 		break;
 		case SDLK_w:
 		{
+
+			status_ = WALK_NONE;
 			fight = 0;
 			input_type_.war2 = 0;
 			max_y =0;
 			min_y = 0;
+			UpdateImagePlayer(screen);
+			
 		}
 		break;
 		case SDLK_d:
 		{
+			status_ = WALK_NONE;
 			fight = 0;
-			input_type_.war3l = 0;
+			input_type_.war3 = 0;
 			max_y = 0;
 			min_y = 0;
+			
+			UpdateImagePlayer(screen);
 		}
 		break;
-		case SDLK_f:
+	
+		case SDLK_s:
 		{
+
+			status_ = WALK_NONE;
 			fight = 0;
-			input_type_.war3r = 0;
+			input_type_.war4 = 0;
 			max_y = 0;
 			min_y = 0;
+
+			UpdateImagePlayer(screen);
+
 		}
-		break;
 
 		}
 	}
@@ -382,16 +403,14 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 		{
 			x_val_ -= PLAYER_SPEED;
 		}
-		else if (input_type_.right_ == 1) {
+		else if (input_type_.right_ == 1)
+		{
 
 			x_val_ += PLAYER_SPEED;
 		}
 
-		if (input_type_.war3l == 1)
-		{
-			x_val_ -= PLAYER_SPEED;
-		}
-		else if (input_type_.war2 == 1)
+		
+		 if (input_type_.war2 == 1)
 		{
 			if (on_ground_ == true) input_type_.jump_ = 1;
 			else
@@ -400,27 +419,19 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 				else x_val_ -= PLAYER_SPEED;
 			}
 		}
-		else if (input_type_.war3r == 1) {
-
-			x_val_ += PLAYER_SPEED;
+		  
+		else if (input_type_.war3 == 1) {
+			 if (check == 1)
+			 {
+				 x_val_ += PLAYER_SPEED;
+			 }
+			 else
+			 {
+				 x_val_ -= PLAYER_SPEED;
+			 }
 		}
-		else 	if (input_type_.war1 == 1)
-		{
-
-			if (unti == 0)
-			{
-				x_pos_ = SCREEN_WIDTH / 2;
-				y_pos_ = 0;
-				unti++;
-			}
-			
-			
-		}
-		else if (input_type_.war2 == 1)
-		{
-			if (check == 0) x_val_ -= PLAYER_SPEED;
-			else x_val_ += PLAYER_SPEED;
-		}
+		
+	
 		else	if (input_type_.jump_ == 1)
 		{
 
@@ -432,6 +443,15 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 			input_type_.jump_ = 0;
 		}
 
+		 if (unti == 1)
+		 {
+			 time_unti++;
+			 if (time_unti == 70)
+			 {
+				 time_unti = 0;
+				 unti = 2;
+			 }
+		 }
 		CheckToMap(map_data);
 		CenterEntityOnMap(map_data);
 
@@ -544,11 +564,7 @@ void MainObject::CheckToMap(Map& map_data)
 
 					y_val_ = 0;
 					on_ground_ = true;
-					if (status_ == WALK_NONE)
-					{
-						status_ = WALK_RIGHT;
-					}
-
+					
 
 				}
 
@@ -591,60 +607,42 @@ void MainObject::CheckToMap(Map& map_data)
 
 void MainObject::UpdateImagePlayer(SDL_Renderer* des)
 {
-	if (on_ground_ == true)
-	{
+	
 		if (status_ == WALK_LEFT)
 		{
 
-			LoadImg("img//player1_left.png", des);
+			LoadImg("img//player_run_left.png", des);
 		}
 		else if(status_==WALK_RIGHT)
 		{
-			LoadImg("img//player1_right.png", des);
+			LoadImg("img//player_run_right.png", des);
+		}
+		else if (status_ == WALK_NONE)
+		{
+			if (check == 0)  LoadImg("img//player_none_left.png", des);
+			else LoadImg("img//player_none_right.png", des);
+
 		}
 		
-	
-		else if (status_ == WAR3) {
-
-			
-			
-			if (check == 0) LoadImg("img//war1_left.png", des);
-			else LoadImg("img//war1_right.png", des);
-			
-		}
-	}
-	else
-	{
-
-		if (status_ == WALK_LEFT)
-		{
-			LoadImg("img//jump_left.png", des);
-		}
-		else if(status_==WALK_RIGHT)
-		{
-			LoadImg("img//jump_right.png", des);
-		}
-		else if (status_ == WAR1)
-		{
-
-			status_ = WAR2;
-		}
+		
 		else if (status_ == WAR2)
 		{
-			
-			
+			if (check == 0)  LoadImg("img//war2_left1.png", des);
+			else LoadImg("img//war2_right1.png", des);
 
-			if (check == 1) LoadImg("img//war2_right1.png", des);
 
-			else LoadImg("img//war2_left1.png", des);
+
 		}
-		else if (status_ == WAR3) {
-
-
+		else if (status_ == WAR3)
+		{
+			
 			 LoadImg("img//war3.png", des);
-			
+
+
+
 		}
-	}
+	
 }
+
 
 

@@ -8,8 +8,7 @@ void Sound::LoadMusic(const char path[])
 
 void Sound::DisplayMusic(int x)
 {
-	if (Mix_PlayingMusic() == 0) Mix_PlayChannel(-1,sound, x);
-
+	Mix_PlayChannel(0, sound, 0);
 }
 
 void Sound::Volume(int volum)

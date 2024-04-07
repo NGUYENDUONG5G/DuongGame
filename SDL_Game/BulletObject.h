@@ -16,61 +16,23 @@ public:
 	~BulletObject();
 
 	
-
+	void action(SDL_Renderer* des,int k);
 	
 
-	void set_x_pos(const int& xVal, const int& yVal) {
-		x_pos_ = xVal;
-		y_pos_ = yVal;
-	}
+	void Set_Rect(const int& x_, const int& y_) { rect_.x = x_; rect_.y = y_; }
+
+	void Loadac(SDL_Renderer* des);
 	
-	int get_x_bb() const { return x_pos_; }
-	int get_y_bb() const { return y_pos_; }
-
-	void set_XY(const int& x, const int& y)
-	{
-
-		x_pos_ = x;
-		y_pos_ = y;
-	}
-	
-	SDL_Rect GetRectFrame() ;
-	
-	void set_clips();
-	bool LoadImg(std::string path, SDL_Renderer* screen);
-	void Show(SDL_Renderer* des);
-	int get_width_frame() const {
-		return width_frame_;
-	}
-	int get_height_frame() const {
-		return height_frame_;
-	}
-	// Hành động cho bot
-
-	void DoPlayer(Map& gMap);
-
-	void CheckToMap(Map& gMap);
-
-	void GPS(const int& x_) { mt_x = x_; }
-	void SetMapXY(const int map_x, const int map_y)
-	{
-		map_x_ = map_x;
-		map_y_ = map_y;
-	}
+	void set_tt (const int& tt_) { tt = tt_; }
+	void set_cb_basic(int basic) { cb_basic = basic; }
+	void set_unti(int unti_) { unti = unti_; }
 private:
-	float x_pos_;
-	float y_pos_;
-	float x_val_;
-	float y_val_;
-	int map_x_;
-	int map_y_;
-	int width_frame_;
-	int height_frame_;
-	int frame_;
-	bool on_ground_;
-	SDL_Rect frame_clip_[4];
-	int mt_x;
 	
+	int sel;
+	float angle;
+	int tt;
+	int cb_basic;
+	int unti;
 };
 
 

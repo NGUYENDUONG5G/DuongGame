@@ -31,6 +31,7 @@ public:
 		WAR1=5,
 		WAR2=6,
 		WAR3=7,
+		WAR4=8,
 
 	
 
@@ -79,8 +80,10 @@ void set_xval_(const int& xval)   {  x_val_= xval; }
 	int  set_fight() { return fight; }
 	float sent_max_y() { return max_y; }
 	float sent_min_y() { return min_y; }
-	int sent_lighting() { return lighting; }
-
+	
+	int cb_basic_() { return cb_basic; }
+	int is_basic_() { return is_basic; }
+	int sent_unti() const { return unti; }
 private:
 	
 
@@ -96,7 +99,7 @@ private:
 	int height_frame_;
 	float max_y;
 	float min_y;
-
+	float angle;
 	SDL_Rect frame_clip_[4];
 
 	Input input_type_;
@@ -113,8 +116,13 @@ private:
 	
 	int check;
 	int fight;
+	
+	
+	int cb_basic;
+	int is_basic;
 	int unti;
-	int lighting;
+	int time_unti;
+	
 };
 
 

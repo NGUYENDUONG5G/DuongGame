@@ -8,7 +8,9 @@ void Music::LoadMusic(const char path[])
 
 void Music::DisplayMusic()
 {
-	if (Mix_PlayingMusic() == 0) Mix_PlayMusic(sound, -1);
+	
+
+	 Mix_PlayMusic(sound, -1);
 
 }
 
@@ -26,6 +28,6 @@ void Music::Free()
 }
 void Music::stopMusic()
 {
-	Mix_HaltMusic();
+	Mix_PauseMusic();
 	
 }

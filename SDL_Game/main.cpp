@@ -18,8 +18,6 @@ BaseObject g_background2;;
 BaseObject star_game;
 
 TTF_Font* font;
-Music music_;
-Sound music1_;
 
 
 
@@ -77,16 +75,37 @@ bool LoadBackground() {
 	return true;
 }
 
+void MusicStart()
+{
+	Mix_HaltMusic();
+	Mix_FreeMusic(music_play);
+	music_start = Mix_LoadMUS("music//start_game.mp3");
+	if (music_start != NULL)
+	{
+		Mix_PlayMusic(music_start, -1);
+	}
+}
+
+void MusicPlay()
+{
+	
+	if (music_play != NULL)
+	{
+		Mix_PlayMusic(music_play, -1);
+	}
+}
+
+
 
 void close() {
 
 	star_game.Free();
 	g_background.Free();
 	g_background2.Free();
+	Mix_FreeMusic(music_start);
+	Mix_FreeMusic(music_play);
 
-	
-	music_.Free();
-	music1_.Free();
+
 	SDL_DestroyRenderer(g_screen);
 	g_screen = NULL;
 	SDL_DestroyWindow(g_window);
@@ -147,7 +166,7 @@ int main(int arc, char* argv[])
 
 
 	MainObject p_player;
-	p_player.LoadImg("img//player1_right.png", g_screen);
+	p_player.LoadImg("img//player_none_right.png", g_screen);
 	p_player.set_clips();
 
 
@@ -169,19 +188,14 @@ int main(int arc, char* argv[])
 	TextObject begin;
 	TextObject endgame[2];
 	TextObject choose[2];
-
-	
+	BulletObject p_bullet;
+	BulletObject p_unti;
 
 	int photo = 0;
 	int lighting = 0;
 
-	BulletObject p_bullet;
-
-		p_bullet.LoadImg("img//war3_right1.png", g_screen);
-		p_bullet.set_clips();
 	
-		music_.LoadMusic("music//start_game.mp3");
-		music1_.LoadMusic("music//war3.mp3");
+	
 	
 	bool is_quit = false;
 
@@ -243,6 +257,7 @@ int main(int arc, char* argv[])
 					star_game.Render(g_screen, NULL);
 
 					SDL_Delay(1000);
+					MusicStart();
 				}
 			
 
@@ -252,10 +267,11 @@ int main(int arc, char* argv[])
 			}
 			else
 			{
-
-				music_.DisplayMusic();
-				music_.Volume(MAX_VOLUME/2);
-
+				
+				
+				
+				
+				
 				
 				g_background2.LoadImg("img//tachi.jpg", g_screen);
 				g_background2.Render(g_screen, NULL);
@@ -265,18 +281,17 @@ int main(int arc, char* argv[])
 				begin.RenderText("START GAME", font, g_screen, 0);
 
 				
-				if (Impact::Impact_(x_, y_, begin.get_Rect())) start = true;
+				if (Impact::Impact_(x_, y_, begin.get_Rect())) { start = true; MusicPlay(); }
 				
 				x_ = 0; y_ = 0;
 			}
 		}
 		else if (start)
 		{
-			music_.stopMusic();
-			
-			music1_.DisplayMusic(-1);
-			music1_.Volume(MAX_VOLUME / 2);
 		
+		
+		
+
 			if (pause == 2)
 			{
 				if (botkilled <killed)
@@ -368,7 +383,8 @@ int main(int arc, char* argv[])
 			else if(pause==0)
 			{
 				
-			
+				MusicPlay();
+
 				SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
 				SDL_RenderClear(g_screen);
 
@@ -378,8 +394,8 @@ int main(int arc, char* argv[])
 
 				Map map_data = game_map.getMap();
 
-				lighting = p_player.sent_lighting();
-
+			
+				int is_basic;
 
 				vtrix = p_player.vitri_x();
 				vtriy = p_player.vitri_y();
@@ -387,16 +403,17 @@ int main(int arc, char* argv[])
 				myfight = p_player.set_fight();
 				max_y = p_player.sent_max_y();
 				min_y = p_player.sent_min_y();
-
-
+				int k = p_player.cb_basic_();
+				is_basic = p_player.is_basic_();
+				int unti = p_player.sent_unti();
 				vitribotx = p_threat.get_x_pos();
 				vitriboty = p_threat.get_y_pos();
 				botfight = p_threat.sent_fight();
-
+			
 				p_player.Swap(vitribotx, vitriboty);
 
 				p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
-
+				
 				p_player.Doplayer(map_data,g_screen);
 
 				p_player.Show(g_screen);
@@ -404,10 +421,29 @@ int main(int arc, char* argv[])
 				game_map.SetMap(map_data);
 
 				game_map.DrawMap(g_screen);
+				SDL_Rect rect_player = p_player.GetRectFrame();
+				if (is_basic == 1)
+				{
+
+					p_bullet.set_tt(tt);
+					p_bullet.set_cb_basic(k);
+					p_bullet.Loadac(g_screen);
 
 
+					if (tt == 1)
+					{
+						p_bullet.SetRect(rect_player.x, rect_player.y - 20);
+					}
+					else
+					{
+						p_bullet.SetRect(rect_player.x - 20, rect_player.y - 20);
 
+					}
+					p_bullet.action(g_screen,60);
 
+				}
+
+			
 
 				p_threat.SetMapXY(map_data.start_x_, map_data.start_y_);
 				p_threat.ktraN(vtrix, vtriy, tt);
@@ -420,38 +456,33 @@ int main(int arc, char* argv[])
 
 				p_threat.Show(g_screen);
 
-				SDL_Rect rect_player = p_player.GetRectFrame();
-				SDL_Rect rect_bullet = p_bullet.GetRectFrame();
-				if (lighting == 1)
-				{
-					
-					
-						p_bullet.SetMapXY(map_data.start_x_, map_data.start_y_);
-						p_bullet.DoPlayer(map_data);
-						p_bullet.GPS(vitribotx);
-						p_bullet.Show(g_screen);
-						
-						if (Impact::Impact_(vitribotx, vitriboty, rect_bullet)) botkilled -= 5;
-				
-				}
-
-				
-				
+			
 				bool bCol1 = false;
 				bool bCol2 = false;
 				bool bCol3 = false;
 
+				
+				if (unti != 2)
+				{
+					p_unti.set_unti(unti);
+					p_unti.Loadac(g_screen);
+					p_unti.SetRect(rect_player.x - 64, rect_player.y - 100);
+					p_unti.action(g_screen, 180);
 
+					if (vitribotx <= vtrix + 64 * 4 && vitribotx >= vtrix - 64 * 4 && vitriboty <= max_y && vitriboty >= min_y) bCol1 = true;
+
+				}
+				
+				
+			
+
+				
 
 
 				if (myfight == 1 && botfight == 0)
 				{
 
 					if (vitribotx <= vtrix + 64 * 2 && vitribotx >= vtrix - 64 * 2 && vitriboty <= max_y && vitriboty >= min_y) bCol1 = true;
-
-
-
-
 
 
 				}
@@ -463,8 +494,8 @@ int main(int arc, char* argv[])
 
 
 				}
-
-				else
+				
+				else if(myfight==1&&botfight==1)
 				{
 					if (vitribotx <= vtrix + 64 && vitribotx >= vtrix - 64 && vitriboty <= max_y && vitriboty >= min_y) bCol3 = true;
 					
@@ -472,6 +503,8 @@ int main(int arc, char* argv[])
 
 
 				}
+				
+				
 
 
 				if (bCol3)
@@ -492,7 +525,7 @@ int main(int arc, char* argv[])
 
 
 
-
+				
 
 			
 				else if (bCol1)
@@ -547,6 +580,8 @@ int main(int arc, char* argv[])
 p_myhp.free();
 p_bothp.free();
 p_player.Free();
+p_bullet.Free();
+p_unti.Free();
 for (int i = 0; i < 2; i++)
 {
 	endgame[i].free();
