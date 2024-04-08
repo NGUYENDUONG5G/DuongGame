@@ -50,7 +50,7 @@ const int RENDER_DRAW_COLOR = 0xff;
 
 
 #define MAX_VOLUME 128
-#define BULLET_SPEED 5
+
 
 typedef struct Input
 {

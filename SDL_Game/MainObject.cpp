@@ -330,7 +330,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 		{
 			status_ = WALK_NONE;
 			input_type_.war1 = 0;
-			heiy= 0;
+			
 			fight = 0;
 			cb_basic = 0;
 			min_y = 0;

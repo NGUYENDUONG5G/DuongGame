@@ -2,6 +2,8 @@
 
 #include "ThreatsObject.h"
 #include <cmath>
+#include <random>
+#include <iostream>
 
 ThreatsObject::ThreatsObject()
 {
@@ -20,7 +22,8 @@ ThreatsObject::ThreatsObject()
 	
 	dem = 0;
 	fight = 0;
-
+	time_skill = 0;
+	rad = 0;
 }
 
 
@@ -80,6 +83,70 @@ void ThreatsObject::Show(SDL_Renderer* des)
 	
 }
 
+void ThreatsObject::RandomAction()
+{
+	std::srand(std::time(NULL));
+	
+	if (time_skill == 0)
+	{
+		
+		if (x_pos_ > vt_x)
+		{
+			rad = rand() % 2 + 2;
+		
+			
+			
+		}
+		else if (x_pos_ < vt_x)
+		{
+			rad = rand() % 2;
+				
+
+		}
+		time_skill++;
+	}
+	else
+	{
+		time_skill++;
+		std::cout << rad << '\n';
+		if (rad == 0)
+		{
+			input_type_.right_ = 1;
+			input_type_.left_ = 0;
+			input_type_.up_right_ = 0;
+			input_type_.up_left_ = 0;
+
+		}
+		else if (rad == 1)
+		{
+
+			input_type_.right_ = 0;
+			input_type_.left_ = 0;
+			input_type_.up_right_ = 1;
+			input_type_.up_left_ = 0;
+		}
+		else if(rad==2)
+		{
+
+			input_type_.right_ = 0;
+			input_type_.left_ = 1;
+			input_type_.up_right_ = 0;
+			input_type_.up_left_ = 0;
+		}
+		else if (rad == 3)
+		{
+			input_type_.right_ = 0;
+			input_type_.left_ = 0;
+			input_type_.up_right_ = 0;
+			input_type_.up_left_ = 1;
+		}
+
+		if (time_skill >= AI[rad]) time_skill = 0;
+	}
+}
+
+
+
 void ThreatsObject::DoPlayer(Map& gMap)
 {
 	
@@ -89,7 +156,11 @@ void ThreatsObject::DoPlayer(Map& gMap)
 		{
 			y_val_ = THREAT_MAX_FALL_SPEED;
 		}
-
+		else if (y_val_ <= THREAT_FLY)
+		{
+			y_val_ = THREAT_FLY;
+		}
+		if (y_pos_ <= 0) y_pos_ = 0;
 		if (input_type_.left_ == 1)
 		{
 			x_val_ -= THREAT_SPEED;
@@ -99,7 +170,24 @@ void ThreatsObject::DoPlayer(Map& gMap)
 			x_val_ += THREAT_SPEED;
 		}
 		
-		
+		else if (input_type_.up_right_ == 1)
+		{
+			if (on_ground_ == true)
+			{
+				x_val_ += THREAT_SPEED;
+				y_val_ -= 20;
+				on_ground_ = false;
+			}
+		}
+		else if (input_type_.up_left_ == 1)
+		{
+			if (on_ground_ == true)
+			{
+				x_val_ -= THREAT_SPEED;
+				y_val_ -= 20;
+				on_ground_ = false;
+			}
+		}
 		
 		CheckToMap(gMap);
 
@@ -248,16 +336,15 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 
 		if (x_pos_ > vt_x)
 		{
-				input_type_.left_ = 1;
-				input_type_.right_ = 0;
 				
-				if (x_pos_ - x_val_ > 64*3 )
+				if (x_pos_ - vt_x > 64*2 )
 				{
-					LoadImg("img//bot_left.png", screen);
+					LoadImg("img//bot_none_left.png", screen);
 				}
 				else
 				{
-					LoadImg("img//bot_left.png", screen);
+					input_type_.left_ = 0;
+					LoadImg("img//bot_fight_left.png", screen);
 				}
 			
 
@@ -267,15 +354,15 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 		{
 			
 				
-				input_type_.left_ = 0;
-				input_type_.right_ = 1;
-				if (x_val_ - x_pos_ > 64*3)
+			
+				if (vt_x - x_pos_ > 64*2)
 				{
-					LoadImg("img//bot_right.png", screen);
+					LoadImg("img//bot_none_right.png", screen);
 				}
 				else
 				{
-					LoadImg("img//bot_right.png", screen);
+					
+					LoadImg("img//bot_fight_right.png", screen);
 
 				}
 		}

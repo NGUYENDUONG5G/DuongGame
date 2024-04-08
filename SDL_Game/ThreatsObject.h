@@ -10,8 +10,8 @@
 #define THREAT_FRAME_NUM 8
 #define THREAT_GRAVITY_SPEED 0.8
 #define THREAT_MAX_FALL_SPEED 10
-#define THREAT_SPEED 3
-#define THREAT_JUMP 18
+#define THREAT_SPEED 8
+#define THREAT_FLY -10
 
 
 class ThreatsObject :public BaseObject
@@ -107,11 +107,11 @@ public:
 
 
 	SDL_Rect GetRectFrame();
-
+	void RandomAction();
 	
 	
 private:
-
+	int time_skill;
 	int tt;
 	float vt_x;
 	float vt_y;
@@ -129,13 +129,13 @@ private:
 	int height_frame_;
 	int frame_;
 
-
+	
 
 	int dem;
 	int fight;
 	Input input_type_;
-
-	
+	int AI[4] = {20,20, 10,10 };
+	int rad;
 };
 
 

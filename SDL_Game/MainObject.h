@@ -75,8 +75,8 @@ void set_xval_(const int& xval)   {  x_val_= xval; }
 
 	
 	int set_check() const { return check; }
-	int get_heiy() { return heiy; }
-
+	
+	
 	int  set_fight() { return fight; }
 	float sent_max_y() { return max_y; }
 	float sent_min_y() { return min_y; }
@@ -88,7 +88,7 @@ private:
 	
 
 	
-	int heiy;
+	
 	float swx;
 	float swy;
 	float x_val_;

@@ -104,7 +104,7 @@ void close() {
 	g_background2.Free();
 	Mix_FreeMusic(music_start);
 	Mix_FreeMusic(music_play);
-
+	
 
 	SDL_DestroyRenderer(g_screen);
 	g_screen = NULL;
@@ -171,7 +171,7 @@ int main(int arc, char* argv[])
 
 
 	ThreatsObject p_threat;
-	p_threat.LoadImg("img//bot_left.png",g_screen);
+	p_threat.LoadImg("img//bot_none_left.png",g_screen);
 	p_threat.set_clips();
 
 	
@@ -417,11 +417,12 @@ int main(int arc, char* argv[])
 				p_player.Doplayer(map_data,g_screen);
 
 				p_player.Show(g_screen);
-
+			
 				game_map.SetMap(map_data);
 
 				game_map.DrawMap(g_screen);
 				SDL_Rect rect_player = p_player.GetRectFrame();
+
 				if (is_basic == 1)
 				{
 
@@ -447,8 +448,8 @@ int main(int arc, char* argv[])
 
 				p_threat.SetMapXY(map_data.start_x_, map_data.start_y_);
 				p_threat.ktraN(vtrix, vtriy, tt);
-
-
+				p_threat.RandomAction();
+				
 				p_threat.ImpMoveType(g_screen);
 				p_threat.DoPlayer(map_data);
 
