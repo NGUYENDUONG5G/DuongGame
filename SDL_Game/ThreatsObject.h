@@ -5,7 +5,7 @@
 #include "CommonFunc.h"
 #include "BaseObject.h"
 #include "BulletObject.h"
-
+#include <string.h>
 
 #define THREAT_FRAME_NUM 8
 #define THREAT_GRAVITY_SPEED 0.8
@@ -109,7 +109,8 @@ public:
 	SDL_Rect GetRectFrame();
 	void RandomAction();
 	
-	
+	void set_bots();
+	void set_choose_bot(const int& choose) { choose_bot = choose; }
 private:
 	int time_skill;
 	int tt;
@@ -136,6 +137,8 @@ private:
 	Input input_type_;
 	int AI[4] = {20,20, 10,10 };
 	int rad;
+	std::vector<std::string> bot[4];
+	int choose_bot;
 };
 
 

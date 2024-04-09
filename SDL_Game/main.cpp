@@ -11,14 +11,24 @@
 #include <vector>
 #include "Sound.h"
 #include<iostream>
+#include<vector>
+#include<random>
 
 #undef main
 BaseObject g_background;
 BaseObject g_background2;;
 BaseObject star_game;
+BaseObject key_star;
+BaseObject key_end;
+BaseObject key_resume;
+BaseObject key_exit;
+BaseObject hp_me;
+BaseObject hp_bot;
+
 
 TTF_Font* font;
 
+std::string bkgr[4] = {"img//newbkgr0.jpg","img//newbkgr1.jpg","img//newbkgr2.gif","img//newbkgr3.jpg"};
 
 
 bool InitData() {
@@ -69,8 +79,8 @@ bool InitData() {
 }
 
 
-bool LoadBackground() {
-	bool ret = g_background.LoadImg("img//newbkgr4.jpg", g_screen);
+bool LoadBackground(int choose_bkgr) {
+	bool ret = g_background.LoadImg(bkgr[choose_bkgr], g_screen);
 	if (ret == false) return false;
 	return true;
 }
@@ -105,6 +115,12 @@ void close() {
 	Mix_FreeMusic(music_start);
 	Mix_FreeMusic(music_play);
 	
+	 key_star.Free();
+	 key_end.Free();
+	 key_resume.Free();
+	 key_exit.Free();
+	 hp_me.Free();
+	 hp_bot.Free();
 
 	SDL_DestroyRenderer(g_screen);
 	g_screen = NULL;
@@ -126,9 +142,9 @@ void close() {
 int main(int arc, char* argv[]) 
 {
 
-
-
-
+	srand(time(NULL));
+	
+	int choose_bkgr = 0;
 
 
 
@@ -153,7 +169,7 @@ int main(int arc, char* argv[])
 
 
 	if (InitData() == false) return -1;
-	if (LoadBackground() == false) return -1;
+	
 
 
 
@@ -173,17 +189,14 @@ int main(int arc, char* argv[])
 	ThreatsObject p_threat;
 	p_threat.LoadImg("img//bot_none_left.png",g_screen);
 	p_threat.set_clips();
+	p_threat.set_bots();
 
 	
 
-	int killed = 1000;
-	int botkilled = 1000;
+	float killed = 1000;
+	float botkilled = 1000;
 
-	TextObject p_myhp;
-	p_myhp.set_xy(10, 10);
-
-	TextObject p_bothp;
-	p_bothp.set_xy(SCREEN_WIDTH -300, 10);
+	
 
 	TextObject begin;
 	TextObject endgame[2];
@@ -203,7 +216,8 @@ int main(int arc, char* argv[])
 	{
 		fps_timer.start();
 		
-		while (SDL_PollEvent(&g_event) != 0) {
+		while (SDL_PollEvent(&g_event) != 0)
+		{
 
 
 			if (g_event.type == SDL_QUIT) {
@@ -239,25 +253,25 @@ int main(int arc, char* argv[])
 					if (photo ==1) 
 					{
 						
-						star_game.LoadImg("video//start_game2_000.bmp", g_screen);
+						star_game.LoadImg("img//logo_game.jpg", g_screen);
 						star_game.Render(g_screen, NULL);
 						
 					}
 				else if (photo==2)
 				{
 					
-					star_game.LoadImg("video//start_game2_007.bmp", g_screen);
+					star_game.LoadImg("img//white_gr.png", g_screen);
 					star_game.Render(g_screen, NULL);
 					
 				}
 				else if (photo ==3)
 				{
 					
-					star_game.LoadImg("video//start_game2_009.bmp",  g_screen);
+					star_game.LoadImg("img//bkgr_menu.jpg",  g_screen);
 					star_game.Render(g_screen, NULL);
 
 					SDL_Delay(1000);
-					MusicStart();
+					
 				}
 			
 
@@ -273,15 +287,26 @@ int main(int arc, char* argv[])
 				
 				
 				
-				g_background2.LoadImg("img//tachi.jpg", g_screen);
+				g_background2.LoadImg("img//bkgr_menu.jpg", g_screen);
 				g_background2.Render(g_screen, NULL);
 
+				key_star.LoadImg("img//key.png", g_screen);
+				key_star.SetRect(SCREEN_WIDTH / 2 - 64*3, SCREEN_HEIGHT / 2+64+30 );
+				key_star.Render(g_screen, NULL);
 				
 				begin.set_xy(SCREEN_WIDTH / 2 - 64 * 2, SCREEN_HEIGHT / 2 + 64 * 2);
 				begin.RenderText("START GAME", font, g_screen, 0);
 
 				
-				if (Impact::Impact_(x_, y_, begin.get_Rect())) { start = true; MusicPlay(); }
+				if (Impact::Impact_(x_, y_, begin.get_Rect()))
+				
+				{ start = true; 
+				key_star.LoadImg("img//key_small.png", g_screen);
+				key_star.SetRect(SCREEN_WIDTH / 2 - 64 * 3+20, SCREEN_HEIGHT / 2 + 64 + 30);
+				key_star.Render(g_screen, NULL);
+
+				
+				}
 				
 				x_ = 0; y_ = 0;
 			}
@@ -290,7 +315,7 @@ int main(int arc, char* argv[])
 		{
 		
 		
-		
+			if (LoadBackground(choose_bkgr) == false) is_quit = true;
 
 			if (pause == 2)
 			{
@@ -300,43 +325,51 @@ int main(int arc, char* argv[])
 					g_background2.LoadImg("img//wingame.jpg", g_screen);
 					g_background2.SetRect(0,0);
 					g_background2.Render(g_screen, NULL);
+					SDL_Delay(2000);
+					int save = choose_bkgr;
+					while ( choose_bkgr==save)
+					{
+						choose_bkgr = rand() % 4;
+					}
+					pause = 0; killed = 1000; botkilled = 1000; p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0); 
+
 				}
-				else if (killed <botkilled)
+				else if (killed < botkilled)
 				{
 					g_background2.LoadImg("img//lose_game.jpg", g_screen);
 					g_background2.SetRect(0, 0);
 					g_background2.Render(g_screen, NULL);
-				}
-			
-				endgame[0].set_xy(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 64 +32);
-				endgame[0].RenderText("CONTINUTE PLAY", font, g_screen, 0);
 
-				endgame[1].set_xy(SCREEN_WIDTH / 2-64*3, SCREEN_HEIGHT / 2 + 64+32 );
-				endgame[1].RenderText("EXIT GAME", font, g_screen, 0);
-				
-				for (int i = 0; i < 2; i++)
-				{
-					if (Impact::Impact_(x_, y_, endgame[i].get_Rect()))
+
+					endgame[0].set_xy(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 64 + 32);
+					endgame[0].RenderText("CONTINUTE PLAY", font, g_screen, 0);
+
+					endgame[1].set_xy(SCREEN_WIDTH / 2 - 64 * 3, SCREEN_HEIGHT / 2 + 64 + 32);
+					endgame[1].RenderText("EXIT GAME", font, g_screen, 0);
+
+					for (int i = 0; i < 2; i++)
 					{
-						if (i == 0) { start = false; pause = 0; killed = 1000; botkilled = 1000; p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0); }
-						else if (i == 1)
+						if (Impact::Impact_(x_, y_, endgame[i].get_Rect()))
 						{
-
-							if (MessageBox(NULL, L"EXITED THE GAME ", L"GAME OVER", MB_OK | MB_ICONSTOP) == IDOK)
+							if (i == 0) { start = false; pause = 0; killed = 1000; botkilled = 1000; p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0); choose_bkgr = 0; }
+							else if (i == 1)
 							{
 
-								p_player.Free();
-								p_threat.Free();
-								close();
-								SDL_Quit();
-								return 0;
+								if (MessageBox(NULL, L"EXITED THE GAME ", L"GAME OVER", MB_OK | MB_ICONSTOP) == IDOK)
+								{
+
+									p_player.Free();
+									p_threat.Free();
+									close();
+									SDL_Quit();
+									return 0;
+								}
+
 							}
-
 						}
+
 					}
-
 				}
-
 
 			}
 
@@ -350,11 +383,18 @@ int main(int arc, char* argv[])
 				g_background2.SetRect(272, 113);
 				g_background2.Render(g_screen, NULL);
 
+				key_resume.LoadImg("img//key_small.png", g_screen);
+				key_resume.SetRect(SCREEN_WIDTH / 2 +64, SCREEN_HEIGHT / 2 -20);
+				key_resume.Render(g_screen, NULL);
+
+				key_exit.LoadImg("img//key_small.png", g_screen);
+				key_exit.SetRect(SCREEN_WIDTH / 2 - 64*4, SCREEN_HEIGHT / 2-20);
+				key_exit.Render(g_screen, NULL);
 			
-				choose[0].set_xy(SCREEN_WIDTH / 2 - 64, SCREEN_HEIGHT / 2 - 64);
+				choose[0].set_xy(SCREEN_WIDTH / 2 +64*2, SCREEN_HEIGHT / 2 );
 				choose[0].RenderText("Resume", font, g_screen, 1);
 
-				choose[1].set_xy(SCREEN_WIDTH / 2 - 64, SCREEN_HEIGHT / 2);
+				choose[1].set_xy(SCREEN_WIDTH / 2 - 64*2-30, SCREEN_HEIGHT / 2);
 				choose[1].RenderText("Exit", font, g_screen, 1);
 
 				 
@@ -445,7 +485,7 @@ int main(int arc, char* argv[])
 				}
 
 			
-
+				p_threat.set_choose_bot(choose_bkgr);
 				p_threat.SetMapXY(map_data.start_x_, map_data.start_y_);
 				p_threat.ktraN(vtrix, vtriy, tt);
 				p_threat.RandomAction();
@@ -547,18 +587,52 @@ int main(int arc, char* argv[])
 				{
 					pause = 2;
 				}
-				char myhp[20];
-
-				snprintf(myhp, 20, "MY HP : %d", killed);
-				p_myhp.RenderText(myhp, font, g_screen, 0);
-
 				
+				if (killed > 800)
+				{
+					hp_me.LoadImg("img//full_hp.png", g_screen);
+
+				}
+				else if (killed > 600)
+				{
+					hp_me.LoadImg("img//four_of_five.png", g_screen);
+				}
+				else if (killed > 400)
+				{
+					hp_me.LoadImg("img//three_of_five.png", g_screen);
+				}
+				else if (killed > 200)
+				{
+					hp_me.LoadImg("img//two_of_five.png", g_screen);
+				}
+				else hp_me.LoadImg("img//one_of_five.png", g_screen);
+
+				hp_me.SetRect(10, 10);
+				hp_me.Render(g_screen, NULL);
 
 
-				char bothp[20];
+				if (botkilled > 800)
+				{
+					hp_bot.LoadImg("img//full_hp.png", g_screen);
 
-				snprintf(bothp, 20, "BOT HP : %d", botkilled);
-				p_bothp.RenderText(bothp, font, g_screen, 0);
+				}
+				else if (botkilled > 600)
+				{
+					hp_bot.LoadImg("img//four_of_five_bot.png", g_screen);
+				}
+				else if (botkilled > 400)
+				{
+					hp_bot.LoadImg("img//three_of_five_bot.png", g_screen);
+				}
+				else if (botkilled > 200)
+				{
+					hp_bot.LoadImg("img//two_of_five_bot.png", g_screen);
+				}
+				else hp_me.LoadImg("img//one_of_five_bot.png", g_screen);
+
+				hp_bot.SetRect(SCREEN_WIDTH-250, 10);
+				hp_bot.Render(g_screen, NULL);
+
 			}
 		}
 			SDL_RenderPresent(g_screen);
@@ -578,8 +652,7 @@ int main(int arc, char* argv[])
    }
 
    begin.free();
-p_myhp.free();
-p_bothp.free();
+
 p_player.Free();
 p_bullet.Free();
 p_unti.Free();

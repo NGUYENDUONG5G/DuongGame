@@ -24,6 +24,7 @@ ThreatsObject::ThreatsObject()
 	fight = 0;
 	time_skill = 0;
 	rad = 0;
+	choose_bot = 0;
 }
 
 
@@ -65,6 +66,15 @@ void ThreatsObject::set_clips()
 
 }
 
+void ThreatsObject::set_bots()
+{
+	bot[0] = { "img//bot_none_right.png","img//bot_none_left.png","img//bot_fight_right.png","img//bot_fight_left.png"};
+	bot[1] = { "img//bot_none_right.png","img//bot_none_left.png","img//bot_fight_right.png","img//bot_fight_left.png" };
+	bot[2] = { "img//bot_none_right.png","img//bot_none_left.png","img//bot_fight_right.png","img//bot_fight_left.png" };
+	bot[3] = { "img//bot_none_right.png","img//bot_none_left.png","img//bot_fight_right.png","img//bot_fight_left.png" };
+	
+
+}
 void ThreatsObject::Show(SDL_Renderer* des)
 {
 
@@ -339,12 +349,12 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 				
 				if (x_pos_ - vt_x > 64*2 )
 				{
-					LoadImg("img//bot_none_left.png", screen);
+					LoadImg(bot[choose_bot][1], screen);
 				}
 				else
 				{
 					input_type_.left_ = 0;
-					LoadImg("img//bot_fight_left.png", screen);
+					LoadImg(bot[choose_bot][3], screen);
 				}
 			
 
@@ -357,12 +367,12 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 			
 				if (vt_x - x_pos_ > 64*2)
 				{
-					LoadImg("img//bot_none_right.png", screen);
+					LoadImg(bot[choose_bot][0], screen);
 				}
 				else
 				{
 					
-					LoadImg("img//bot_fight_right.png", screen);
+					LoadImg(bot[choose_bot][2], screen);
 
 				}
 		}

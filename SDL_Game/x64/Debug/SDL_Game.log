@@ -1,26 +1,32 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Big_pro.vcxproj, Big_project.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ThreatsObject.cpp
+  main.cpp
 D:\DuongGame\SDL_Game\CommonFunc.h(70,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-  (compiling source file 'ThreatsObject.cpp')
+  (compiling source file 'main.cpp')
   
 D:\DuongGame\SDL_Game\CommonFunc.h(85,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
-  (compiling source file 'ThreatsObject.cpp')
+  (compiling source file 'main.cpp')
   
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(71,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(72,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(88,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(154,33): warning C4305: '+=': truncation from 'double' to 'float'
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(213,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(214,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(216,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(217,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(230,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(248,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(267,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(268,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(270,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(271,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(284,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(307,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(324,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame\SDL_Game\MainObject.h(59,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame\SDL_Game\MainObject.h(60,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame\SDL_Game\MainObject.h(63,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame\SDL_Game\MainObject.h(65,46): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame\SDL_Game\MainObject.h(66,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame\SDL_Game\MainObject.h(67,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame\SDL_Game\main.cpp(145,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(440,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(441,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(555,31): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(560,31): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
   SDL_Game.vcxproj -> D:\DuongGame\x64\Debug\SDL_Game.exe

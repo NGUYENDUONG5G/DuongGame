@@ -84,6 +84,7 @@ void set_xval_(const int& xval)   {  x_val_= xval; }
 	int cb_basic_() { return cb_basic; }
 	int is_basic_() { return is_basic; }
 	int sent_unti() const { return unti; }
+	
 private:
 	
 
