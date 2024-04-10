@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "game_map.h"
 
+//refer from : https://phattrienphanmem123az.com/
+
 void GameMap::LoadMap(char* name)
 {
 	FILE* fp = NULL;

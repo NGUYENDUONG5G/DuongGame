@@ -5,6 +5,10 @@
 #include <iostream>
 #include<cmath>
 
+
+
+
+
 MainObject::MainObject() {
 	frame_ = 0;
 	x_pos_ = 0;
@@ -37,7 +41,7 @@ MainObject::~MainObject() {
 
 
 }
-
+//refer from : https://phattrienphanmem123az.com/
 bool MainObject::LoadImg(std::string path, SDL_Renderer* screen)
 {
 	bool ret = BaseObject::LoadImg(path, screen);
@@ -61,7 +65,7 @@ SDL_Rect MainObject::GetRectFrame()
 	rect.h = height_frame_;
 	return rect;
 }
-
+//refer from : https://phattrienphanmem123az.com/
 void MainObject::set_clips()
 {
 	
@@ -78,6 +82,7 @@ void MainObject::set_clips()
 	}
 
 }
+//refer from : https://phattrienphanmem123az.com/
 void MainObject::Show(SDL_Renderer* des) {
 	UpdateImagePlayer(des);
 
@@ -453,6 +458,7 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 
 	}
 
+//refer from : https://phattrienphanmem123az.com/
 void MainObject::CenterEntityOnMap(Map& map_data)
 {
 	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 2);
@@ -476,7 +482,7 @@ void MainObject::CenterEntityOnMap(Map& map_data)
 	}
 }
 
-
+//refer from : https://phattrienphanmem123az.com/
 void MainObject::CheckToMap(Map& map_data)
 {
 	int x1 = 0;
@@ -600,7 +606,7 @@ void MainObject::CheckToMap(Map& map_data)
 }
 
 
-
+//refer from : https://phattrienphanmem123az.com/
 void MainObject::UpdateImagePlayer(SDL_Renderer* des)
 {
 	

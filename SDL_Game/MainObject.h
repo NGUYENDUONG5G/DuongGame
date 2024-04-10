@@ -1,5 +1,7 @@
 #pragma once
 #pragma once
+//refer from : https://phattrienphanmem123az.com/
+
 #ifndef  MAIN_OBJECT_H_
 #define MAIN_OBJECT_H_
 

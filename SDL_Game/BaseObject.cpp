@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "BaseObject.h"
 
+
+//refer from : https://phattrienphanmem123az.com/
 BaseObject::BaseObject()
 {
 	p_object_ = NULL;

@@ -16,7 +16,7 @@ ThreatsObject::ThreatsObject()
 	on_ground_ = 0;
 	
 	frame_ = 0;
-	status_=WALK_NONE,
+	
 
 	input_type_.left_ = 0;
 	
@@ -35,6 +35,7 @@ ThreatsObject::~ThreatsObject()
 
 
 }
+//refer from : https://phattrienphanmem123az.com/
 bool ThreatsObject::LoadImg(std::string path, SDL_Renderer* screen)
 {
 	bool ret = BaseObject::LoadImg(path, screen);
@@ -50,7 +51,7 @@ bool ThreatsObject::LoadImg(std::string path, SDL_Renderer* screen)
 }
 
 
-
+//refer from : https://phattrienphanmem123az.com/
 void ThreatsObject::set_clips()
 {
 	if (width_frame_ > 0 && height_frame_ > 0)
@@ -75,6 +76,7 @@ void ThreatsObject::set_bots()
 	
 
 }
+//refer from : https://phattrienphanmem123az.com/
 void ThreatsObject::Show(SDL_Renderer* des)
 {
 
@@ -208,7 +210,7 @@ void ThreatsObject::DoPlayer(Map& gMap)
 
 
 
-
+//refer from : https://phattrienphanmem123az.com/
 
 void ThreatsObject::CheckToMap(Map& map_data)
 {
@@ -338,7 +340,7 @@ void ThreatsObject::CheckToMap(Map& map_data)
 
 }
 
-//t
+
 void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 {
 	

@@ -1,4 +1,5 @@
 ﻿#pragma once
+//refer from: https://phattrienphanmem123az.com/
 
 #ifndef COMMON_FUNCTION_H_
 #define COMMON_FUNCTION_H_

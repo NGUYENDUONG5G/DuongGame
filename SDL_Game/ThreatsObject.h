@@ -1,5 +1,6 @@
 ﻿#pragma once
 #pragma once
+//refer from : https://phattrienphanmem123az.com/
 #ifndef THREATS_OBJECT_H_
 #define THREATS_OBJECT_H_
 #include "CommonFunc.h"
@@ -11,7 +12,7 @@
 #define THREAT_GRAVITY_SPEED 0.8
 #define THREAT_MAX_FALL_SPEED 10
 #define THREAT_SPEED 8
-#define THREAT_FLY -10
+#define THREAT_FLY -150
 
 
 class ThreatsObject :public BaseObject
@@ -20,17 +21,7 @@ public:
 	ThreatsObject();
 	~ThreatsObject();
 
-	enum WalkType
-	{
-		WALK_NONE = 0,
-		WALK_RIGHT = 1,
-		WALK_LEFT = 2,
-		WALK_UP = 3,
-		WALK_DOWN = 4,
-		WAR1 = 5,
-		WAR2 = 6,
-	
-	};
+
 
 	void set_x_val(const float& xVal) {
 		x_val_ = xVal;

@@ -1,5 +1,7 @@
 #pragma once
 
+//refer from : https://phattrienphanmem123az.com/
+
 #ifndef BASE_OBJECT_H_
 #define BASE_OBJECT_H_
 

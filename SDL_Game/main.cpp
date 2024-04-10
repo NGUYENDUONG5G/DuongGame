@@ -23,6 +23,8 @@ BaseObject key_star;
 BaseObject key_end;
 BaseObject key_resume;
 BaseObject key_exit;
+BaseObject key_open_music;
+BaseObject key_close_music;
 BaseObject key_go;
 BaseObject hp_me;
 BaseObject hp_bot;
@@ -102,13 +104,25 @@ void close() {
 	star_game.Free();
 	g_background.Free();
 	g_background2.Free();
+	g_background3.Free();
+	star_game.Free();
 	music_bkgr.Free();
 	music_star.Free();
-	
+
+	 boxing.DisplayMusic();
+	 knife.Free();
+	 axe.Free();
+	 is_killed.Free();
+	 skill1.Free();
+	 skill2.Free();
+
 	 key_star.Free();
 	 key_end.Free();
 	 key_resume.Free();
 	 key_exit.Free();
+	 key_open_music.Free();
+	 key_close_music.Free();
+	 key_go.Free();
 	 hp_me.Free();
 	 hp_bot.Free();
 
@@ -141,6 +155,7 @@ int main(int arc, char* argv[])
 	bool start = false;
 	bool enter = false;
 	bool click = false;
+	bool state_mus = false; 
 	int pause=0;
 
 	int x_;
@@ -195,6 +210,8 @@ int main(int arc, char* argv[])
 	TextObject endgame[2];
 	TextObject choose[2];
 	TextObject ready;
+	TextObject count_match;
+	count_match.set_xy(SCREEN_WIDTH / 2 - 80, 10);
 	BulletObject p_bullet;
 	p_bullet.set_system_basis();
 	BulletObject p_unti;
@@ -203,6 +220,7 @@ int main(int arc, char* argv[])
 	int basic_skill = 0;
 	int dame_me = 10;
 	int dame_bot = 10;
+	int match = 1;
 	
 	bool mus_star = false;
 	music_star.LoadMusic("music//star_game.mp3");
@@ -383,6 +401,7 @@ int main(int arc, char* argv[])
 				music_bkgr.DisplayMusic();
 				music_bkgr.Volume(MAX_VOLUME / 2);
 				mus_bkgr = true;
+				state_mus = true;
 			}
 
 			if (pause == 2)
@@ -403,7 +422,7 @@ int main(int arc, char* argv[])
 					real_hp_bot = botkilled;
 					p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0); 
 					dame_bot += 10;
-
+					match++;
 				}
 				else if (killed < botkilled)
 				{
@@ -471,6 +490,25 @@ int main(int arc, char* argv[])
 				key_exit.SetRect(SCREEN_WIDTH / 2 - 64*4, SCREEN_HEIGHT / 2-20);
 				key_exit.Render(g_screen, NULL);
 			
+				if (state_mus)
+				{
+					music_bkgr.resumeMusic();
+					key_open_music.LoadImg("img//open_volume.png", g_screen);
+					key_open_music.SetRect(SCREEN_WIDTH / 2 - 20, SCREEN_HEIGHT / 2 - 60);
+					key_open_music.Render(g_screen, NULL);
+					if(Impact::Impact_(x_,y_,key_open_music.GetRect())) state_mus=false;
+				}
+				else
+				{
+					music_bkgr.stopMusic();
+					key_close_music.LoadImg("img//close_volume.png", g_screen);
+					key_close_music.SetRect(SCREEN_WIDTH / 2 - 20, SCREEN_HEIGHT / 2 - 60);
+					key_close_music.Render(g_screen, NULL);
+					if (Impact::Impact_(x_, y_, key_close_music.GetRect())) state_mus = true;
+
+
+				}
+
 				choose[0].set_xy(SCREEN_WIDTH / 2 +64*2, SCREEN_HEIGHT / 2 );
 				choose[0].RenderText("Resume", font, g_screen, 1);
 
@@ -726,6 +764,10 @@ int main(int arc, char* argv[])
 				hp_bot.SetRect(SCREEN_WIDTH-250, 10);
 				hp_bot.Render(g_screen, NULL);
 
+				char smatch[20];
+				snprintf(smatch, 20, " MATCH : %d ", match);
+				count_match.RenderText(smatch, font, g_screen, 1);
+
 			}
 		}
 			SDL_RenderPresent(g_screen);
@@ -749,6 +791,8 @@ int main(int arc, char* argv[])
 p_player.Free();
 p_bullet.Free();
 p_unti.Free();
+count_match.free();
+ready.free();
 for (int i = 0; i < 2; i++)
 {
 	endgame[i].free();

@@ -1,6 +1,9 @@
 #include"stdafx.h"
 #include "ImpTimer.h"
 #include "CommonFunc.h"
+
+//refer from : https://phattrienphanmem123az.com/
+
 ImpTimer::ImpTimer() {
 	start_tick_ = 0;
 	paused_tick_ = 0;
