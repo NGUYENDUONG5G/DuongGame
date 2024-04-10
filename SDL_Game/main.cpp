@@ -16,17 +16,23 @@
 
 #undef main
 BaseObject g_background;
-BaseObject g_background2;;
+BaseObject g_background2;
+BaseObject g_background3;
 BaseObject star_game;
 BaseObject key_star;
 BaseObject key_end;
 BaseObject key_resume;
 BaseObject key_exit;
+BaseObject key_go;
 BaseObject hp_me;
 BaseObject hp_bot;
+BaseObject skill1,skill2;
 Music music_star;
 Music music_bkgr;
-
+Sound boxing;
+Sound knife;
+Sound axe;
+Sound is_killed;
 
 TTF_Font* font;
 
@@ -87,25 +93,7 @@ bool LoadBackground(int choose_bkgr) {
 	return true;
 }
 
-void MusicStart()
-{
-	Mix_HaltMusic();
-	Mix_FreeMusic(music_play);
-	music_start = Mix_LoadMUS("music//start_game.mp3");
-	if (music_start != NULL)
-	{
-		Mix_PlayMusic(music_start, -1);
-	}
-}
 
-void MusicPlay()
-{
-	
-	if (music_play != NULL)
-	{
-		Mix_PlayMusic(music_play, -1);
-	}
-}
 
 
 
@@ -114,8 +102,8 @@ void close() {
 	star_game.Free();
 	g_background.Free();
 	g_background2.Free();
-	Mix_FreeMusic(music_start);
-	Mix_FreeMusic(music_play);
+	music_bkgr.Free();
+	music_star.Free();
 	
 	 key_star.Free();
 	 key_end.Free();
@@ -151,6 +139,8 @@ int main(int arc, char* argv[])
 
 
 	bool start = false;
+	bool enter = false;
+	bool click = false;
 	int pause=0;
 
 	int x_;
@@ -204,13 +194,13 @@ int main(int arc, char* argv[])
 	TextObject begin;
 	TextObject endgame[2];
 	TextObject choose[2];
+	TextObject ready;
 	BulletObject p_bullet;
 	p_bullet.set_system_basis();
 	BulletObject p_unti;
 
 	int photo = 0;
-	int lighting = 0;
-
+	int basic_skill = 0;
 	int dame_me = 10;
 	int dame_bot = 10;
 	
@@ -218,6 +208,14 @@ int main(int arc, char* argv[])
 	music_star.LoadMusic("music//star_game.mp3");
 	bool mus_bkgr = false;
 	music_bkgr.LoadMusic("music//fight_game.mp3");
+
+	boxing.LoadMusic("music//boxing.mp3");
+	knife.LoadMusic("music//knife.mp3");
+	axe.LoadMusic("music//axe.mp3");
+	is_killed.LoadMusic("music//killed.mp3");
+
+
+
 
 	bool is_quit = false;
 
@@ -298,30 +296,80 @@ int main(int arc, char* argv[])
 				}
 				
 				
-				
-				
-				
-				g_background2.LoadImg("img//bkgr_menu.jpg", g_screen);
-				g_background2.Render(g_screen, NULL);
+				if (!enter)
+				{
 
-				key_star.LoadImg("img//key.png", g_screen);
-				key_star.SetRect(SCREEN_WIDTH / 2 - 64*3, SCREEN_HEIGHT / 2+64+30 );
-				key_star.Render(g_screen, NULL);
-				
-				begin.set_xy(SCREEN_WIDTH / 2 - 64 * 2, SCREEN_HEIGHT / 2 + 64 * 2);
-				begin.RenderText("START GAME", font, g_screen, 0);
+					g_background2.LoadImg("img//bkgr_menu.jpg", g_screen);
+					g_background2.Render(g_screen, NULL);
 
-				
-				if (Impact::Impact_(x_, y_, begin.get_Rect()))
-				
-				{ start = true; 
-				key_star.LoadImg("img//key_small.png", g_screen);
-				key_star.SetRect(SCREEN_WIDTH / 2 - 64 * 3+20, SCREEN_HEIGHT / 2 + 64 + 30);
-				key_star.Render(g_screen, NULL);
+					key_star.LoadImg("img//key.png", g_screen);
+					key_star.SetRect(SCREEN_WIDTH / 2 - 64 * 3, SCREEN_HEIGHT / 2 + 64 + 30);
+					key_star.Render(g_screen, NULL);
 
-				
+					begin.set_xy(SCREEN_WIDTH / 2 - 64 * 2, SCREEN_HEIGHT / 2 + 64 * 2);
+					begin.RenderText("START GAME", font, g_screen, 1);
+
+
+					if (Impact::Impact_(x_, y_, begin.get_Rect()))
+
+					{
+						enter = true;
+						key_star.LoadImg("img//key_small.png", g_screen);
+						key_star.SetRect(SCREEN_WIDTH / 2 - 64 * 3 + 20, SCREEN_HEIGHT / 2 + 64 + 30);
+						key_star.Render(g_screen, NULL);
+
+						
+					}
 				}
-				
+				else
+				{
+					g_background3.LoadImg("img//bkgr_menu2.jpg", g_screen);
+					g_background3.SetRect(85, 0);
+					g_background3.Render(g_screen, NULL);
+
+					key_go.LoadImg("img//key.png", g_screen);
+					key_go.SetRect(SCREEN_WIDTH / 2 - 148, 450);
+					key_go.Render(g_screen, NULL);
+
+					ready.set_xy(SCREEN_WIDTH / 2 -20, 480);
+					ready.RenderText("GO", font, g_screen, 1);
+					if (!click)
+					{
+						skill1.LoadImg("img//axe_before.png", g_screen);
+						skill1.SetRect(100, 30);
+						skill1.Render(g_screen, NULL);
+						skill2.LoadImg("img//knife_before.png", g_screen);
+						skill2.SetRect(173, 30);
+						skill2.Render(g_screen, NULL);
+						if (x_ <= 244 && x_ >= 100 && y_ >= 30 && y_ <= 102) click = true;
+					}
+					else
+					{
+						
+						
+
+
+						if (Impact::Impact_(x_, y_, skill1.GetRect()))
+						{
+							skill1.LoadImg("img//axe_after.jpg", g_screen);
+							skill2.LoadImg("img//knife_before.png", g_screen);
+							basic_skill = 1;
+						}
+						else if (Impact::Impact_(x_, y_, skill2.GetRect()))
+						{
+							skill1.LoadImg("img//axe_before.png", g_screen);
+							skill2.LoadImg("img//knife_after.png", g_screen);
+							basic_skill = 2;
+						}
+						std::cout << basic_skill << '\n';
+						skill1.SetRect(100, 30);
+						skill1.Render(g_screen, NULL);
+						skill2.SetRect(173, 30);
+						skill2.Render(g_screen, NULL);
+					
+					}
+					if (Impact::Impact_(x_, y_, ready.get_Rect())) start = true;
+				}
 				x_ = 0; y_ = 0;
 			}
 		}
@@ -365,10 +413,10 @@ int main(int arc, char* argv[])
 
 
 					endgame[0].set_xy(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 64 + 32);
-					endgame[0].RenderText("CONTINUTE PLAY", font, g_screen, 0);
+					endgame[0].RenderText("CONTINUTE PLAY", font, g_screen, 1);
 
 					endgame[1].set_xy(SCREEN_WIDTH / 2 - 64 * 3, SCREEN_HEIGHT / 2 + 64 + 32);
-					endgame[1].RenderText("EXIT GAME", font, g_screen, 0);
+					endgame[1].RenderText("EXIT GAME", font, g_screen, 1);
 
 					for (int i = 0; i < 2; i++)
 					{
@@ -455,7 +503,7 @@ int main(int arc, char* argv[])
 			else if(pause==0)
 			{
 				
-				MusicPlay();
+				
 
 				SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
 				SDL_RenderClear(g_screen);
@@ -478,7 +526,7 @@ int main(int arc, char* argv[])
 				int cb_basic = p_player.cb_basic_();
 				is_basic = p_player.is_basic_();
 				int unti = p_player.sent_unti();
-				int basic_skill = p_player.sent_basic_skill();
+				
 
 
 
@@ -499,12 +547,14 @@ int main(int arc, char* argv[])
 				game_map.DrawMap(g_screen);
 				SDL_Rect rect_player = p_player.GetRectFrame();
 
-				if (is_basic == 1)
+				if (is_basic == 1) // cho phép hiện đánh thường
 				{
+					
 					p_bullet.set_basic_skill(basic_skill);
 					p_bullet.set_tt(tt);
 					p_bullet.set_cb_basic(cb_basic);
 					p_bullet.Loadac(g_screen);
+					
 					
 
 					if (tt == 1)
@@ -518,8 +568,8 @@ int main(int arc, char* argv[])
 					}
 					p_bullet.action(g_screen,60);
 					if (basic_skill == 0) dame_me = 10;
-					else if (dame_me == 1) dame_me = 15;
-					else if (dame_me == 2) dame_me = 20;
+					else if (basic_skill == 1) dame_me = 15;
+					else if (basic_skill == 2) dame_me = 20;
 				}
 
 			
@@ -541,7 +591,7 @@ int main(int arc, char* argv[])
 				bool bCol3 = false;
 
 				
-				if (unti != 2)
+				if (unti != 2)// Chiêu cuối 
 				{
 					p_unti.set_unti(unti);
 					p_unti.Loadac(g_screen);
@@ -562,7 +612,7 @@ int main(int arc, char* argv[])
 				{
 
 					if (vitribotx <= vtrix + 64 * 2 && vitribotx >= vtrix - 64 * 2 && vitriboty <= max_y && vitriboty >= min_y) bCol1 = true;
-
+					
 
 				}
 
@@ -583,7 +633,12 @@ int main(int arc, char* argv[])
 
 				}
 				
-				
+				if (myfight == 1)
+				{
+					if (basic_skill == 0) boxing.DisplayMusic();
+					else if (basic_skill == 1) axe.DisplayMusic();
+					else if (basic_skill == 2) knife.DisplayMusic();
+				}
 
 
 				if (bCol3)
@@ -617,7 +672,7 @@ int main(int arc, char* argv[])
 				else if (bCol2)
 				{
 					killed -= dame_bot;
-
+					is_killed.DisplayMusic();
 				
 				}
 

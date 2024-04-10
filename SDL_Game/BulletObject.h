@@ -25,9 +25,10 @@ public:
 	void Loadac(SDL_Renderer* des);
 	
 	void set_tt (const int& tt_) { tt = tt_; }
+
 	void set_cb_basic(int basic) { cb_basic = basic; }
 	void set_unti(int unti_) { unti = unti_; }
-	void set_basic_skill(const int& bs_skill) { basic_skill = bs_skill; }
+	void set_basic_skill( int bs_skill) { basic_skill = bs_skill; }
 	void set_system_basis();
 private:
 	
