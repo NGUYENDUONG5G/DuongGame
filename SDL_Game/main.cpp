@@ -24,6 +24,8 @@ BaseObject key_resume;
 BaseObject key_exit;
 BaseObject hp_me;
 BaseObject hp_bot;
+Music music_star;
+Music music_bkgr;
 
 
 TTF_Font* font;
@@ -195,21 +197,28 @@ int main(int arc, char* argv[])
 
 	float killed = 1000;
 	float botkilled = 1000;
-
+	float real_hp_me = 1000;
+	float real_hp_bot = 1000;
 	
 
 	TextObject begin;
 	TextObject endgame[2];
 	TextObject choose[2];
 	BulletObject p_bullet;
+	p_bullet.set_system_basis();
 	BulletObject p_unti;
 
 	int photo = 0;
 	int lighting = 0;
 
+	int dame_me = 10;
+	int dame_bot = 10;
 	
-	
-	
+	bool mus_star = false;
+	music_star.LoadMusic("music//star_game.mp3");
+	bool mus_bkgr = false;
+	music_bkgr.LoadMusic("music//fight_game.mp3");
+
 	bool is_quit = false;
 
 	while (!is_quit)
@@ -281,7 +290,12 @@ int main(int arc, char* argv[])
 			}
 			else
 			{
-				
+				if (mus_star == false)
+				{
+					music_star.DisplayMusic();
+					music_star.Volume(MAX_VOLUME / 2);
+					mus_star = true;
+				}
 				
 				
 				
@@ -316,22 +330,31 @@ int main(int arc, char* argv[])
 		
 		
 			if (LoadBackground(choose_bkgr) == false) is_quit = true;
+			if (mus_bkgr == false)
+			{
+				music_bkgr.DisplayMusic();
+				music_bkgr.Volume(MAX_VOLUME / 2);
+				mus_bkgr = true;
+			}
 
 			if (pause == 2)
 			{
 				if (botkilled <killed)
 
 				{
-					g_background2.LoadImg("img//wingame.jpg", g_screen);
-					g_background2.SetRect(0,0);
-					g_background2.Render(g_screen, NULL);
-					SDL_Delay(2000);
+					
+					SDL_Delay(1000);
 					int save = choose_bkgr;
 					while ( choose_bkgr==save)
 					{
 						choose_bkgr = rand() % 4;
 					}
-					pause = 0; killed = 1000; botkilled = 1000; p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0); 
+					pause = 0;
+					killed = 1000; botkilled += 1000;
+					real_hp_me = 1000;
+					real_hp_bot = botkilled;
+					p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0); 
+					dame_bot += 10;
 
 				}
 				else if (killed < botkilled)
@@ -351,7 +374,16 @@ int main(int arc, char* argv[])
 					{
 						if (Impact::Impact_(x_, y_, endgame[i].get_Rect()))
 						{
-							if (i == 0) { start = false; pause = 0; killed = 1000; botkilled = 1000; p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0); choose_bkgr = 0; }
+							if (i == 0) { start = false;
+							pause = 0; killed = 1000;
+							botkilled = 1000;
+							p_player.set_vt(0, 0);
+							p_threat.set_vt(SCREEN_WIDTH, 0);
+							choose_bkgr = 0;
+							dame_me = 10; dame_bot = 10;
+							mus_star = false;
+							mus_bkgr = false;
+							}
 							else if (i == 1)
 							{
 
@@ -443,9 +475,13 @@ int main(int arc, char* argv[])
 				myfight = p_player.set_fight();
 				max_y = p_player.sent_max_y();
 				min_y = p_player.sent_min_y();
-				int k = p_player.cb_basic_();
+				int cb_basic = p_player.cb_basic_();
 				is_basic = p_player.is_basic_();
 				int unti = p_player.sent_unti();
+				int basic_skill = p_player.sent_basic_skill();
+
+
+
 				vitribotx = p_threat.get_x_pos();
 				vitriboty = p_threat.get_y_pos();
 				botfight = p_threat.sent_fight();
@@ -465,11 +501,11 @@ int main(int arc, char* argv[])
 
 				if (is_basic == 1)
 				{
-
+					p_bullet.set_basic_skill(basic_skill);
 					p_bullet.set_tt(tt);
-					p_bullet.set_cb_basic(k);
+					p_bullet.set_cb_basic(cb_basic);
 					p_bullet.Loadac(g_screen);
-
+					
 
 					if (tt == 1)
 					{
@@ -481,7 +517,9 @@ int main(int arc, char* argv[])
 
 					}
 					p_bullet.action(g_screen,60);
-
+					if (basic_skill == 0) dame_me = 10;
+					else if (dame_me == 1) dame_me = 15;
+					else if (dame_me == 2) dame_me = 20;
 				}
 
 			
@@ -572,13 +610,13 @@ int main(int arc, char* argv[])
 				else if (bCol1)
 				{
 					
-					botkilled -= 10;
+					botkilled -= dame_me;
 					
 				}
 				
 				else if (bCol2)
 				{
-					killed -= 10;
+					killed -= dame_bot;
 
 				
 				}
@@ -588,20 +626,20 @@ int main(int arc, char* argv[])
 					pause = 2;
 				}
 				
-				if (killed > 800)
+				if (killed > real_hp_me*4/5)
 				{
 					hp_me.LoadImg("img//full_hp.png", g_screen);
 
 				}
-				else if (killed > 600)
+				else if (killed > real_hp_me*3/5)
 				{
 					hp_me.LoadImg("img//four_of_five.png", g_screen);
 				}
-				else if (killed > 400)
+				else if (killed > real_hp_me*2.5)
 				{
 					hp_me.LoadImg("img//three_of_five.png", g_screen);
 				}
-				else if (killed > 200)
+				else if (killed > real_hp_me/5)
 				{
 					hp_me.LoadImg("img//two_of_five.png", g_screen);
 				}
@@ -611,24 +649,24 @@ int main(int arc, char* argv[])
 				hp_me.Render(g_screen, NULL);
 
 
-				if (botkilled > 800)
+				if (botkilled > real_hp_bot*4/5)
 				{
 					hp_bot.LoadImg("img//full_hp.png", g_screen);
 
 				}
-				else if (botkilled > 600)
+				else if (botkilled > real_hp_bot*3/5)
 				{
 					hp_bot.LoadImg("img//four_of_five_bot.png", g_screen);
 				}
-				else if (botkilled > 400)
+				else if (botkilled > real_hp_bot*2/5)
 				{
 					hp_bot.LoadImg("img//three_of_five_bot.png", g_screen);
 				}
-				else if (botkilled > 200)
+				else if (botkilled > real_hp_bot/5)
 				{
 					hp_bot.LoadImg("img//two_of_five_bot.png", g_screen);
 				}
-				else hp_me.LoadImg("img//one_of_five_bot.png", g_screen);
+				else hp_bot.LoadImg("img//one_of_five_bot.png", g_screen);
 
 				hp_bot.SetRect(SCREEN_WIDTH-250, 10);
 				hp_bot.Render(g_screen, NULL);

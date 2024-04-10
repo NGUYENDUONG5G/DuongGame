@@ -6,9 +6,9 @@ void Sound::LoadMusic(const char path[])
 
 }
 
-void Sound::DisplayMusic(int x)
+void Sound::DisplayMusic()
 {
-	Mix_PlayChannel(0, sound, 0);
+	Mix_PlayChannel(-1, sound,0 );
 }
 
 void Sound::Volume(int volum)
@@ -28,3 +28,4 @@ void Sound::stopMusic()
 	Mix_HaltChannel(-1);
 
 }
+

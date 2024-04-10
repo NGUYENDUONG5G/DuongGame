@@ -10,11 +10,22 @@ BulletObject::BulletObject()
 	tt = 0;
 	cb_basic = 0;
 	unti = 0;
+	basic_skill = 0;
 }
 
 BulletObject  ::~BulletObject()
 {
 	;
+}
+
+
+void BulletObject::set_system_basis()
+{
+	skill[2] = { "img//knife_left.png","img//knife_right.png" };
+	skill[1] = { "img//axe_left.png","img//axe_right.png" };
+	skill[0] = { "img//hand_left.png","img//hand_right.png" };
+
+
 }
 void BulletObject::Loadac(SDL_Renderer* screen)
 {
@@ -23,11 +34,11 @@ void BulletObject::Loadac(SDL_Renderer* screen)
 		if (tt == 0)
 		{
 
-			LoadImg("img//knife_left.png", screen);
+			LoadImg(skill[basic_skill][0], screen);
 		}
 		else
 		{
-			LoadImg("img//knife_right.png", screen);
+			LoadImg(skill[basic_skill][1], screen);
 
 		}
 	}
@@ -52,7 +63,7 @@ void BulletObject::action(SDL_Renderer* screen,int k)
 	}
 	else if (unti == 1)
 	{
-		angle += 20;
+		angle += 10;
 	}
 	else angle = 0;
 	if (abs(angle) > k) angle = 0;

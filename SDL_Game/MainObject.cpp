@@ -135,16 +135,28 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 
 		case SDLK_1:
 		{
-
+			basic_skill = 0;
+			is_basic = 1;
 		}
 		break;
-
+		case SDLK_2:
+		{
+			basic_skill = 1;
+			is_basic = 1;
+		}
+		break;
+		case SDLK_3:
+		{
+			basic_skill = 2;
+			is_basic = 1;
+		}
+		break;
 		case SDLK_a:
 		{
 			status_ = WAR1;
 			input_type_.war1 = 1;
 			UpdateImagePlayer(screen);
-			is_basic = 1;
+			
 			fight = 1;
 			cb_basic = 1;
 			max_y = y_pos_;
@@ -257,7 +269,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			UpdateImagePlayer(screen);
 
 			fight = 1;
-			is_basic = 0;
+			
 			unti = 1;
 
 			if (on_ground_ == true)

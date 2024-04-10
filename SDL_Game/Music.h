@@ -11,7 +11,8 @@ public:
 	void DisplayMusic();
 	void Volume(int volum);
 	void stopMusic();
-	void Free();
+	void Free(); 
+		void  resumeMusic();
 private:
 
 	Mix_Music* sound;

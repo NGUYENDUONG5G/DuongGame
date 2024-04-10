@@ -31,3 +31,9 @@ void Music::stopMusic()
 	Mix_PauseMusic();
 	
 }
+void Music::resumeMusic()
+{
+	Mix_ResumeMusic();
+
+
+}

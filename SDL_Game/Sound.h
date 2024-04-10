@@ -6,7 +6,7 @@ class Sound
 {
 public:
 	void LoadMusic(const char path[]);
-	void DisplayMusic(int x);
+	void DisplayMusic();
 	void Volume(int volum);
 	void stopMusic();
 	void Free();
