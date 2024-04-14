@@ -38,7 +38,7 @@ private:
 	int cb_basic;
 	int unti;
 	int basic_skill;
-	std::vector<std::string > skill[3];
+	std::vector<std::string > skill[20];
 };
 
 

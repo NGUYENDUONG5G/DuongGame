@@ -349,7 +349,7 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 		if (x_pos_ > vt_x)
 		{
 				
-				if (x_pos_ - vt_x > 64*1.5 )
+				if (x_pos_ - vt_x > 64 )
 				{
 					LoadImg(bot[choose_bot][1], screen);
 				}
@@ -367,7 +367,7 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
 			
 				
 			
-				if (vt_x - x_pos_ > 64*1.5)
+				if (vt_x - x_pos_ > 64)
 				{
 					LoadImg(bot[choose_bot][0], screen);
 				}

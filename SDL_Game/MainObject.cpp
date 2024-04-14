@@ -28,7 +28,7 @@ MainObject::MainObject() {
 	map_y_ = 0;
 	angle = 0;
 	fight = 0;
-	dem=0;
+
 	check = 1;
 	is_basic = 0;
 	
@@ -103,284 +103,421 @@ void MainObject::Show(SDL_Renderer* des) {
 
 
 }
-void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
-	
-	if (events.type == SDL_KEYDOWN)
+void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk) {
+	if (pk == 1)
 	{
-
-		switch (events.key.keysym.sym)
+		if (events.type == SDL_KEYDOWN)
 		{
 
-		case SDLK_RIGHT:
-		{
-			status_ = WALK_RIGHT;
-			input_type_.right_ = 1;
-			input_type_.left_ = 0;
-			check = 1;
-			UpdateImagePlayer(screen);
-		}
-		break;
-		case SDLK_LEFT:
-		{
-			status_ = WALK_LEFT;
-
-			input_type_.left_ = 1;
-			input_type_.right_ = 0;
-			check = 0;
-			UpdateImagePlayer(screen);
-		}
-		break;
-
-		case SDLK_UP:
-		{
-			input_type_.jump_ = 1;
-		}
-		break;
-
-
-		
-		case SDLK_a:
-		{
-			status_ = WAR1;
-			input_type_.war1 = 1;
-			UpdateImagePlayer(screen);
-			
-			fight = 1;
-			cb_basic = 1;
-			is_basic = 1;
-			max_y = y_pos_;
-			min_y = y_pos_ - 64 * 2;
-
-
-		}
-		break;
-		case SDLK_w:
-		{
-			status_ = WAR2;
-			input_type_.war2 = 1;
-			UpdateImagePlayer(screen);
-			is_basic = 0;
-			fight = 1;
-			if (on_ground_ == true)
+			switch (events.key.keysym.sym)
 			{
 
+			case SDLK_v:
+			{
+				status_ = WALK_RIGHT;
+				input_type_.right_ = 1;
+				input_type_.left_ = 0;
+				check = 1;
+				UpdateImagePlayer(screen);
+			}
+			break;
+			case SDLK_c:
+			{
+				status_ = WALK_LEFT;
+
+				input_type_.left_ = 1;
+				input_type_.right_ = 0;
+				check = 0;
+				UpdateImagePlayer(screen);
+			}
+			break;
+
+			case SDLK_f:
+			{
+				input_type_.jump_ = 1;
+			}
+			break;
+
+			case SDLK_s:
+			{
+				status_ = WAR1;
+				input_type_.war1 = 1;
+				UpdateImagePlayer(screen);
+
+				fight = 1;
+				cb_basic = 1;
+				is_basic = 1;
 				max_y = y_pos_;
 				min_y = y_pos_ - 64 * 2;
 
 
+			}
+			break;
+			case SDLK_q:
+			{
+				status_ = WAR2;
+				input_type_.war2 = 1;
+				UpdateImagePlayer(screen);
+				is_basic = 0;
+				fight = 1;
+				if (on_ground_ == true)
+				{
+
+					max_y = y_pos_;
+					min_y = y_pos_ - 64 * 2;
+
+				}
+
+				else
+				{
+
+					max_y = y_pos_ + 64 * 2;
+					min_y = y_pos_ - 64 * 2;
+
+				}
+			}
+			break;
+			case SDLK_e:
+			{
+				status_ = WAR3;
+				input_type_.war3 = 1;
+				UpdateImagePlayer(screen);
+
+				fight = 1;
+				is_basic = 0;
 
 
+				if (on_ground_ == true)
+				{
+
+					max_y = y_pos_;
+					min_y = y_pos_ - 64 * 2;
+
+
+				}
+				else
+				{
+
+
+					max_y = y_pos_ + 64 * 2;
+					min_y = y_pos_ - 64 * 2;
+
+				}
 			}
 
 
 
 
+			break;
 
-
-			else
+			case SDLK_w:
 			{
+				status_ = WAR4;
+				input_type_.war4 = 1;
+				UpdateImagePlayer(screen);
 
+				fight = 1;
 
+				unti = 1;
 
-
-
-				max_y = y_pos_ + 64 * 2;
-				min_y = y_pos_ - 64 * 2;
-
-
-
-
-
+				
+			}
+			break;
 
 
 			}
 		}
-		break;
-		case SDLK_d:
+		else if (events.type == SDL_KEYUP)
 		{
-			status_ = WAR3;
-			input_type_.war3 = 1;
-			UpdateImagePlayer(screen);
+			switch (events.key.keysym.sym) {
 
-			fight = 1;
-			is_basic = 0;
-
-
-			if (on_ground_ == true)
+			case SDLK_v:
 			{
+				status_ = WALK_NONE;
+				input_type_.right_ = 0;
+				UpdateImagePlayer(screen);
+			}
+			break;
+			case SDLK_c:
+			{
+				status_ = WALK_NONE;
+				input_type_.left_ = 0;
+				UpdateImagePlayer(screen);
+			}
+			break;
+			case SDLK_s:
+			{
+				status_ = WALK_NONE;
+				input_type_.war1 = 0;
 
-				max_y = y_pos_;
-				min_y = y_pos_ - 64 * 2;
-
-
-
+				fight = 0;
+				cb_basic = 0;
+				min_y = 0;
+				max_y = 0;
+				UpdateImagePlayer(screen);
 
 			}
-
-
-
-
-
-
-			else
+			break;
+			case SDLK_q:
 			{
 
-
-
-
-
-				max_y = y_pos_ + 64 * 2;
-				min_y = y_pos_ - 64 * 2;
-
-
-
-
-
-
+				status_ = WALK_NONE;
+				fight = 0;
+				input_type_.war2 = 0;
+				max_y = 0;
+				min_y = 0;
+				UpdateImagePlayer(screen);
 
 			}
+			break;
+			case SDLK_e:
+			{
+				status_ = WALK_NONE;
+				fight = 0;
+				input_type_.war3 = 0;
+				max_y = 0;
+				min_y = 0;
 
+				UpdateImagePlayer(screen);
+			}
+			break;
 
+			case SDLK_w:
+			{
 
+				status_ = WALK_NONE;
+				fight = 0;
+				input_type_.war4 = 0;
+				max_y = 0;
+				min_y = 0;
 
+				
+				UpdateImagePlayer(screen);
 
+			}
+			break;
+			}
 		}
 
-
-
-
-		break;
-
-		case SDLK_s:
-		{
-			status_ = WAR4;
-			input_type_.war4 = 1;
-			UpdateImagePlayer(screen);
-
-			fight = 1;
-			
-			unti = 1;
-
-			if (on_ground_ == true)
-			{
-
-				max_y = y_pos_;
-				min_y = y_pos_ - 64 * 3;
-
-
-
-
-			}
-
-
-
-
-
-
-			else
-			{
-
-
-
-
-
-				max_y = y_pos_ + 64 * 3;
-				min_y = y_pos_ - 64 * 3;
-
-
-
-
-
-
-
-			}
-
-
-
-
-
-
-		}
-
-
-
-
-
-
-		}
 	}
-	else if (events.type == SDL_KEYUP)
+	else
 	{
-		switch (events.key.keysym.sym) {
+		if (events.type == SDL_KEYDOWN)
+		{
 
-		case SDLK_RIGHT:
-		{
-			status_ = WALK_NONE;
-			input_type_.right_ = 0;
-			UpdateImagePlayer(screen);
-		}
-		break;
-		case SDLK_LEFT:
-		{
-			status_ = WALK_NONE;
-			input_type_.left_ = 0;
-			UpdateImagePlayer(screen);
-		}
-		break;
-		case SDLK_a:
-		{
-			status_ = WALK_NONE;
-			input_type_.war1 = 0;
+			switch (events.key.keysym.sym)
+			{
+
+			case SDLK_RIGHT:
+			{
+				status_ = WALK_RIGHT;
+				input_type_.right_ = 1;
+				input_type_.left_ = 0;
+				check = 1;
+				UpdateImagePlayer(screen);
+			}
+			break;
+			case SDLK_LEFT:
+			{
+				status_ = WALK_LEFT;
+
+				input_type_.left_ = 1;
+				input_type_.right_ = 0;
+				check = 0;
+				UpdateImagePlayer(screen);
+			}
+			break;
+
+			case SDLK_UP:
+			{
+				input_type_.jump_ = 1;
+			}
+			break;
+
+
+
+			case SDLK_a:
+			{
+				status_ = WAR1;
+				input_type_.war1 = 1;
+				UpdateImagePlayer(screen);
+
+				fight = 1;
+				cb_basic = 1;
+				is_basic = 1;
+				max_y = y_pos_;
+				min_y = y_pos_ - 64 * 2;
+
+
+			}
+			break;
+			case SDLK_w:
+			{
+				status_ = WAR2;
+				input_type_.war2 = 1;
+				UpdateImagePlayer(screen);
+				is_basic = 0;
+				fight = 1;
+				if (on_ground_ == true)
+				{
+
+					max_y = y_pos_;
+					min_y = y_pos_ - 64 * 2;
+
+
+
+
+				}
+
+
+
+
+
+
+				else
+				{
+
+
+
+
+
+					max_y = y_pos_ + 64 * 2;
+					min_y = y_pos_ - 64 * 2;
+
+
+
+
+
+
+
+				}
+			}
+			break;
+			case SDLK_d:
+			{
+				status_ = WAR3;
+				input_type_.war3 = 1;
+				UpdateImagePlayer(screen);
+
+				fight = 1;
+				is_basic = 0;
+
+
+				if (on_ground_ == true)
+				{
+
+					max_y = y_pos_;
+					min_y = y_pos_ - 64 * 2;
+
+				}
+
+				else
+				{
+
+					max_y = y_pos_ + 64 * 2;
+					min_y = y_pos_ - 64 * 2;
+
+				}
+			}
+
+			break;
+
+			case SDLK_s:
+			{
+				status_ = WAR4;
+				input_type_.war4 = 1;
+				UpdateImagePlayer(screen);
+
+				fight = 1;
+
+				unti = 1;
+
 			
-			fight = 0;
-			cb_basic = 0;
-			min_y = 0;
-			max_y = 0;
-			UpdateImagePlayer(screen);
-			
+
+			}
+
+			}
 		}
-		break;
-		case SDLK_w:
+		else if (events.type == SDL_KEYUP)
 		{
+			switch (events.key.keysym.sym) {
 
-			status_ = WALK_NONE;
-			fight = 0;
-			input_type_.war2 = 0;
-			max_y =0;
-			min_y = 0;
-			UpdateImagePlayer(screen);
-			
+			case SDLK_RIGHT:
+			{
+				status_ = WALK_NONE;
+				input_type_.right_ = 0;
+				UpdateImagePlayer(screen);
+			}
+			break;
+			case SDLK_LEFT:
+			{
+				status_ = WALK_NONE;
+				input_type_.left_ = 0;
+				UpdateImagePlayer(screen);
+			}
+			break;
+			case SDLK_a:
+			{
+				status_ = WALK_NONE;
+				input_type_.war1 = 0;
+
+				fight = 0;
+				cb_basic = 0;
+				min_y = 0;
+				max_y = 0;
+				UpdateImagePlayer(screen);
+
+			}
+			break;
+			case SDLK_w:
+			{
+
+				status_ = WALK_NONE;
+				fight = 0;
+				input_type_.war2 = 0;
+				max_y = 0;
+				min_y = 0;
+				UpdateImagePlayer(screen);
+
+			}
+			break;
+			case SDLK_d:
+			{
+				status_ = WALK_NONE;
+				fight = 0;
+				input_type_.war3 = 0;
+				max_y = 0;
+				min_y = 0;
+
+				UpdateImagePlayer(screen);
+			}
+			break;
+
+			case SDLK_s:
+			{
+
+				status_ = WALK_NONE;
+				fight = 0;
+				input_type_.war4 = 0;
+				max_y = 0;
+				min_y = 0;
+
+				UpdateImagePlayer(screen);
+
+			}
+
+			}
 		}
-		break;
-		case SDLK_d:
-		{
-			status_ = WALK_NONE;
-			fight = 0;
-			input_type_.war3 = 0;
-			max_y = 0;
-			min_y = 0;
-			
-			UpdateImagePlayer(screen);
-		}
-		break;
-	
-		case SDLK_s:
-		{
 
-			status_ = WALK_NONE;
-			fight = 0;
-			input_type_.war4 = 0;
-			max_y = 0;
-			min_y = 0;
 
-			UpdateImagePlayer(screen);
+
+
+
+
+
+
 
 		}
-
-		}
-	}
-
-
 
 
 
@@ -413,12 +550,10 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 		
 		 if (input_type_.war2 == 1)
 		{
-			if (on_ground_ == true) input_type_.jump_ = 1;
-			else
-			{
+			
 				if(check==1) x_val_ += PLAYER_SPEED;
 				else x_val_ -= PLAYER_SPEED;
-			}
+			
 		}
 		  
 		else if (input_type_.war3 == 1) {
@@ -454,7 +589,7 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 			 }
 		 }
 		CheckToMap(map_data);
-		CenterEntityOnMap(map_data);
+	CenterEntityOnMap(map_data);
 
 	}
 

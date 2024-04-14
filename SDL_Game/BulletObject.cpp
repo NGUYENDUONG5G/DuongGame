@@ -21,6 +21,7 @@ BulletObject  ::~BulletObject()
 
 void BulletObject::set_system_basis()
 {
+	skill[3] = { "img//knife2_left.png","img//knife2_right.png" };
 	skill[2] = { "img//knife_left.png","img//knife_right.png" };
 	skill[1] = { "img//axe_left.png","img//axe_right.png" };
 	skill[0] = { "img//hand_left.png","img//hand_right.png" };

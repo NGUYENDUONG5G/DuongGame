@@ -41,7 +41,7 @@ public:
 	};
 	bool LoadImg(std::string path, SDL_Renderer* screen);
 	void Show(SDL_Renderer* des);
-	void HandelInputAction(SDL_Event events, SDL_Renderer* screen);
+	void HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk);
 	void set_clips();
 	void Doplayer(Map& map_data,SDL_Renderer* screen);
 	void CheckToMap(Map& map_data);
@@ -107,7 +107,7 @@ private:
 
 	Input input_type_;
 	int frame_;
-	int dem;
+	
 
 	int status_;
 

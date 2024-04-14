@@ -46,7 +46,7 @@ const int RENDER_DRAW_COLOR = 0xff;
 
 #define TILE_SIZE 64
 
-#define MAX_MAP_X 22
+#define MAX_MAP_X 20
 #define MAX_MAP_Y 10
 
 
