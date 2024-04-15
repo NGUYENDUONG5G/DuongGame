@@ -635,6 +635,7 @@ int main(int arc, char* argv[])
 						match_pk++;
 						if (match_pk < 4)
 						{
+							pause = 0;
 							p_player.set_vt(0, 0);
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							killed = 1000;
@@ -652,7 +653,7 @@ int main(int arc, char* argv[])
 
 							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640) { start = false; pk = 2; match = 0; match_pk = 0; }
 						}
-						pause = 0;
+					
 
 
 
@@ -846,20 +847,33 @@ int main(int arc, char* argv[])
 						}
 						p_bullet2.action(g_screen, 60);
 						if (basic_skill2 == 0) {
-							dame_bot = 10; boxing.DisplayMusic();
+							dame_bot = 10; 
 						}
 						else if (basic_skill2 == 1) {
-							dame_bot = 15; axe.DisplayMusic();
+							dame_bot = 15; 
 						}
 						else if (basic_skill2 == 2) {
-							dame_bot = 20; knife.DisplayMusic();
+							dame_bot = 20; 
 						}
 						else if (basic_skill2 == 3) {
-							dame_bot = 30; knife.DisplayMusic();
+							dame_bot = 30;
 						}
 
 					}
+					if (player2_fight == 1)
+					{
+						if (basic_skill2 == 0) {
+							boxing.DisplayMusic();
+						}
+						else if (basic_skill2 == 1) {
+							axe.DisplayMusic();
+						}
+						else if (basic_skill2 == 2||basic_skill2==3) {
+							knife.DisplayMusic();
+						}
 					
+
+					}
 
 					if (unti2 != 2)// Chiêu cuối 
 					{
