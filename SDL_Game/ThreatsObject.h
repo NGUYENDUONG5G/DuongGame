@@ -128,7 +128,7 @@ private:
 	Input input_type_;
 	int AI[4] = {20,20, 10,10 };
 	int rad;
-	std::vector<std::string> bot[4];
+	std::vector<std::string> bot[20];
 	int choose_bot;
 };
 

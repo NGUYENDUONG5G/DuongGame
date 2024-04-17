@@ -2,12 +2,14 @@
 
 void Sound::LoadMusic(const char path[])
 {
+	
 	sound = Mix_LoadWAV(path);
 
 }
 
 void Sound::DisplayMusic()
 {
+	
 	Mix_PlayChannel(-1, sound,0 );
 }
 

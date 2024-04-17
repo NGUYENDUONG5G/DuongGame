@@ -31,14 +31,17 @@ BaseObject key_go;
 BaseObject hp_me;
 BaseObject hp_bot;
 BaseObject vs_bot_, vs_1_;
-BaseObject skill1,skill2,skill3;
-BaseObject skill1_1, skill2_1, skill3_1;
+BaseObject skill1,skill2,skill3,skill4,skill5;
+BaseObject skill1_1, skill2_1, skill3_1,skill4_1,skill5_1;
 Music music_star;
 Music music_bkgr;
 Sound boxing;
 Sound knife;
 Sound axe;
+Sound double_knife;
 Sound is_killed;
+Sound win_game;
+Sound lose_game;
 
 TTF_Font* font;
 
@@ -114,18 +117,24 @@ void close() {
 	music_bkgr.Free();
 	music_star.Free();
 
-	 boxing.DisplayMusic();
+	boxing.Free();
 	 knife.Free();
 	 axe.Free();
+	 double_knife.Free();
 	 is_killed.Free();
+	 win_game.Free();
 	 vs_bot_.Free();
 	 vs_1_.Free();
 	 skill1.Free();
 	 skill2.Free();
 	 skill3.Free();
+	 skill4.Free();
+	 skill5.Free();
 	 skill1_1.Free();
 	 skill2_1.Free();
 	 skill3_1.Free();
+	 skill4_1.Free();
+	 skill5_1.Free();
 	 key_star.Free();
 	 key_end.Free();
 	 key_resume.Free();
@@ -160,7 +169,6 @@ int main(int arc, char* argv[])
 	
 	int choose_bkgr = 0;
 
-
 	
 	bool start = false;
 	bool enter = false;
@@ -172,6 +180,7 @@ int main(int arc, char* argv[])
 	int x_;
 	int y_;
 	ImpTimer fps_timer;
+	int dem_unti = 0;
 	float vtrix;
 	float vtriy;
 	int tt;
@@ -180,13 +189,9 @@ int main(int arc, char* argv[])
 	float vitribotx;
 	float vitriboty;
 	
-	
+	int dem_unti2 = 0;
 	int myfight, botfight;
-
-
 	int player2_fight;
-
-	
 	float vtrix2, vtriy2;
 
 
@@ -261,9 +266,10 @@ int main(int arc, char* argv[])
 	boxing.LoadMusic("music//boxing.mp3");
 	knife.LoadMusic("music//knife.mp3");
 	axe.LoadMusic("music//axe.mp3");
+	double_knife.LoadMusic("music//double_knife.mp3");
 	is_killed.LoadMusic("music//killed.mp3");
-
-
+	win_game.LoadMusic("music//music_win.mp3");
+	lose_game.LoadMusic("music//music_lose.mp3");
 
 
 	bool is_quit = false;
@@ -435,7 +441,12 @@ int main(int arc, char* argv[])
 							skill3.LoadImg("img//knife2_before.png", g_screen);
 							skill3.SetRect(246, 30);
 							skill3.Render(g_screen, NULL);
-
+							skill4.LoadImg("img//spear_before.png", g_screen);
+							skill4.SetRect(100, 173);
+							skill4.Render(g_screen, NULL);
+							skill5.LoadImg("img//double_knife_before.png", g_screen);
+							skill5.SetRect(173, 173);
+							skill5.Render(g_screen, NULL);
 							if (pk == 1)
 							{
 								skill1_1.LoadImg("img//axe_before.png", g_screen);
@@ -447,6 +458,12 @@ int main(int arc, char* argv[])
 								skill3_1.LoadImg("img//knife2_before.png", g_screen);
 								skill3_1.SetRect(1107, 30);
 								skill3_1.Render(g_screen, NULL);
+								skill4_1.LoadImg("img//spear_before.png", g_screen);
+								skill4_1.SetRect(1107, 173);
+								skill4_1.Render(g_screen, NULL);
+								skill5_1.LoadImg("img//double_knife_before.png", g_screen);
+								skill5_1.SetRect(1034, 173);
+								skill5_1.Render(g_screen, NULL);
 							}
 							if (x_ <= 1280 && x_ >= 0 && y_ >= 0 && y_ <= 640) click = true;
 						}
@@ -461,6 +478,8 @@ int main(int arc, char* argv[])
 								skill1.LoadImg("img//axe_after.jpg", g_screen);
 								skill2.LoadImg("img//knife_before.png", g_screen);
 								skill3.LoadImg("img//knife2_before.png", g_screen);
+								skill4.LoadImg("img//spear_before.png", g_screen);
+								skill5.LoadImg("img//double_knife_before.png", g_screen);
 								basic_skill = 1;
 							}
 							else if (Impact::Impact_(x_, y_, skill2.GetRect()))
@@ -468,6 +487,8 @@ int main(int arc, char* argv[])
 								skill1.LoadImg("img//axe_before.png", g_screen);
 								skill2.LoadImg("img//knife_after.png", g_screen);
 								skill3.LoadImg("img//knife2_before.png", g_screen);
+								skill4.LoadImg("img//spear_before.png", g_screen);
+								skill5.LoadImg("img//double_knife_before.png", g_screen);
 								basic_skill = 2;
 							}
 							else if (Impact::Impact_(x_, y_, skill3.GetRect()))
@@ -475,10 +496,28 @@ int main(int arc, char* argv[])
 								skill1.LoadImg("img//axe_before.png", g_screen);
 								skill2.LoadImg("img//knife_before.png", g_screen);
 								skill3.LoadImg("img//knife2_after.png", g_screen);
+								skill4.LoadImg("img//spear_before.png", g_screen);
+								skill5.LoadImg("img//double_knife_before.png", g_screen);
 								basic_skill = 3;
 							}
-
-
+							else if (Impact::Impact_(x_, y_, skill4.GetRect()))
+							{
+								skill1.LoadImg("img//axe_before.png", g_screen);
+								skill2.LoadImg("img//knife_before.png", g_screen);
+								skill3.LoadImg("img//knife2_before.png", g_screen);
+								skill4.LoadImg("img//spear_after.png", g_screen);
+								skill5.LoadImg("img//double_knife_before.png", g_screen);
+								basic_skill = 4;
+							}
+							else if (Impact::Impact_(x_, y_, skill5.GetRect()))
+							{
+								skill1.LoadImg("img//axe_before.png", g_screen);
+								skill2.LoadImg("img//knife_before.png", g_screen);
+								skill3.LoadImg("img//knife2_before.png", g_screen);
+								skill4.LoadImg("img//spear_before.png", g_screen);
+								skill5.LoadImg("img//double_knife_after.png", g_screen);
+								basic_skill = 5;
+							}
 							if (pk == 1)
 
 							{
@@ -487,6 +526,8 @@ int main(int arc, char* argv[])
 									skill1_1.LoadImg("img//axe_after.jpg", g_screen);
 									skill2_1.LoadImg("img//knife_before.png", g_screen);
 									skill3_1.LoadImg("img//knife2_before.png", g_screen);
+									skill4_1.LoadImg("img//spear_before.png", g_screen);
+									skill5_1.LoadImg("img//double_knife_before.png", g_screen);
 									basic_skill2 = 1;
 								}
 								else if (Impact::Impact_(x_, y_, skill2_1.GetRect()))
@@ -494,6 +535,8 @@ int main(int arc, char* argv[])
 									skill1_1.LoadImg("img//axe_before.png", g_screen);
 									skill2_1.LoadImg("img//knife_after.png", g_screen);
 									skill3_1.LoadImg("img//knife2_before.png", g_screen);
+									skill4_1.LoadImg("img//spear_before.png", g_screen);
+									skill5_1.LoadImg("img//double_knife_before.png", g_screen);
 									basic_skill2 = 2;
 								}
 								else if (Impact::Impact_(x_, y_, skill3_1.GetRect()))
@@ -501,7 +544,27 @@ int main(int arc, char* argv[])
 									skill1_1.LoadImg("img//axe_before.png", g_screen);
 									skill2_1.LoadImg("img//knife_before.png", g_screen);
 									skill3_1.LoadImg("img//knife2_after.png", g_screen);
+									skill4_1.LoadImg("img//spear_before.png", g_screen);
+									skill5_1.LoadImg("img//double_knife_before.png", g_screen);
 									basic_skill2 = 3;
+								}
+								else if (Impact::Impact_(x_, y_, skill4_1.GetRect()))
+								{
+									skill1_1.LoadImg("img//axe_before.png", g_screen);
+									skill2_1.LoadImg("img//knife_before.png", g_screen);
+									skill3_1.LoadImg("img//knife2_before.png", g_screen);
+									skill4_1.LoadImg("img//spear_after.png", g_screen);
+									skill5_1.LoadImg("img//double_knife_before.png", g_screen);
+									basic_skill2 = 4;
+								}
+								else if (Impact::Impact_(x_, y_, skill5_1.GetRect()))
+								{
+									skill1_1.LoadImg("img//axe_before.png", g_screen);
+									skill2_1.LoadImg("img//knife_before.png", g_screen);
+									skill3_1.LoadImg("img//knife2_before.png", g_screen);
+									skill4_1.LoadImg("img//spear_before.png", g_screen);
+									skill5_1.LoadImg("img//double_knife_after.png", g_screen);
+									basic_skill2 = 5;
 								}
 
 								skill1_1.SetRect(962, 30);
@@ -510,17 +573,23 @@ int main(int arc, char* argv[])
 								skill2_1.Render(g_screen, NULL);
 								skill3_1.SetRect(1107, 30);
 								skill3_1.Render(g_screen, NULL);
-
+								skill4_1.SetRect(1107, 173);
+								skill4_1.Render(g_screen, NULL);
+								skill5_1.SetRect(1034, 173);
+								skill5_1.Render(g_screen, NULL);
 
 							}
-							std::cout << basic_skill << '\n';
+							
 							skill1.SetRect(100, 30);
 							skill1.Render(g_screen, NULL);
 							skill2.SetRect(173, 30);
 							skill2.Render(g_screen, NULL);
 							skill3.SetRect(246, 30);
 							skill3.Render(g_screen, NULL);
-
+							skill4.SetRect(100, 173);
+							skill4.Render(g_screen, NULL);
+							skill5.SetRect(173, 173);
+							skill5.Render(g_screen, NULL);
 						}
 						if (Impact::Impact_(x_, y_, ready.get_Rect())) start = true;
 						else if (Impact::Impact_(x_, y_, cancel.GetRect())) pk = 2;
@@ -569,9 +638,11 @@ int main(int arc, char* argv[])
 						p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0);
 						dame_bot += 10;
 						match++;
+
 					}
 					else if (pk == 1)
 					{
+						
 						match++;
 						if (match < 4)
 						{
@@ -580,15 +651,24 @@ int main(int arc, char* argv[])
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							killed = 1000;
 							botkilled = 1000;
+							dem_unti = 0;
+							dem_unti2 = 0;
 						}
 						else 
 						{
-
+							win_game.DisplayMusic();
 							g_background2.LoadImg("img//win_black.jpg", g_screen);
 							g_background2.SetRect(320, 0);
 							g_background2.Render(g_screen, NULL);
 
-							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640) { start = false; pk = 2; match = 0; match_pk = 0; }
+							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640) { 
+							start = false; pk = 2; match = 0; match_pk = 0; killed = 1000;
+							p_player.set_vt(0, 0);
+							p_player2.set_vt(SCREEN_WIDTH, 0);
+							botkilled = 1000;
+							dem_unti = 0;
+							dem_unti2 = 0;
+							}
 						}
 					}
 				}
@@ -596,6 +676,8 @@ int main(int arc, char* argv[])
 				{
 					if (pk == 0)
 					{
+						lose_game.DisplayMusic();
+						music_bkgr.stopMusic();
 						g_background2.LoadImg("img//lose_game.jpg", g_screen);
 						g_background2.SetRect(250, 0);
 						g_background2.Render(g_screen, NULL);
@@ -615,12 +697,15 @@ int main(int arc, char* argv[])
 									start = false;
 									pause = 0; killed = 1000;
 									botkilled = 1000;
+									killed = 1000;
 									p_player.set_vt(0, 0);
 									p_threat.set_vt(SCREEN_WIDTH, 0);
 									choose_bkgr = 0;
 									dame_me = 10; dame_bot = 10;
 									mus_star = false;
 									mus_bkgr = false;
+									state_mus = true;
+								
 								}
 								else if (i == 1)
 								{
@@ -632,6 +717,11 @@ int main(int arc, char* argv[])
 					}
 					else if (pk == 1)
 					{
+						int save = choose_bkgr;
+						while (choose_bkgr == save)
+						{
+							choose_bkgr = rand() % 4;
+						}
 						match_pk++;
 						if (match_pk < 4)
 						{
@@ -644,14 +734,22 @@ int main(int arc, char* argv[])
 						}
 
 						else  {
-							
+							win_game.DisplayMusic();
 
 							g_background2.LoadImg("img//win_green.jpg", g_screen);
 							g_background2.SetRect(320, 0);
 							
 							g_background2.Render(g_screen, NULL);
 
-							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640) { start = false; pk = 2; match = 0; match_pk = 0; }
+							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640)
+							{ start = false; pk = 2; match = 0; match_pk = 0;
+							p_player.set_vt(0, 0);
+							p_player2.set_vt(SCREEN_WIDTH, 0);
+							killed = 1000;
+							botkilled = 1000;
+							dem_unti = 0;
+							dem_unti2 = 0;
+							}
 						}
 					
 
@@ -789,22 +887,36 @@ int main(int arc, char* argv[])
 
 					if (tt == 1)
 					{
-						p_bullet.SetRect(rect_player.x, rect_player.y - 20);
+						if (basic_skill != 4)
+						{
+							p_bullet.SetRect(rect_player.x, rect_player.y - 20);
+						}
+						else p_bullet.SetRect(rect_player.x-20, rect_player.y - 40);
 					}
 					else
 					{
-						p_bullet.SetRect(rect_player.x - 20, rect_player.y - 20);
+						if (basic_skill != 4)
+						{
+							p_bullet.SetRect(rect_player.x-20, rect_player.y - 20);
+						}
+						else p_bullet.SetRect(rect_player.x-35, rect_player.y - 40);
 
 					}
-					p_bullet.action(g_screen,60);
+					if (basic_skill != 5)
+					{
+						p_bullet.action(g_screen, 60);
+					}
+					else p_bullet.action(g_screen, 180);
 					if (basic_skill == 0) dame_me = 10;
 					else if (basic_skill == 1) dame_me = 15;
 					else if (basic_skill == 2) dame_me = 20;
 					else if (basic_skill == 3) dame_me = 30;
+					else if (basic_skill == 4) dame_me = 25; 
+					else if (basic_skill == 5) dame_me = 20;
 				}
 
 
-				
+			
 
 				if (pk == 1)
 				{
@@ -838,14 +950,23 @@ int main(int arc, char* argv[])
 
 						if (tt2 == 1)
 						{
-							p_bullet2.SetRect(rect_player2.x, rect_player2.y - 20);
+							if (basic_skill2 != 4)
+							{
+								p_bullet2.SetRect(rect_player2.x, rect_player2.y - 20);
+							}
+							else p_bullet2.SetRect(rect_player2.x - 20, rect_player2.y - 40);
 						}
 						else
 						{
-							p_bullet2.SetRect(rect_player2.x - 20, rect_player2.y - 20);
+							if (basic_skill2 != 4)
+							{
+								p_bullet2.SetRect(rect_player2.x - 20, rect_player2.y - 20);
+							}
+							else p_bullet.SetRect(rect_player2.x - 35, rect_player2.y - 40);
 
 						}
-						p_bullet2.action(g_screen, 60);
+						if (basic_skill2 != 5) p_bullet2.action(g_screen, 60);
+						else p_bullet2.action(g_screen, 180);
 						if (basic_skill2 == 0) {
 							dame_bot = 10; 
 						}
@@ -858,6 +979,12 @@ int main(int arc, char* argv[])
 						else if (basic_skill2 == 3) {
 							dame_bot = 30;
 						}
+						else if (basic_skill2 == 4) {
+							dame_bot = 25;
+						}
+						else if (basic_skill2 == 5) {
+							dame_bot = 20;
+						}
 
 					}
 					if (player2_fight == 1)
@@ -868,21 +995,24 @@ int main(int arc, char* argv[])
 						else if (basic_skill2 == 1) {
 							axe.DisplayMusic();
 						}
-						else if (basic_skill2 == 2||basic_skill2==3) {
+						else if (basic_skill2 == 2 || basic_skill2 == 3 || basic_skill2 == 4) {
 							knife.DisplayMusic();
 						}
+						else if (basic_skill2 == 5) double_knife.DisplayMusic();
 					
 
 					}
 
-					if (unti2 != 2)// Chiêu cuối 
+					if (unti2 != 2&&dem_unti2<=70)// Chiêu cuối 
 					{
+						dem_unti2++;
 						p_unti2.set_unti(unti2);
 						p_unti2.Loadac(g_screen);
-						p_unti2.SetRect(rect_player2.x - 64, rect_player2.y - 100);
+						p_unti2.SetRect(rect_player2.x - 40, rect_player2.y - 80);
 						p_unti2.action(g_screen, 180);
 
-						if (Impact::Impact_(vtrix, vtriy, p_unti2.GetRect())) killed -= 20;
+						dame_me /= 2;
+						botkilled += 10;
 
 					}
 
@@ -928,7 +1058,7 @@ int main(int arc, char* argv[])
 
 
 
-
+					
 
 					p_threat.Show(g_screen);
 
@@ -956,29 +1086,24 @@ int main(int arc, char* argv[])
 
 
 					}
+					dame_bot = 10;
 				}
 			
 				
 
 				
 				
-				
-				if (unti != 2)// Chiêu cuối 
+				if (unti != 2 && dem_unti <= 70)// Chiêu cuối 
 				{
+					dem_unti++;
 					p_unti.set_unti(unti);
 					p_unti.Loadac(g_screen);
-					p_unti.SetRect(rect_player.x - 64, rect_player.y - 100);
+					p_unti.SetRect(rect_player.x - 40, rect_player.y - 80);
 					p_unti.action(g_screen, 180);
-					if (pk == 0)
-					{
-						if (Impact::Impact_(vitribotx,vitriboty, p_unti.GetRect())) botkilled -= 20;
-					}
-					else if (pk == 1)
-					{
-
-						if (Impact::Impact_(vtrix2, vtriy2, p_unti.GetRect())) botkilled -= 20;
-					}
+					dame_bot /= 2;
+					killed += 10;
 				}
+			
 
 				
 
@@ -989,7 +1114,8 @@ int main(int arc, char* argv[])
 				{
 					if (basic_skill == 0) boxing.DisplayMusic();
 					else if (basic_skill == 1) axe.DisplayMusic();
-					else if (basic_skill == 2||basic_skill==3) knife.DisplayMusic();
+					else if (basic_skill == 2 || basic_skill == 3 || basic_skill == 4) knife.DisplayMusic();
+					else if (basic_skill == 5) double_knife.DisplayMusic();
 				}
 
 

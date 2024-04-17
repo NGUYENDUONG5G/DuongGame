@@ -2,6 +2,7 @@
 
 void Music::LoadMusic(const char path[])
 {
+	
 	sound = Mix_LoadMUS(path);
 
 }

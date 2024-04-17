@@ -42,7 +42,7 @@ SDL_Color TextObject::SetColor(int type)
 
 void TextObject::RenderText(const char* data_, TTF_Font* gFont,SDL_Renderer* screen ,int k)
 {
-	
+	free();
 	
 	SDL_Color color = SetColor(k);
 	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, data_, color);

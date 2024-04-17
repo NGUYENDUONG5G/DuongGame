@@ -21,6 +21,8 @@ BulletObject  ::~BulletObject()
 
 void BulletObject::set_system_basis()
 {
+	skill[5] = { "img//double_knife_left.png","img//double_knife_right.png" };
+	skill[4] = { "img//spear_left.png","img//spear_right.png" };
 	skill[3] = { "img//knife2_left.png","img//knife2_right.png" };
 	skill[2] = { "img//knife_left.png","img//knife_right.png" };
 	skill[1] = { "img//axe_left.png","img//axe_right.png" };
@@ -46,7 +48,7 @@ void BulletObject::Loadac(SDL_Renderer* screen)
 	else if (unti == 1)
 	{
 
-		LoadImg("img//knife_around.png", screen);
+		LoadImg("img//unti.png", screen);
 	}
 }
 	
@@ -59,8 +61,8 @@ void BulletObject::action(SDL_Renderer* screen,int k)
 {
 	if (cb_basic == 1)
 	{
-		if (tt == 1) angle += 20;
-		else angle -= 20;
+		if (tt == 1) angle += 30;
+		else angle -= 30;
 	}
 	else if (unti == 1)
 	{
