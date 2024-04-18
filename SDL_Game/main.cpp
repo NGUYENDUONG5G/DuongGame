@@ -14,6 +14,7 @@
 #include<iostream>
 #include<vector>
 #include<random>
+#include"RoomImg.h"
 
 #undef main
 BaseObject g_background;
@@ -28,6 +29,7 @@ BaseObject key_exit;
 BaseObject key_open_music;
 BaseObject key_close_music;
 BaseObject key_go;
+BaseObject up_volume, down_volume;
 BaseObject hp_me;
 BaseObject hp_bot;
 BaseObject vs_bot_, vs_1_;
@@ -42,6 +44,7 @@ Sound double_knife;
 Sound is_killed;
 Sound win_game;
 Sound lose_game;
+RoomImg room_win1,room_lose,room_win2;
 
 TTF_Font* font;
 
@@ -116,12 +119,16 @@ void close() {
 	cancel.Free();
 	music_bkgr.Free();
 	music_star.Free();
+	room_win1.Free();
+	room_win2.Free();
+	room_lose.Free();
 
 	boxing.Free();
 	 knife.Free();
 	 axe.Free();
 	 double_knife.Free();
 	 is_killed.Free();
+
 	 win_game.Free();
 	 vs_bot_.Free();
 	 vs_1_.Free();
@@ -142,6 +149,9 @@ void close() {
 	 key_open_music.Free();
 	 key_close_music.Free();
 	 key_go.Free();
+	 up_volume.Free();
+	 down_volume.Free();
+	
 	 hp_me.Free();
 	 hp_bot.Free();
 
@@ -176,6 +186,7 @@ int main(int arc, char* argv[])
 	bool state_mus = false; 
 	int pause=0;
 	int pk = 2;
+	int volume = 64;
 
 	int x_;
 	int y_;
@@ -206,6 +217,11 @@ int main(int arc, char* argv[])
 	game_map.LoadMap(file_name);
 
 	game_map.LoadTiles(g_screen);
+
+	up_volume.LoadImg("img//key_up.png", g_screen);
+	up_volume.SetRect(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 - 135);
+	down_volume.LoadImg("img//key_down.png", g_screen);
+	down_volume.SetRect(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 -65);
 
 
 	MainObject p_player;
@@ -240,7 +256,7 @@ int main(int arc, char* argv[])
 	TextObject vs_bot;
 	TextObject vs_1;
 	TextObject tutorial_player1, tutorial_player2;
-
+	TextObject count_volume;
 
 	
 	BulletObject p_bullet;
@@ -258,6 +274,13 @@ int main(int arc, char* argv[])
 	int match = 0;
 	int match_pk = 0;
 	
+	int stop_room = 0;
+	int room_ = 0;
+	room_win1.LoadImg("img//win_black.jpg", g_screen);
+	room_win2.LoadImg("img//win_green.jpg", g_screen);
+	room_lose.LoadImg("img//lose_game.jpg", g_screen);
+
+
 	bool mus_star = false;
 	music_star.LoadMusic("music//star_game.mp3");
 	bool mus_bkgr = false;
@@ -347,7 +370,7 @@ int main(int arc, char* argv[])
 				if (mus_star == false)
 				{
 					music_star.DisplayMusic();
-					music_star.Volume(MAX_VOLUME / 2);
+					music_star.Volume(MAX_VOLUME/2 );
 					mus_star = true;
 				}
 
@@ -366,7 +389,7 @@ int main(int arc, char* argv[])
 					begin.RenderText("START GAME", font, g_screen, 1);
 
 
-					if (Impact::Impact_(x_, y_, begin.get_Rect()))
+					if (Impact::Impact_(x_, y_, key_star.GetRect()))
 
 					{
 						enter = true;
@@ -380,8 +403,8 @@ int main(int arc, char* argv[])
 				else if (enter)
 				{
 
-					g_background3.LoadImg("img//bkgr_menu2.jpg", g_screen);
-					g_background3.SetRect(85, 0);
+					g_background3.LoadImg("img//bkgr_menu3.png", g_screen);
+					g_background3.SetRect(77, 0);
 					g_background3.Render(g_screen, NULL);
 
 					if (pk == 2)
@@ -389,22 +412,22 @@ int main(int arc, char* argv[])
 
 
 						vs_bot_.LoadImg("img//key_big.png", g_screen);
-						vs_bot_.SetRect(SCREEN_WIDTH / 2 - 450, SCREEN_HEIGHT / 2 - 60);
+						vs_bot_.SetRect(SCREEN_WIDTH / 2 - 450, SCREEN_HEIGHT / 2 - 120);
 						vs_bot_.Render(g_screen, NULL);
 
 						vs_1_.LoadImg("img//key_big.png", g_screen);
-						vs_1_.SetRect(SCREEN_WIDTH / 2+20 , SCREEN_HEIGHT / 2 - 60);
+						vs_1_.SetRect(SCREEN_WIDTH / 2+20 , SCREEN_HEIGHT / 2 - 120);
 						vs_1_.Render(g_screen, NULL);
 
-						vs_bot.set_xy(SCREEN_WIDTH / 2 - 360, SCREEN_HEIGHT / 2);
+						vs_bot.set_xy(SCREEN_WIDTH / 2 - 360, SCREEN_HEIGHT / 2-60);
 						vs_bot.RenderText("WAR WITH BOT ", font, g_screen, 1);
 
-						vs_1.set_xy(SCREEN_WIDTH / 2 + 80, SCREEN_HEIGHT / 2);
+						vs_1.set_xy(SCREEN_WIDTH / 2 + 80, SCREEN_HEIGHT / 2-60);
 						vs_1.RenderText("WAR WITH HUMAN ", font, g_screen, 1);
 
 						if (Impact::Impact_(x_, y_, vs_bot_.GetRect())) pk = 0;
 						else if (Impact::Impact_(x_, y_, vs_1_.GetRect())) pk = 1; 
-						std::cout << " PK = " << pk << '\n';
+						
 					}
 					else if (pk != 2)
 					{
@@ -424,7 +447,7 @@ int main(int arc, char* argv[])
 
 						if (pk == 1)
 						{
-							tutorial_player1.set_xy(SCREEN_WIDTH / 2 - 320, SCREEN_HEIGHT / 2 + 100);
+							tutorial_player1.set_xy(SCREEN_WIDTH / 2 - 400, SCREEN_HEIGHT / 2 + 100);
 							tutorial_player1.RenderText("PLAYER 1 ", font, g_screen, 1);
 
 							tutorial_player2.set_xy(SCREEN_WIDTH / 2 + 320, SCREEN_HEIGHT / 2 + 100);
@@ -591,7 +614,7 @@ int main(int arc, char* argv[])
 							skill5.SetRect(173, 173);
 							skill5.Render(g_screen, NULL);
 						}
-						if (Impact::Impact_(x_, y_, ready.get_Rect())) start = true;
+						if (Impact::Impact_(x_, y_, key_go.GetRect()) )start = true;
 						else if (Impact::Impact_(x_, y_, cancel.GetRect())) pk = 2;
 					}
 					
@@ -611,7 +634,7 @@ int main(int arc, char* argv[])
 			if (mus_bkgr == false)
 			{
 				music_bkgr.DisplayMusic();
-				music_bkgr.Volume(MAX_VOLUME / 2);
+				music_bkgr.Volume( volume );
 				mus_bkgr = true;
 				state_mus = true;
 			}
@@ -633,7 +656,7 @@ int main(int arc, char* argv[])
 					{
 						pause = 0;
 						killed = 1000; botkilled += 1000;
-						real_hp_me = 1000;
+						real_hp_me = killed;
 						real_hp_bot = botkilled;
 						p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0);
 						dame_bot += 10;
@@ -656,18 +679,32 @@ int main(int arc, char* argv[])
 						}
 						else 
 						{
+							music_bkgr.stopMusic();
 							win_game.DisplayMusic();
-							g_background2.LoadImg("img//win_black.jpg", g_screen);
-							g_background2.SetRect(320, 0);
-							g_background2.Render(g_screen, NULL);
+							if (stop_room == 0)
+							{
+								
+								room_ = room_win1.sent_room();
+								
+								room_win1.practice(g_screen);
+								if (room_ > 1)
+								{
+									stop_room = 1;
+									room_win1.set_room(0);
+								}
+							}
 
-							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640) { 
-							start = false; pk = 2; match = 0; match_pk = 0; killed = 1000;
+
+							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640)
+							{ 
+								
+							start = false; pk = 2; match = 0; match_pk = 0; killed = 1000; stop_room = 0;
 							p_player.set_vt(0, 0);
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							botkilled = 1000;
 							dem_unti = 0;
 							dem_unti2 = 0;
+							music_bkgr.resumeMusic();
 							}
 						}
 					}
@@ -678,9 +715,20 @@ int main(int arc, char* argv[])
 					{
 						lose_game.DisplayMusic();
 						music_bkgr.stopMusic();
-						g_background2.LoadImg("img//lose_game.jpg", g_screen);
-						g_background2.SetRect(250, 0);
-						g_background2.Render(g_screen, NULL);
+						
+						if (stop_room == 0)
+						{
+
+							room_ = room_lose.sent_room();
+
+							room_lose.practice(g_screen);
+							if (room_ > 1)
+							{
+								stop_room = 1;
+								room_lose.set_room(0);
+							}
+						}
+
 						match = 0;
 
 						endgame[0].set_xy(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 64 + 32);
@@ -694,8 +742,10 @@ int main(int arc, char* argv[])
 							if (Impact::Impact_(x_, y_, endgame[i].get_Rect()))
 							{
 								if (i == 0) {
+
 									start = false;
 									pause = 0; killed = 1000;
+									stop_room = 0;
 									botkilled = 1000;
 									killed = 1000;
 									p_player.set_vt(0, 0);
@@ -705,7 +755,7 @@ int main(int arc, char* argv[])
 									mus_star = false;
 									mus_bkgr = false;
 									state_mus = true;
-								
+									music_bkgr.resumeMusic();
 								}
 								else if (i == 1)
 								{
@@ -717,6 +767,7 @@ int main(int arc, char* argv[])
 					}
 					else if (pk == 1)
 					{
+						
 						int save = choose_bkgr;
 						while (choose_bkgr == save)
 						{
@@ -734,21 +785,31 @@ int main(int arc, char* argv[])
 						}
 
 						else  {
+							music_bkgr.stopMusic();
 							win_game.DisplayMusic();
 
-							g_background2.LoadImg("img//win_green.jpg", g_screen);
-							g_background2.SetRect(320, 0);
-							
-							g_background2.Render(g_screen, NULL);
+							if (stop_room == 0)
+							{
+								room_ = room_lose.sent_room();
+
+								room_lose.practice(g_screen);
+								if (room_ > 1)
+								{
+									stop_room = 1;
+									room_lose.set_room(0);
+								}
+							}
 
 							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640)
-							{ start = false; pk = 2; match = 0; match_pk = 0;
+							{
+							start = false; pk = 2; match = 0; match_pk = 0; stop_room = 0;
 							p_player.set_vt(0, 0);
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							killed = 1000;
 							botkilled = 1000;
 							dem_unti = 0;
 							dem_unti2 = 0;
+							music_bkgr.resumeMusic();
 							}
 						}
 					
@@ -772,18 +833,42 @@ int main(int arc, char* argv[])
 				g_background2.Render(g_screen, NULL);
 
 				key_resume.LoadImg("img//key_small.png", g_screen);
-				key_resume.SetRect(SCREEN_WIDTH / 2 +64, SCREEN_HEIGHT / 2 -20);
+				key_resume.SetRect(SCREEN_WIDTH / 2 +64, SCREEN_HEIGHT / 2 );
 				key_resume.Render(g_screen, NULL);
 
 				key_exit.LoadImg("img//key_small.png", g_screen);
-				key_exit.SetRect(SCREEN_WIDTH / 2 - 64*4, SCREEN_HEIGHT / 2-20);
+				key_exit.SetRect(SCREEN_WIDTH / 2 - 64*4, SCREEN_HEIGHT / 2);
 				key_exit.Render(g_screen, NULL);
+			
+				
+				up_volume.Render(g_screen, NULL);
+				down_volume.Render(g_screen, NULL);
+			
+				if (Impact::Impact_(x_, y_, up_volume.GetRect()))
+				{
+					volume += 10; state_mus = true;
+				}
+				else if (Impact::Impact_(x_, y_, down_volume.GetRect())) 
+				{
+					volume -= 10; state_mus = true;
+				}
+				
+				if (volume <= 0) {
+					volume = 0; state_mus = false;
+				}
+				else if (volume >= 128)
+				{
+					volume = 128;
+				}
+				music_bkgr.Volume(volume);
+				music_star.Volume(volume);
+				
 			
 				if (state_mus)
 				{
 					music_bkgr.resumeMusic();
 					key_open_music.LoadImg("img//open_volume.png", g_screen);
-					key_open_music.SetRect(SCREEN_WIDTH / 2 - 20, SCREEN_HEIGHT / 2 - 60);
+					key_open_music.SetRect(SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 100);
 					key_open_music.Render(g_screen, NULL);
 					if(Impact::Impact_(x_,y_,key_open_music.GetRect())) state_mus=false;
 				}
@@ -791,17 +876,25 @@ int main(int arc, char* argv[])
 				{
 					music_bkgr.stopMusic();
 					key_close_music.LoadImg("img//close_volume.png", g_screen);
-					key_close_music.SetRect(SCREEN_WIDTH / 2 - 20, SCREEN_HEIGHT / 2 - 60);
+					key_close_music.SetRect(SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 100);
 					key_close_music.Render(g_screen, NULL);
 					if (Impact::Impact_(x_, y_, key_close_music.GetRect())) state_mus = true;
 
 
 				}
 
-				choose[0].set_xy(SCREEN_WIDTH / 2 +64*2, SCREEN_HEIGHT / 2 );
+				char svolume[20];
+				count_volume.set_xy(SCREEN_WIDTH / 2 -20, SCREEN_HEIGHT / 2 - 100);
+				snprintf(svolume, 20, " %d", volume);
+				count_volume.RenderText(svolume, font, g_screen, 1);
+
+
+
+
+				choose[0].set_xy(SCREEN_WIDTH / 2 +64*2, SCREEN_HEIGHT / 2+20 );
 				choose[0].RenderText("Resume", font, g_screen, 1);
 
-				choose[1].set_xy(SCREEN_WIDTH / 2 - 64*2-30, SCREEN_HEIGHT / 2);
+				choose[1].set_xy(SCREEN_WIDTH / 2 - 64*2-30, SCREEN_HEIGHT / 2+20);
 				choose[1].RenderText("Exit", font, g_screen, 1);
 
 				 
@@ -962,7 +1055,7 @@ int main(int arc, char* argv[])
 							{
 								p_bullet2.SetRect(rect_player2.x - 20, rect_player2.y - 20);
 							}
-							else p_bullet.SetRect(rect_player2.x - 35, rect_player2.y - 40);
+							else p_bullet2.SetRect(rect_player2.x - 35, rect_player2.y - 40);
 
 						}
 						if (basic_skill2 != 5) p_bullet2.action(g_screen, 60);
@@ -987,7 +1080,7 @@ int main(int arc, char* argv[])
 						}
 
 					}
-					if (player2_fight == 1)
+					if (player2_fight == 1&&is_basic2==1)
 					{
 						if (basic_skill2 == 0) {
 							boxing.DisplayMusic();
@@ -1018,29 +1111,38 @@ int main(int arc, char* argv[])
 
 					if (myfight == 1 && player2_fight == 0)
 					{
-
-						if (vtrix2 <= vtrix + 64 * 2 && vtrix2 >= vtrix - 64 * 2 && vtriy2 <= vtriy+64*2 && vtriy2 >= vtriy-64*2) bCol1 = true;
-
+						if (tt == 1)
+						{
+							if (vtrix2 <= vtrix + 64 * 2&&vtrix2>=vtrix&& vtriy2 <= vtriy + 64 * 2 && vtriy2 >= vtriy - 64 * 2) bCol1 = true;
+						}
+						else
+						{
+							if (vtrix2 >= vtrix - 64 * 2 && vtrix2<=vtrix && vtriy2 <= vtriy + 64 * 2 && vtriy2 >= vtriy - 64 * 2) bCol1 = true;
+						}
 
 					}
 					 
 					else if (player2_fight == 1 && myfight == 0)
 					{
-
-						if (vtrix >= vtrix2 - 64 * 2 && vtrix <= vtrix2 + 64 * 2 && vtriy >= vtriy2-64*2 && vtriy <= vtriy2+64*2) bCol2 = true;
-
-
+						if (tt2 == 1)
+						{
+							if (vtrix >= vtrix2  && vtrix <= vtrix2 + 64 * 2 && vtriy >= vtriy2 - 64 * 2 && vtriy <= vtriy2 + 64 * 2) bCol2 = true;
+						}
+						else
+						{
+							if (vtrix >= vtrix2 -64*2&& vtrix <= vtrix2  && vtriy >= vtriy2 - 64 * 2 && vtriy <= vtriy2 + 64 * 2) bCol2 = true;
+						}
 					}
 
 					else if (myfight == 1 && player2_fight == 1)
 					{
-						if (vtrix2 <= vtrix + 64 * 2 && vtrix2 >= vtrix - 64 * 2 && vtriy2 <= vtriy + 64 * 2 && vtriy2 >= vtriy - 64 * 2)  bCol3 = true;
+						if ((tt == 1 && tt2 == 0) || (tt == 0 && tt2 == 1))
+						{
+							if (vtrix2 <= vtrix + 64 * 2 && vtrix2 >= vtrix-64*2 && vtriy2 <= vtriy + 64 * 2 && vtriy2 >= vtriy - 64 * 2) bCol3 = true;
 
-						else 	if (vtrix >= vtrix2 - 64 * 2 && vtrix <= vtrix2 + 64 * 2 && vtriy >= vtriy2 - 64 * 2 && vtriy <= vtriy2 + 64 * 2)  bCol3 = true;
-
-
+						}
 					}
-			}
+				}
 				else if (pk == 0)
 				{
 					vitribotx = p_threat.get_x_pos();
@@ -1065,7 +1167,7 @@ int main(int arc, char* argv[])
 
 					if (myfight == 1 && botfight == 0)
 					{
-
+						
 						if (vitribotx <= vtrix + 64 * 2 && vitribotx >= vtrix - 64 * 2 && vitriboty <= vtriy+64*2 && vitriboty >= vtriy-64*2) bCol1 = true;
 
 
@@ -1076,7 +1178,7 @@ int main(int arc, char* argv[])
 
 						if (vtrix >= vitribotx - 64 * 2 && vtrix <= vitribotx + 64 * 2 && vtriy >= vitriboty - 64 * 2 && vtriy <= vitriboty + 64 * 2) bCol2 = true;
 
-						std::cout << bCol2 << '\n';
+					
 					}
 					else if (myfight == 1 && botfight == 1)
 					{
@@ -1086,7 +1188,7 @@ int main(int arc, char* argv[])
 
 
 					}
-					dame_bot = 10;
+				
 				}
 			
 				
@@ -1110,7 +1212,7 @@ int main(int arc, char* argv[])
 
 				
 				
-				if (myfight == 1)
+				if (myfight == 1&&is_basic==1)
 				{
 					if (basic_skill == 0) boxing.DisplayMusic();
 					else if (basic_skill == 1) axe.DisplayMusic();
@@ -1242,6 +1344,7 @@ int main(int arc, char* argv[])
 p_player.Free();
 p_bullet.Free();
 p_player2.Free();
+p_threat.Free();
 p_unti.Free();
 count_match.free();
 ready.free();

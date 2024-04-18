@@ -17,7 +17,7 @@ void Music::DisplayMusic()
 
 void Music::Volume(int volum)
 {
-	Mix_Volume(-1, volum);
+	Mix_VolumeMusic(volum);
 
 
 }
