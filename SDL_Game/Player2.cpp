@@ -30,7 +30,7 @@ Player2::Player2() {
 	angle = 0;
 	fight = 0;
 
-	check = 1;
+	check = 0;
 	is_basic = 0;
 
 	cb_basic = 0;

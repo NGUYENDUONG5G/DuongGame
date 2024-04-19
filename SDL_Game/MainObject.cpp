@@ -336,7 +336,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 
 
-			case SDLK_a:
+			case SDLK_s:
 			{
 				status_ = WAR1;
 				input_type_.war1 = 1;
@@ -351,7 +351,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 			}
 			break;
-			case SDLK_w:
+			case SDLK_q:
 			{
 				status_ = WAR2;
 				input_type_.war2 = 1;
@@ -393,7 +393,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				}
 			}
 			break;
-			case SDLK_d:
+			case SDLK_e:
 			{
 				status_ = WAR3;
 				input_type_.war3 = 1;
@@ -422,7 +422,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 			break;
 
-			case SDLK_s:
+			case SDLK_w:
 			{
 				status_ = WAR4;
 				input_type_.war4 = 1;
@@ -456,7 +456,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				UpdateImagePlayer(screen);
 			}
 			break;
-			case SDLK_a:
+			case SDLK_s:
 			{
 				status_ = WALK_NONE;
 				input_type_.war1 = 0;
@@ -469,7 +469,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 			}
 			break;
-			case SDLK_w:
+			case SDLK_q:
 			{
 
 				status_ = WALK_NONE;
@@ -481,7 +481,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 			}
 			break;
-			case SDLK_d:
+			case SDLK_e:
 			{
 				status_ = WALK_NONE;
 				fight = 0;
@@ -493,7 +493,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 			}
 			break;
 
-			case SDLK_s:
+			case SDLK_w:
 			{
 
 				status_ = WALK_NONE;

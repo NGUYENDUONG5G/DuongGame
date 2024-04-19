@@ -12,7 +12,7 @@
 #define THREAT_GRAVITY_SPEED 0.8
 #define THREAT_MAX_FALL_SPEED 10
 #define THREAT_SPEED 8
-#define THREAT_FLY -150
+#define THREAT_FLY -200
 
 
 class ThreatsObject :public BaseObject

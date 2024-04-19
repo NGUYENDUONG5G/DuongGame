@@ -17,7 +17,7 @@ public:
 	~BulletObject();
 
 	
-	void action(SDL_Renderer* des,int k);
+	void action(SDL_Renderer* des,int k,int  move=0);
 	
 
 	void Set_Rect(const int& x_, const int& y_) { rect_.x = x_; rect_.y = y_; }
