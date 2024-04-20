@@ -15,7 +15,7 @@ BulletObject::BulletObject()
 
 BulletObject  ::~BulletObject()
 {
-	;
+	Free();
 }
 
 

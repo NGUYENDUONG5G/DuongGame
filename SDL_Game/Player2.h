@@ -69,7 +69,11 @@ public:
 	int vitri_y() { return y_pos_; }
 
 	
-
+	void set_vt_bot(const float& x, const float& y)
+	{
+		swx = x;
+		swy = y;
+	}
 
 	
 	int set_check() const { return check; }
@@ -119,6 +123,7 @@ private:
 	int is_basic;
 	int unti;
 	int time_unti;
+	int time_move_skill;
 
 };
 

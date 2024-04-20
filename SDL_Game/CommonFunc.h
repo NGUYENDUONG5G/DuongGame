@@ -18,10 +18,7 @@
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
-static Mix_Music* music_start = NULL;
-static Mix_Music* music_play = NULL;
-static Mix_Music* music_win = NULL;
-static Mix_Music* music_lost = NULL;
+
 // Screen
 
 const int  FRAME_PER_SECOND = 25;

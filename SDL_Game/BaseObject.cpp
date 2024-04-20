@@ -47,7 +47,7 @@ void BaseObject::Render(SDL_Renderer* des, float angle,const SDL_Rect* clip)
 	SDL_Rect renderquad = { rect_.x , rect_.y , rect_.w , rect_.h };
 
 	SDL_RenderCopyEx(des, p_object_, clip, &renderquad,angle, nullptr, SDL_FLIP_NONE);
-	//SDL_RenderCopy(des, p_object_, clip, &renderquad);
+	
 
 
 }

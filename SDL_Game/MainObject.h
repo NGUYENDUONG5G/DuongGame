@@ -68,7 +68,7 @@ void set_xval_(const int& xval)   {  x_val_= xval; }
 	int  vitri_x() { return x_pos_; }
 	int vitri_y() { return y_pos_; }
 	
-	void Swap(const float& x, const float& y)
+	void set_vt_bot(const float& x, const float& y)
 	{
 		swx = x;
 		swy = y;
@@ -125,6 +125,8 @@ private:
 	int is_basic;
 	int unti;
 	int time_unti;
+
+	int time_move_skill;
 	
 };
 

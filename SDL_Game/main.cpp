@@ -239,11 +239,11 @@ int main(int arc, char* argv[])
 
 	MainObject p_player;
 	p_player.LoadImg("img//player_none_right.png", g_screen);
-	p_player.set_clips();
+	
 
 	Player2 p_player2;
 	p_player2.LoadImg("img//player2_none_left.png", g_screen);
-	p_player2.set_clips();
+	
 
 	ThreatsObject p_threat;
 	p_threat.LoadImg("img//bot_none_left.png",g_screen);
@@ -986,6 +986,7 @@ int main(int arc, char* argv[])
 				bool bCol2 = false;
 				bool bCol3 = false;
 
+				p_player.set_clips();
 				vtrix = p_player.vitri_x();
 				vtriy = p_player.vitri_y();
 				tt = p_player.set_check();
@@ -1002,7 +1003,7 @@ int main(int arc, char* argv[])
 			
 
 
-				p_player.Swap(vitribotx, vitriboty);
+				
 
 				p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
 				
@@ -1035,19 +1036,19 @@ int main(int arc, char* argv[])
 					{
 						if (basic_skill == 4)
 						{
-							p_bullet.SetRect(rect_player.x - 20, rect_player.y - 40);
+							p_bullet.SetRect(rect_player.x - 40, rect_player.y - 35);
 						}
 						else if (basic_skill == 6&&is_dart==0)
 						{
-							p_bullet.SetRect(rect_player.x+20 , rect_player.y+20 );
-							bullet_xpos = rect_player.x + 20;
-							bullet_ypos = rect_player.y + 20;
+							p_bullet.SetRect(rect_player.x + 10, rect_player.y + 30);
+							bullet_xpos = rect_player.x +10;
+							bullet_ypos = rect_player.y + 30;
 							
 							r = 1;
 							l = 0;
 						}
 						
-						else p_bullet.SetRect(rect_player.x, rect_player.y - 20);
+						else p_bullet.SetRect(rect_player.x-15, rect_player.y - 15);
 						
 						
 					}
@@ -1055,21 +1056,21 @@ int main(int arc, char* argv[])
 					{
 						if (basic_skill == 4)
 						{
-							p_bullet.SetRect(rect_player.x - 35, rect_player.y - 40);
+							p_bullet.SetRect(rect_player.x - 70, rect_player.y - 35);
 							
 						}
 						else if (basic_skill == 6&&is_dart==0)
 						{
-							p_bullet.SetRect(rect_player.x + 60, rect_player.y + 20);
-							bullet_xpos = rect_player.x + 60;
-							bullet_ypos = rect_player.y + 20;
+							p_bullet.SetRect(rect_player.x +15, rect_player.y +30);
+							bullet_xpos = rect_player.x + 15;
+							bullet_ypos = rect_player.y + 30;
 							
 							l = 1;
 							r = 0;
 							
 						}
 					
-						else p_bullet.SetRect(rect_player.x - 20, rect_player.y - 20);
+						else p_bullet.SetRect(rect_player.x - 55, rect_player.y - 15);
 
 					}
 					if (myfight == 1&&basic_skill==6) is_dart = 1;
@@ -1123,7 +1124,7 @@ int main(int arc, char* argv[])
 
 				if (pk == 1)
 				{
-					
+					p_player2.set_clips();
 					vtrix2 = p_player2.vitri_x();
 					vtriy2 = p_player2.vitri_y();
 
@@ -1134,12 +1135,16 @@ int main(int arc, char* argv[])
 					is_basic2 = p_player2.is_basic_();
 					int unti2 = p_player2.sent_unti();
 
+
 					p_player2.SetMapXY(map_data.start_x_, map_data.start_y_);
 
 					p_player2.Doplayer(map_data, g_screen);
 
 					p_player2.Show(g_screen);
+					p_player2.set_vt_bot(vtrix, vtriy);
 					
+					p_player.set_vt_bot(vtrix2, vtriy2);
+
 
 					SDL_Rect rect_player2 = p_player2.GetRect();
 
@@ -1163,15 +1168,15 @@ int main(int arc, char* argv[])
 							
 							else if (basic_skill2 == 6 && is_dart2==0)
 							{
-								p_bullet2.SetRect(rect_player2.x + 20, rect_player2.y + 20);
-								bullet_xpos2 = rect_player2.x + 20;
-								bullet_ypos2 = rect_player2.y + 20;
+								p_bullet2.SetRect(rect_player2.x + 10, rect_player2.y + 30);
+								bullet_xpos2 = rect_player2.x + 10;
+								bullet_ypos2 = rect_player2.y + 30;
 								
 								r2 = 1;
 								l2 = 0;
 							}
 							
-							else p_bullet2.SetRect(rect_player2.x, rect_player2.y - 20);
+							else p_bullet2.SetRect(rect_player2.x - 15, rect_player2.y - 15);
 						}
 						else
 						{
@@ -1182,15 +1187,15 @@ int main(int arc, char* argv[])
 							}
 							else if (basic_skill2 == 6 && is_dart2==0)
 							{
-								p_bullet2.SetRect(rect_player2.x + 60, rect_player2.y + 20);
-								bullet_xpos2 = rect_player2.x + 60;
-								bullet_ypos2= rect_player2.y + 20;
+								p_bullet2.SetRect(rect_player2.x + 15, rect_player2.y + 30);
+								bullet_xpos2 = rect_player2.x + 15;
+								bullet_ypos2 = rect_player2.y + 30;
 								
 								l2 = 1;
 								r2 = 0;
 							}
 						
-							else p_bullet2.SetRect(rect_player2.x - 20, rect_player2.y - 20);
+							else p_bullet2.SetRect(rect_player2.x - 55, rect_player2.y - 15);
 
 						}
 
@@ -1266,7 +1271,7 @@ int main(int arc, char* argv[])
 						dem_unti2++;
 						p_unti2.set_unti(unti2);
 						p_unti2.Loadac(g_screen);
-						p_unti2.SetRect(rect_player2.x - 40, rect_player2.y - 80);
+						p_unti2.SetRect(rect_player2.x - 60, rect_player2.y - 80);
 						p_unti2.action(g_screen, 180);
 
 						dame_me /= 2;
@@ -1344,8 +1349,8 @@ int main(int arc, char* argv[])
 					p_threat.ImpMoveType(g_screen);
 					p_threat.DoPlayer(map_data);
 
-
-
+					p_player.set_vt_bot(vitribotx, vitriboty);
+					
 					
 
 					p_threat.Show(g_screen);
@@ -1395,7 +1400,7 @@ int main(int arc, char* argv[])
 					dem_unti++;
 					p_unti.set_unti(unti);
 					p_unti.Loadac(g_screen);
-					p_unti.SetRect(rect_player.x - 40, rect_player.y - 80);
+					p_unti.SetRect(rect_player.x - 60, rect_player.y - 80);
 					p_unti.action(g_screen, 180);
 					dame_bot /= 2;
 					killed += 10;

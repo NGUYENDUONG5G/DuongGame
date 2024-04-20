@@ -35,6 +35,7 @@ MainObject::MainObject() {
 	cb_basic = 0;
 	unti = 2;
 	time_unti = 0;
+	time_move_skill = 0;
 }
 MainObject::~MainObject() {
 
@@ -118,6 +119,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				input_type_.right_ = 1;
 				input_type_.left_ = 0;
 				check = 1;
+				is_basic = 0;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -128,6 +130,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				input_type_.left_ = 1;
 				input_type_.right_ = 0;
 				check = 0;
+				is_basic = 0;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -236,12 +239,14 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				status_ = WALK_NONE;
 				input_type_.right_ = 0;
 				UpdateImagePlayer(screen);
+				is_basic = 1;
 			}
 			break;
 			case SDLK_c:
 			{
 				status_ = WALK_NONE;
 				input_type_.left_ = 0;
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -254,6 +259,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				cb_basic = 0;
 				min_y = 0;
 				max_y = 0;
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 
 			}
@@ -263,9 +269,10 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 				status_ = WALK_NONE;
 				fight = 0;
-				input_type_.war2 = 0;
+				
 				max_y = 0;
 				min_y = 0;
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 
 			}
@@ -277,7 +284,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				input_type_.war3 = 0;
 				max_y = 0;
 				min_y = 0;
-
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -290,7 +297,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				input_type_.war4 = 0;
 				max_y = 0;
 				min_y = 0;
-
+				
 				
 				UpdateImagePlayer(screen);
 
@@ -314,6 +321,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				input_type_.right_ = 1;
 				input_type_.left_ = 0;
 				check = 1;
+				is_basic = 0;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -324,6 +332,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				input_type_.left_ = 1;
 				input_type_.right_ = 0;
 				check = 0;
+				is_basic = 0;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -446,6 +455,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 			{
 				status_ = WALK_NONE;
 				input_type_.right_ = 0;
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -453,6 +463,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 			{
 				status_ = WALK_NONE;
 				input_type_.left_ = 0;
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -474,9 +485,10 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 				status_ = WALK_NONE;
 				fight = 0;
-				input_type_.war2 = 0;
+				
 				max_y = 0;
 				min_y = 0;
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 
 			}
@@ -488,7 +500,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				input_type_.war3 = 0;
 				max_y = 0;
 				min_y = 0;
-
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -550,9 +562,38 @@ void MainObject::Doplayer(Map& map_data,SDL_Renderer* screen)
 		
 		 if (input_type_.war2 == 1)
 		{
-			
-				if(check==1) x_val_ += PLAYER_SPEED;
-				else x_val_ -= PLAYER_SPEED;
+			 if (swx > x_pos_)
+			 {
+				 if (time_move_skill == 0)
+				 {
+					 x_pos_ = (x_pos_ + swx) / 2;
+					 y_pos_ = swy / 2;
+					 time_move_skill = 1;
+				 }
+				 else
+				 {
+					 x_pos_ =  swx +64*2;
+					 y_pos_ = swy ;
+					 time_move_skill = 0;
+					 input_type_.war2 = 0;
+				 }
+			}
+			 else if (swx < x_pos_)
+			 {
+				 if (time_move_skill == 0)
+				 {
+					 x_pos_ = (x_pos_ + swx) / 2;
+					 y_pos_ = swy / 2;
+					 time_move_skill = 1;
+				 }
+				 else
+				 {
+					 x_pos_ = swx - 64 * 2;
+					 y_pos_ = swy;
+					 time_move_skill = 0;
+					 input_type_.war2 = 0;
+				 }
+			 }
 			
 		}
 		  
@@ -773,10 +814,15 @@ void MainObject::UpdateImagePlayer(SDL_Renderer* des)
 		else if (status_ == WAR3)
 		{
 			
-			 LoadImg("img//war3.png", des);
+			 LoadImg("img//war3_re.png", des);
 
 
 
+		}
+		else if (status_ == WAR1)
+		{
+			if (check == 0)  LoadImg("img//player_fight_left.png", des);
+			else LoadImg("img//player_fight_right.png", des);
 		}
 	
 }
