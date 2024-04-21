@@ -216,7 +216,7 @@ int main(int arc, char* argv[])
 	int bullet_xpos2=0;
 	int bullet_ypos2=0;
 	
-	int l2 = 1, r2 = 1;
+	int l2 = 0, r2 = 0;
 
 
 	if (InitData() == false) return -1;
