@@ -31,7 +31,7 @@ MainObject::MainObject() {
 
 	check = 1;
 	is_basic = 0;
-	
+	none_basic = 0;
 	cb_basic = 0;
 	unti = 2;
 	time_unti = 0;
@@ -118,8 +118,11 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				status_ = WALK_RIGHT;
 				input_type_.right_ = 1;
 				input_type_.left_ = 0;
+				cb_basic = 0;
+				none_basic = 1;
+				is_basic = 1;
 				check = 1;
-				is_basic = 0;
+				
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -129,8 +132,10 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 				input_type_.left_ = 1;
 				input_type_.right_ = 0;
+				cb_basic = 0;
 				check = 0;
-				is_basic = 0;
+				none_basic = 1;
+				is_basic = 1;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -150,6 +155,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				fight = 1;
 				cb_basic = 1;
 				is_basic = 1;
+				none_basic = 0;
 				max_y = y_pos_;
 				min_y = y_pos_ - 64 * 2;
 
@@ -239,6 +245,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				status_ = WALK_NONE;
 				input_type_.right_ = 0;
 				UpdateImagePlayer(screen);
+				none_basic = 0;
 				is_basic = 1;
 			}
 			break;
@@ -247,6 +254,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				status_ = WALK_NONE;
 				input_type_.left_ = 0;
 				is_basic = 1;
+				none_basic = 0;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -320,8 +328,11 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				status_ = WALK_RIGHT;
 				input_type_.right_ = 1;
 				input_type_.left_ = 0;
+				cb_basic = 0;
+				none_basic = 1;
+				is_basic = 1;
 				check = 1;
-				is_basic = 0;
+			
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -331,8 +342,11 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 
 				input_type_.left_ = 1;
 				input_type_.right_ = 0;
+				cb_basic = 0;
+				none_basic = 1;
+				is_basic = 1;
 				check = 0;
-				is_basic = 0;
+			
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -354,6 +368,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				fight = 1;
 				cb_basic = 1;
 				is_basic = 1;
+				none_basic = 0;
 				max_y = y_pos_;
 				min_y = y_pos_ - 64 * 2;
 
@@ -456,6 +471,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				status_ = WALK_NONE;
 				input_type_.right_ = 0;
 				is_basic = 1;
+				none_basic = 0;
 				UpdateImagePlayer(screen);
 			}
 			break;
@@ -464,6 +480,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,int pk
 				status_ = WALK_NONE;
 				input_type_.left_ = 0;
 				is_basic = 1;
+				none_basic = 0;
 				UpdateImagePlayer(screen);
 			}
 			break;

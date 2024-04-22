@@ -86,7 +86,7 @@ void set_xval_(const int& xval)   {  x_val_= xval; }
 	int cb_basic_() { return cb_basic; }
 	int is_basic_() { return is_basic; }
 	int sent_unti() const { return unti; }
-	
+	int sen_none_basic() const { return none_basic; }
 private:
 	
 
@@ -119,7 +119,7 @@ private:
 	
 	int check;
 	int fight;
-	
+	int none_basic;
 	
 	int cb_basic;
 	int is_basic;

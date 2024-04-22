@@ -120,7 +120,7 @@ void ThreatsObject::RandomAction()
 	else
 	{
 		time_skill++;
-		std::cout << rad << '\n';
+		
 		if (rad == 0)
 		{
 			input_type_.right_ = 1;

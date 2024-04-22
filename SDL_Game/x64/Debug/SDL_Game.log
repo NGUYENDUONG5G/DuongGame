@@ -42,16 +42,17 @@ D:\DuongGame\SDL_Game\Player2.h(68,26): warning C4244: 'return': conversion from
 D:\DuongGame\SDL_Game\Player2.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   (compiling source file 'main.cpp')
   
-D:\DuongGame\SDL_Game\main.cpp(180,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(739,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(774,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(845,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(990,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(991,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1128,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1129,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1429,32): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1431,50): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1436,32): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1438,51): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(184,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(752,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(795,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(871,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(914,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1030,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1031,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1168,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1169,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1469,32): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1471,50): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1476,32): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame\SDL_Game\main.cpp(1478,51): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
   SDL_Game.vcxproj -> D:\DuongGame\x64\Debug\SDL_Game.exe

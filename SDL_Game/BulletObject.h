@@ -30,6 +30,7 @@ public:
 	void set_unti(int unti_) { unti = unti_; }
 	void set_basic_skill( int bs_skill) { basic_skill = bs_skill; }
 	void set_system_basis();
+	void set_none_basic(int none_basic_) { none_basic = none_basic_; }
 private:
 	
 	int sel;
@@ -38,6 +39,7 @@ private:
 	int cb_basic;
 	int unti;
 	int basic_skill;
+	int none_basic;
 	std::vector<std::string > skill[20];
 };
 

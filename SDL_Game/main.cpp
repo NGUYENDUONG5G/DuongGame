@@ -42,10 +42,10 @@ Sound knife;
 Sound axe;
 Sound double_knife;
 Sound is_killed;
-Sound win_game;
-Sound lose_game;
+Music win_game;
+Music lose_game;
 RoomImg room_win1,room_lose,room_win2;
-
+RoomImg g_background4;
 TTF_Font* font;
 
 std::string bkgr[4] = {"img//newbkgr0.jpg","img//newbkgr1.jpg","img//newbkgr2.gif","img//newbkgr3.jpg"};
@@ -115,13 +115,16 @@ void close() {
 	g_background.Free();
 	g_background2.Free();
 	g_background3.Free();
-	star_game.Free();
+	g_background4.Free();
 	cancel.Free();
 	music_bkgr.Free();
 	music_star.Free();
+
 	room_win1.Free();
 	room_win2.Free();
 	room_lose.Free();
+
+
 
 	boxing.Free();
 	 knife.Free();
@@ -130,6 +133,7 @@ void close() {
 	 is_killed.Free();
 
 	 win_game.Free();
+	 lose_game.Free();
 	 vs_bot_.Free();
 	 vs_1_.Free();
 	 skill1.Free();
@@ -289,15 +293,19 @@ int main(int arc, char* argv[])
 	
 	int stop_room = 0;
 	int room_ = 0;
-	room_win1.LoadImg("img//win_black.jpg", g_screen);
-	room_win2.LoadImg("img//win_green.jpg", g_screen);
+	room_win1.LoadImg("img//win_red.png", g_screen);
+	room_win2.LoadImg("img//win_green.png", g_screen);
 	room_lose.LoadImg("img//lose_game.jpg", g_screen);
-
+	g_background4.LoadImg("img//s9.jpg", g_screen);
 
 	bool mus_star = false;
 	music_star.LoadMusic("music//star_game.mp3");
 	bool mus_bkgr = false;
 	music_bkgr.LoadMusic("music//fight_game.mp3");
+
+
+	bool mus_win = false;
+	bool mus_lose = false;
 
 	boxing.LoadMusic("music//boxing.mp3");
 	knife.LoadMusic("music//knife.mp3");
@@ -374,7 +382,7 @@ int main(int arc, char* argv[])
 				}
 
 
-				SDL_Delay(2000);
+				SDL_Delay(1000);
 
 
 			}
@@ -697,7 +705,7 @@ int main(int arc, char* argv[])
 
 				{
 					
-					SDL_Delay(1000);
+				
 					int save = choose_bkgr;
 					while ( choose_bkgr==save)
 					{
@@ -731,8 +739,13 @@ int main(int arc, char* argv[])
 						}
 						else 
 						{
-							music_bkgr.stopMusic();
-							win_game.DisplayMusic();
+							
+							if (mus_win == false)
+							{
+								win_game.DisplayMusic();
+								win_game.Volume(volume);
+								mus_win = true;
+							}
 							if (stop_room == 0)
 							{
 								
@@ -751,6 +764,10 @@ int main(int arc, char* argv[])
 							{ 
 								
 							start = false; pk = 2; match = 0; match_pk = 0; killed = 1000; stop_room = 0;
+							pause = 0;
+							mus_star = false;
+							mus_win = false;
+							enter = false;
 							p_player.set_vt(0, 0);
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							botkilled = 1000;
@@ -765,8 +782,12 @@ int main(int arc, char* argv[])
 				{
 					if (pk == 0)
 					{
-						lose_game.DisplayMusic();
-						music_bkgr.stopMusic();
+						if (mus_lose == false)
+						{
+							lose_game.DisplayMusic();
+							lose_game.Volume(volume);
+							mus_lose = true;
+						}
 						
 						if (stop_room == 0)
 						{
@@ -796,6 +817,7 @@ int main(int arc, char* argv[])
 								if (i == 0) {
 
 									start = false;
+									enter = false;
 									pause = 0; killed = 1000;
 									stop_room = 0;
 									botkilled = 1000;
@@ -807,7 +829,8 @@ int main(int arc, char* argv[])
 									mus_star = false;
 									mus_bkgr = false;
 									state_mus = true;
-									music_bkgr.resumeMusic();
+									mus_lose = false;
+									dem_unti = 0;
 								}
 								else if (i == 1)
 								{
@@ -837,31 +860,38 @@ int main(int arc, char* argv[])
 						}
 
 						else  {
-							music_bkgr.stopMusic();
-							win_game.DisplayMusic();
-
+							if (mus_win == false)
+							{
+								win_game.DisplayMusic();
+								win_game.Volume(volume);
+								mus_win = true;
+							}
 							if (stop_room == 0)
 							{
-								room_ = room_lose.sent_room();
+								room_ = room_win2.sent_room();
 
-								room_lose.practice(g_screen);
+								room_win2.practice(g_screen);
 								if (room_ > 1)
 								{
 									stop_room = 1;
-									room_lose.set_room(0);
+									room_win2.set_room(0);
 								}
 							}
 
 							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640)
 							{
 							start = false; pk = 2; match = 0; match_pk = 0; stop_room = 0;
+							enter = false;
+							pause = 0;
+							mus_star = false;
+							mus_win = false;
 							p_player.set_vt(0, 0);
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							killed = 1000;
 							botkilled = 1000;
 							dem_unti = 0;
 							dem_unti2 = 0;
-							music_bkgr.resumeMusic();
+							
 							}
 						}
 					
@@ -877,12 +907,19 @@ int main(int arc, char* argv[])
 		else  if (pause == 1)
 			{
 
+				
 
-
-
-				g_background2.LoadImg("img//s9.jpg", g_screen);
-				g_background2.SetRect(272, 113);
-				g_background2.Render(g_screen, NULL);
+				if (stop_room == 0)
+				{
+					int room_ = g_background4.sent_room();
+					g_background4.practice(g_screen);
+					if (room_ > 1)
+					{
+						stop_room = 1;
+						g_background4.set_room(0);
+					}
+				}
+				
 
 				key_resume.LoadImg("img//key_small.png", g_screen);
 				key_resume.SetRect(SCREEN_WIDTH / 2 +64, SCREEN_HEIGHT / 2 );
@@ -954,7 +991,10 @@ int main(int arc, char* argv[])
 				{
 					if (Impact::Impact_(x_, y_, choose[i].get_Rect()))
 					{
-						if (i == 0) pause = 0;
+						if (i == 0) {
+							pause = 0;
+							stop_room = 0;
+						}
 						else if (i == 1)
 						{
 							is_quit = true;
@@ -995,7 +1035,7 @@ int main(int arc, char* argv[])
 				int cb_basic = p_player.cb_basic_();
 				is_basic = p_player.is_basic_();
 				int unti = p_player.sent_unti();
-				
+				int none_basic = p_player.sen_none_basic();
 
 
 
@@ -1024,7 +1064,7 @@ int main(int arc, char* argv[])
 
 				if (is_basic == 1) // cho phép hiện đánh thường
 				{
-					
+					p_bullet.set_none_basic(none_basic);
 					p_bullet.set_basic_skill(basic_skill);
 					p_bullet.set_tt(tt);
 					p_bullet.set_cb_basic(cb_basic);
@@ -1134,7 +1174,7 @@ int main(int arc, char* argv[])
 					int cb_basic2 = p_player2.cb_basic_();
 					is_basic2 = p_player2.is_basic_();
 					int unti2 = p_player2.sent_unti();
-
+					int none_basic2 = p_player2.sent_none_basic();
 
 					p_player2.SetMapXY(map_data.start_x_, map_data.start_y_);
 
@@ -1150,7 +1190,7 @@ int main(int arc, char* argv[])
 
 					if (is_basic2 == 1) // cho phép hiện đánh thường
 					{
-
+						p_bullet2.set_none_basic(none_basic2);
 						p_bullet2.set_basic_skill(basic_skill2);
 						p_bullet2.set_tt(tt2);
 						p_bullet2.set_cb_basic(cb_basic2);
@@ -1162,7 +1202,7 @@ int main(int arc, char* argv[])
 						{
 							if (basic_skill2 == 4)
 							{
-								p_bullet2.SetRect(rect_player2.x - 20, rect_player2.y - 40);
+								p_bullet2.SetRect(rect_player2.x - 40, rect_player2.y - 35);
 								
 							}
 							
@@ -1182,7 +1222,7 @@ int main(int arc, char* argv[])
 						{
 							if (basic_skill2 == 4)
 							{
-								p_bullet2.SetRect(rect_player2.x - 35, rect_player2.y - 40);
+								p_bullet2.SetRect(rect_player2.x - 70, rect_player2.y - 35);
 								
 							}
 							else if (basic_skill2 == 6 && is_dart2==0)
@@ -1446,7 +1486,7 @@ int main(int arc, char* argv[])
 				{
 					
 					botkilled -= dame_me;
-					
+					if(pk==1) is_killed.DisplayMusic();
 				}
 				
 				else if (bCol2)
@@ -1550,6 +1590,8 @@ p_player2.Free();
 p_threat.Free();
 p_unti.Free();
 count_match.free();
+count_player.free();
+count_volume.free();
 ready.free();
 vs_bot.free();
  vs_1.free();

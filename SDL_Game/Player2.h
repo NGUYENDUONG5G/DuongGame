@@ -82,10 +82,10 @@ public:
 	float sent_max_y() { return max_y; }
 	float sent_min_y() { return min_y; }
 
-	int cb_basic_() { return cb_basic; }
-	int is_basic_() { return is_basic; }
+	int cb_basic_()const { return cb_basic; }
+	int is_basic_()const { return is_basic; }
 	int sent_unti() const { return unti; }
-
+	int sent_none_basic() const { return none_basic; }
 private:
 
 	
@@ -124,7 +124,7 @@ private:
 	int unti;
 	int time_unti;
 	int time_move_skill;
-
+	int none_basic;
 };
 
 

@@ -11,6 +11,7 @@ BulletObject::BulletObject()
 	cb_basic = 0;
 	unti = 0;
 	basic_skill = 0;
+	none_basic = 0;
 }
 
 BulletObject  ::~BulletObject()
@@ -70,14 +71,22 @@ void BulletObject::action(SDL_Renderer* screen,int k,int  move)
 		if (tt == 1) angle += 30;
 		else angle -= 30;
 	}
-	
+
 	else if (unti == 1)
 	{
 		angle += 10;
 	}
 	else angle = 0;
-	if (abs(angle) > k) angle = 0;
+	if (none_basic == 0)
+	{
+		if (abs(angle) > k) angle = 0;
+	}
+	else
+	{
 
+		if (tt == 1) angle = -130;
+		else angle =130 ;
+	}
 
 	BaseObject::Render(screen, angle, NULL);
 

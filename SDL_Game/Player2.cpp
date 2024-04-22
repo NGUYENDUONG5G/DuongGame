@@ -32,7 +32,7 @@ Player2::Player2() {
 
 	check = 0;
 	is_basic = 0;
-
+	none_basic = 0;
 	cb_basic = 0;
 	unti = 2;
 	time_unti = 0;
@@ -119,7 +119,8 @@ void Player2::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			input_type_.right_ = 1;
 			input_type_.left_ = 0;
 			check = 1;
-			is_basic = 0;
+			is_basic = 1;
+			none_basic = 1;
 			UpdateImagePlayer(screen);
 		}
 		break;
@@ -130,7 +131,8 @@ void Player2::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			input_type_.left_ = 1;
 			input_type_.right_ = 0;
 			check = 0;
-			is_basic = 0;
+			is_basic = 1;
+			none_basic = 1;
 			UpdateImagePlayer(screen);
 		}
 		break;
@@ -152,6 +154,7 @@ void Player2::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			fight = 1;
 			cb_basic = 1;
 			is_basic = 1;
+			none_basic = 0;
 			max_y = y_pos_;
 			min_y = y_pos_ - 64 * 2;
 
@@ -238,6 +241,7 @@ void Player2::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			status_ = WALK_NONE;
 			input_type_.right_ = 0;
 			is_basic = 1;
+			none_basic = 0;
 			UpdateImagePlayer(screen);
 		}
 		break;
@@ -246,6 +250,7 @@ void Player2::HandelInputAction(SDL_Event events, SDL_Renderer* screen) {
 			status_ = WALK_NONE;
 			input_type_.left_ = 0;
 			is_basic = 1;
+			none_basic = 0;
 			UpdateImagePlayer(screen);
 		}
 		break;
