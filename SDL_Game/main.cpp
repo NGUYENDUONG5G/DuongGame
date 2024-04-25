@@ -335,8 +335,10 @@ int main(int arc, char* argv[])
 			{
 				if (g_event.key.keysym.sym == SDLK_SPACE)
 				{
-					pause = 1;
-				
+					if (start == true)
+					{
+						pause = 1;
+					}
 				}
 			}
 			
@@ -719,7 +721,7 @@ int main(int arc, char* argv[])
 						real_hp_me = killed;
 						real_hp_bot = botkilled;
 						p_player.set_vt(0, 0); p_threat.set_vt(SCREEN_WIDTH, 0);
-						dame_bot += 10;
+						dame_bot += 20;
 						match++;
 
 					}
@@ -766,11 +768,13 @@ int main(int arc, char* argv[])
 							start = false; pk = 2; match = 0; match_pk = 0; killed = 1000; stop_room = 0;
 							pause = 0;
 							mus_star = false;
+							mus_bkgr = false;
 							mus_win = false;
-							enter = false;
+							enter = true;
 							p_player.set_vt(0, 0);
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							botkilled = 1000;
+							dame_bot = 10;
 							dem_unti = 0;
 							dem_unti2 = 0;
 							music_bkgr.resumeMusic();
@@ -817,7 +821,8 @@ int main(int arc, char* argv[])
 								if (i == 0) {
 
 									start = false;
-									enter = false;
+									enter = true;
+									pk = 2;
 									pause = 0; killed = 1000;
 									stop_room = 0;
 									botkilled = 1000;
@@ -880,15 +885,17 @@ int main(int arc, char* argv[])
 
 							if (x_ <= 1280 && x_ > 0 && y_ > 0 && y_ <= 640)
 							{
-							start = false; pk = 2; match = 0; match_pk = 0; stop_room = 0;
-							enter = false;
+								start = false; pk = 2; match = 0; match_pk = 0; stop_room = 0;
+							enter = true;;
 							pause = 0;
 							mus_star = false;
+							mus_bkgr = false;
 							mus_win = false;
 							p_player.set_vt(0, 0);
 							p_player2.set_vt(SCREEN_WIDTH, 0);
 							killed = 1000;
 							botkilled = 1000;
+							dame_bot = 10;
 							dem_unti = 0;
 							dem_unti2 = 0;
 							
@@ -1417,14 +1424,7 @@ int main(int arc, char* argv[])
 
 					
 					}
-					else if (myfight == 1 && botfight == 1)
-					{
-						if (vitribotx <= vtrix + 64 * 2 && vitribotx >= vtrix - 64 * 2 && vitriboty <= vtriy + 64 * 2 && vitriboty >= vtriy - 64 * 2) bCol3 = true;
-
-						else 	if (vtrix >= vitribotx - 64 && vtrix <= vitribotx + 64 && vtriy >= vitriboty - 64 && vtriy <= vitriboty + 64) bCol3 = true;
-
-
-					}
+				
 					
 
 
@@ -1442,11 +1442,15 @@ int main(int arc, char* argv[])
 					p_unti.Loadac(g_screen);
 					p_unti.SetRect(rect_player.x - 60, rect_player.y - 80);
 					p_unti.action(g_screen, 180);
-					dame_bot /= 2;
+					if (pk == 1)
+					{
+						dame_bot /= 2;
+					}
+					
 					killed += 10;
 					if (killed >= 1000) killed = 1000;
 				}
-			
+				
 				
 				
 
@@ -1466,17 +1470,23 @@ int main(int arc, char* argv[])
 				{
 						if (p_player.set_check() == 1)
 						{
-							p_player.set_xpos(vtrix - 64 * 2);
-							if (pk == 0) p_threat.set_x_pos(vitribotx + 64 * 2);
-							else if (pk == 1) p_player2.set_xpos(vtrix+64*2);
 							
+							
+							if (pk == 1)
+							{
+								p_player.set_xpos(vtrix - 64 * 2);
+								p_player2.set_xpos(vtrix2 + 64 * 2);
+							}
 						}
 						else
 						{
-							p_player.set_xpos(vtrix + 64 * 2);
-							if (pk == 0) p_threat.set_x_pos(vitribotx - 64 * 2);
-							else if (pk == 1) p_player2.set_xpos(vtrix - 64 * 2);
-
+						
+							
+							if (pk == 1)
+							{
+								p_player.set_xpos(vtrix + 64 * 2);
+								p_player2.set_xpos(vtrix2 - 64 * 2);
+							}
 						}
 					
 					

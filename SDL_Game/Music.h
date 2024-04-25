@@ -12,7 +12,7 @@ public:
 	void Volume(int volum);
 	void stopMusic();
 	void Free(); 
-		void  resumeMusic();
+	void  resumeMusic();
 private:
 
 	Mix_Music* sound;
