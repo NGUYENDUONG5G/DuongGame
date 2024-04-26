@@ -77,6 +77,7 @@ void BulletObject::action(SDL_Renderer* screen,int k,int  move)
 		angle += 10;
 	}
 	else angle = 0;
+
 	if (none_basic == 0)
 	{
 		if (abs(angle) > k) angle = 0;

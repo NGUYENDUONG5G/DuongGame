@@ -1120,6 +1120,7 @@ int main(int arc, char* argv[])
 						else p_bullet.SetRect(rect_player.x - 55, rect_player.y - 15);
 
 					}
+
 					if (myfight == 1&&basic_skill==6) is_dart = 1;
 
 					

@@ -1,211 +1,240 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Big_pro.vcxproj, Big_project.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   BaseObject.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'BaseObject.cpp')
   
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'BaseObject.cpp')
   
   BulletObject.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'BulletObject.cpp')
   
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'BulletObject.cpp')
   
+  CommonFunc.cpp
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'CommonFunc.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'CommonFunc.cpp')
+  
+  game_map.cpp
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'game_map.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'game_map.cpp')
+  
+  ImpTimer.cpp
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'ImpTimer.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'ImpTimer.cpp')
+  
+  main.cpp
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(67,46): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(67,45): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(184,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(754,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(799,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(876,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(921,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1037,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1038,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1176,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1177,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1478,33): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1479,35): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1488,33): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\main.cpp(1489,35): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
   MainObject.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\MainObject.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\MainObject.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\MainObject.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\MainObject.h(67,46): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(67,46): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\MainObject.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\MainObject.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   (compiling source file 'MainObject.cpp')
   
-D:\DuongGame\SDL_Game\MainObject.cpp(95,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(96,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(563,16): warning C4305: '+=': truncation from 'double' to 'float'
-D:\DuongGame\SDL_Game\MainObject.cpp(657,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(667,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(689,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(690,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(692,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(693,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(705,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(722,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(741,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(742,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(744,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(745,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(757,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(778,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\MainObject.cpp(795,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(95,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(96,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(563,16): warning C4305: '+=': truncation from 'double' to 'float'
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(657,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(667,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(689,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(690,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(692,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(693,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(705,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(722,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(741,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(742,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(744,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(745,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(757,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(778,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\MainObject.cpp(795,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Music.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'Music.cpp')
   
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'Music.cpp')
   
   Player2.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\Player2.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\Player2.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\Player2.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\Player2.h(67,45): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(67,45): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\Player2.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\Player2.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
   (compiling source file 'Player2.cpp')
   
-D:\DuongGame\SDL_Game\Player2.cpp(96,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(97,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(325,15): warning C4305: '+=': truncation from 'double' to 'float'
-D:\DuongGame\SDL_Game\Player2.cpp(428,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(429,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(431,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(432,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(444,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(461,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(480,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(481,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(483,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(484,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(496,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(517,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\Player2.cpp(534,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(96,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(97,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(325,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(428,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(429,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(431,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(432,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(444,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(461,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(480,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(481,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(483,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(484,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(496,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(517,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\Player2.cpp(534,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   RoomImg.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'RoomImg.cpp')
   
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'RoomImg.cpp')
   
-D:\DuongGame\SDL_Game\RoomImg.cpp(22,26): warning C4305: '+=': truncation from 'double' to 'float'
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,38): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,64): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,72): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,72): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,74): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\DuongGame\SDL_Game\RoomImg.cpp(26,74): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(22,26): warning C4305: '+=': truncation from 'double' to 'float'
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,38): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,64): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,72): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,72): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,74): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\DuongGame2\DuongGame\SDL_Game\RoomImg.cpp(26,74): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Sound.cpp
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'Sound.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'Sound.cpp')
+  
+  stdafx.cpp
+  TextObject.cpp
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'TextObject.cpp')
+  
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'TextObject.cpp')
+  
   ThreatsObject.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'ThreatsObject.cpp')
   
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+D:\DuongGame2\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'ThreatsObject.cpp')
   
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(83,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(84,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(100,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(166,33): warning C4305: '+=': truncation from 'double' to 'float'
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(225,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(226,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(228,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(229,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(242,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(260,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(279,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(280,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(282,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(283,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(296,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(319,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\ThreatsObject.cpp(336,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  game_map.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-  (compiling source file 'game_map.cpp')
-  
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
-  (compiling source file 'game_map.cpp')
-  
-  main.cpp
-D:\DuongGame\SDL_Game\CommonFunc.h(68,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\CommonFunc.h(83,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\MainObject.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\MainObject.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\MainObject.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\MainObject.h(67,46): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\MainObject.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\MainObject.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\Player2.h(61,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\Player2.h(62,12): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\Player2.h(65,44): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\Player2.h(67,45): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\Player2.h(68,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\Player2.h(69,25): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
-  
-D:\DuongGame\SDL_Game\main.cpp(184,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(754,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(799,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(876,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(921,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1037,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1038,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1175,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1176,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1477,33): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1478,35): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1487,33): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-D:\DuongGame\SDL_Game\main.cpp(1488,35): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(83,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(84,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(100,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(166,33): warning C4305: '+=': truncation from 'double' to 'float'
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(225,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(226,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(228,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(229,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(242,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(260,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(279,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(280,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(282,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(283,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(296,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(319,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DuongGame2\DuongGame\SDL_Game\ThreatsObject.cpp(336,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Generating Code...
-  SDL_Game.vcxproj -> D:\DuongGame\x64\Debug\SDL_Game.exe
+  SDL_Game.vcxproj -> D:\DuongGame2\DuongGame\x64\Debug\SDL_Game.exe
