@@ -1,4 +1,9 @@
-# Ninja fight là thể loại game đối kháng giữa ninja và quái vật hoặc giữa các ninja với nhau. Cách chơi rất đơn giản đó là chiến đấu, chiến đấu và chiến đấu.
+# Introduction
+## Họ và tên : Nguyễn Nho Dương
+## Mã sinh viên : 23020034
+
+
+# Giới thiệu game : Ninja fight là thể loại game đối kháng giữa ninja và quái vật hoặc giữa các ninja với nhau. Cách chơi rất đơn giản đó là chiến đấu, chiến đấu và chiến đấu.
 # Link giới thiệu game trên Youtube: https://youtu.be/_79LEXjZHV0
 
 
